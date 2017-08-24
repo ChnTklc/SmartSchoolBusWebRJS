@@ -71,7 +71,6 @@ class AdminLogin extends React.Component {
             headers:
             {
                 'content-type': 'application/x-www-form-urlencoded',
-
             },
             form:
             {
@@ -124,12 +123,13 @@ class AdminLogin extends React.Component {
                         <div className="outer">
                             <TextField required floatingLabelText="Username*" style={{ marginRight: 22 }}
                                 onChange={(event, value) => this.setState({ username: value })} />
+                            <br /><br />
                             <TextField required floatingLabelText="Password*" type="password" id="pass"
                                 onChange={(event, value) => this.setState({ password: value })} />
                             {this.state.visible ? <ActionVisibilityOff color="rgb(103, 118, 141)" onClick={() => this.show('pass')} /> :
                                 <ActionVisibility color="rgb(103, 118, 141)" onClick={() => this.show('pass')} />}
                             <br />
-                            <RaisedButton label="Go" labelColor="rgb(103, 118, 141)" style={{ opacity: .7 }}
+                            <RaisedButton label="Go" labelColor="rgb(103, 118, 141)" style={{ opacity: .8 }}
                                 secondary={true} className="loginbutton" onClick={(e) => this.handleClick(e)} />
                         </div>
                     </form>

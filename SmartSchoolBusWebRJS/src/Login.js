@@ -21,6 +21,7 @@ class Login extends React.Component {
         this.state = {
             visible: false,
             isLogin: false,
+            errortext: '',
             phone: '',
             password: ''
         }
@@ -62,7 +63,9 @@ class Login extends React.Component {
                     });
                 } else {
                     console.log(body);
-                    alert(info.error);
+                    self.setState({
+                        errortext: info.error
+                    });
                 }
             }
         });
@@ -111,6 +114,8 @@ class Login extends React.Component {
                                     onChange={(event, value) => this.setState({ password: value })} />
                                 {this.state.visible ? <ActionVisibilityOff color="rgb(103, 118, 141)" onClick={() => this.show('pass')} /> :
                                     <ActionVisibility color="rgb(103, 118, 141)" onClick={() => this.show('pass')} />}
+                                <br /><br />
+                                {this.state.errortext ? <div className="errorText">{this.state.errortext}!</div> : true}
                                 <br />
                                 <RaisedButton label="Login" className="loginbutton" backgroundColor="rgba(51, 105, 30, 0.7)" labelColor="rgb(255, 255, 255)"
                                     onClick={(e) => this.handleClick(e)} labelStyle={{ fontSize: 18 }} style={{ width: 120, height: 40, opacity: 0.8 }} />

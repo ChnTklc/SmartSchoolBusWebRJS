@@ -1,6 +1,17 @@
+
+* {
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif, sans-serif;
+}
+
 .outer {
     position: relative;
     text-align: center;
+}
+
+.errorText {
+    text-align: left;
+    color: red;
+    font-size: 16px;
 }
 
 .signin {
@@ -36,11 +47,11 @@
 https://s-media-cache-ak0.pinimg.com/originals/58/b9/1e/58b91ecf69cc7b00b89a98d6700b67a8.jpg
 */
 body {
-    background: url(https://images2.alphacoders.com/628/628814.jpg ) no-repeat center center fixed;
+    background: url(https://images2.alphacoders.com/628/628814.jpg) no-repeat center center fixed;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    font-family: 'Roboto', sans-serif;
+    margin: 0px;
 }
 
 .nav-bar {
@@ -55,10 +66,14 @@ body {
         width: 550px;
         float: left;
         height: 120px;
-        top: 15%;
+        bottom: 4%;
         left: 5%;
         position: relative;
     }
+
+        .nav-bar .slogan h2 {
+            font-size: 40px;
+        }
 
         .nav-bar .slogan .sloganlink {
             text-decoration: none;
@@ -94,6 +109,10 @@ body {
     padding: 1em 2em 1em 2em;
 }
 
+    .homepageoutter .aboutdiv p {
+        font-size: 16px;
+    }
+
     .homepageoutter .aboutdiv .altinfo {
         column-count: 2;
     }
@@ -125,6 +144,11 @@ body {
         margin-left: 2em;
     }
 
+        .contactform .contactfields strong {
+            font-size: 20px;
+        }
+
+
     .contactform .contactinfo {
         text-size-adjust: 100%;
         width: 550px;
@@ -136,7 +160,3 @@ body {
             list-style: none;
             margin-left: -2.7em;
         }
-
-    .contactform .sendedmail {
-        text-align: left;
-    }

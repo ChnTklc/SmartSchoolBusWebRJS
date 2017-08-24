@@ -30,14 +30,22 @@ class ContactUs extends Component {
             sent: false,
             name: '',
             email: '',
-            message: ''
+            message: '',
+            errortext: '',
         }
     }
 
     handleClick() {
-        this.setState({
-            sent: true
-        });
+        var self = this;
+        if (self.state.name && self.state.email && self.state.message) {
+            self.setState({
+                sent: true
+            });
+        } else {
+            self.setState({
+                errortext: 'You have to fill in all fields!'
+            });
+        }
     }
 
     render() {
@@ -58,7 +66,7 @@ class ContactUs extends Component {
                     </section>
                     <main>
                         <form className="contactform">
-                            {this.state.sent ? <div className="sendedmail"><strong>Thank you for your message. We will reply your email soon.</strong></div> :
+                            {this.state.sent ? <div className="contactfields"><strong>Thank you for your message. We will reply your email soon.</strong></div> :
                                 <div className="contactfields">
                                     <TextField floatingLabelText="Name*" floatingLabelStyle={styles.floatingLabelStyle}
                                         fullWidth={true} floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
@@ -72,6 +80,7 @@ class ContactUs extends Component {
                                         fullWidth={true} floatingLabelFocusStyle={styles.floatingLabelFocusStyle} multiLine={true} rows={5} rowsMax={9}
                                         onChange={(event, value) => this.setState({ message: value })} required />
                                     <br />
+                                    {this.state.errortext ? <div className="errorText">{this.state.errortext}</div> : true}
                                     <FlatButton label="Send" backgroundColor="rgba(51, 105, 30, .8)" labelStyle={{ fontSize: 18, color: "rgba(255, 255, 255, 1)" }}
                                         style={{ width: 100, height: 40, marginTop: 30 }} onClick={() => this.handleClick()} />
                                 </div>}
