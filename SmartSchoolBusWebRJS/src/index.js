@@ -2,7 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import ContactUs from './ContactUs';
+import AboutUs from './AboutUs';
+import Login from './Login';
+import AdminLogin from './AdminLogin';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+ReactDOM.render(
+    <BrowserRouter>
+        <div>
+            <Switch>
+                <Route exact path='/' component={App} />
+                <Route exact path='/contact' component={ContactUs} />
+                <Route exact path='/about' component={AboutUs} />
+                <Route exact path='/login' component={Login} />
+                <Route exact path='/admin' component={AdminLogin} />
+            </Switch>
+        </div>
+    </BrowserRouter>, document.getElementById('root'));
