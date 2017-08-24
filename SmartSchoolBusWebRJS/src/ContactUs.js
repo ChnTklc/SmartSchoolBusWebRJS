@@ -24,8 +24,8 @@ const styles = {
 };
 
 class ContactUs extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             sent: false,
             name: '',

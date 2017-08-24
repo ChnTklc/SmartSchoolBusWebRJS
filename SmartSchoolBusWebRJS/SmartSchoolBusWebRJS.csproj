@@ -79,6 +79,7 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include="src\AboutUs.js" />
+    <Content Include="src\Admin.js" />
     <Content Include="src\AdminLogin.js" />
     <Content Include="src\App.js" />
     <Content Include="src\App.test.js" />

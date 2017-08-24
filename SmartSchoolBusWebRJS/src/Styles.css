@@ -1,6 +1,6 @@
 
 * {
-    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, serif, sans-serif;
 }
 
 .outer {
@@ -45,12 +45,12 @@
 }
 /* 
 https://s-media-cache-ak0.pinimg.com/originals/58/b9/1e/58b91ecf69cc7b00b89a98d6700b67a8.jpg
+
+https://images2.alphacoders.com/628/628814.jpg
 */
 body {
     background: url(https://images2.alphacoders.com/628/628814.jpg) no-repeat center center fixed;
     background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     margin: 0px;
 }
 

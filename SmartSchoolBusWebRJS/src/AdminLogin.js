@@ -4,6 +4,8 @@ import ActionVisibility from 'material-ui/svg-icons/action/visibility';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import Admin from './Admin';
+import { Redirect } from 'react-router-dom';
 var request = require("request");
 
 class AdminLogin extends React.Component {
@@ -16,6 +18,8 @@ class AdminLogin extends React.Component {
             password: ''
         }
     };
+
+    static isLoggedIn = false;
 
     /*
         var options = {
@@ -36,7 +40,7 @@ class AdminLogin extends React.Component {
         axios(options).then(function (response) {
             console.log(response);
             alert('REQUEST SENT!');
-
+    
             if (response.status === 200) {
                 console.log("Login successfull");
                 alert("Login successfull");
@@ -86,11 +90,10 @@ class AdminLogin extends React.Component {
             else {
                 var info = JSON.parse(body);
                 if (response.statusCode === 200) {
-                    console.log(body);
-                    alert(info.role);
                     self.setState({
                         isLogin: true
-                    });
+                    })
+                    AdminLogin.isLoggedIn = true;
                 } else {
                     console.log(body);
                     alert(info.error);
@@ -112,28 +115,26 @@ class AdminLogin extends React.Component {
     }
 
     render() {
+        if (Admin.isLoggedOut) {
+            return (<Redirect to="/admin" />)
+        }
+        AdminLogin.isLoggedIn = false;
         return (
             <MuiThemeProvider>
-                {this.state.isLogin ?
-                    <div>
-
+                <form className="loginform">
+                    <div className="outer">
+                        <TextField required floatingLabelText="Username*" style={{ marginRight: 22 }}
+                            onChange={(event, value) => this.setState({ username: value })} />
+                        <br /><br />
+                        <TextField required floatingLabelText="Password*" type="password" id="pass"
+                            onChange={(event, value) => this.setState({ password: value })} />
+                        {this.state.visible ? <ActionVisibilityOff color="rgb(103, 118, 141)" onClick={() => this.show('pass')} /> :
+                            <ActionVisibility color="rgb(103, 118, 141)" onClick={() => this.show('pass')} />}
+                        <br />
+                        <RaisedButton label="Go" labelColor="rgb(103, 118, 141)" style={{ opacity: .8 }}
+                            secondary={true} className="loginbutton" onClick={(e) => this.handleClick(e)} />
                     </div>
-                    :
-                    <form className="loginform">
-                        <div className="outer">
-                            <TextField required floatingLabelText="Username*" style={{ marginRight: 22 }}
-                                onChange={(event, value) => this.setState({ username: value })} />
-                            <br /><br />
-                            <TextField required floatingLabelText="Password*" type="password" id="pass"
-                                onChange={(event, value) => this.setState({ password: value })} />
-                            {this.state.visible ? <ActionVisibilityOff color="rgb(103, 118, 141)" onClick={() => this.show('pass')} /> :
-                                <ActionVisibility color="rgb(103, 118, 141)" onClick={() => this.show('pass')} />}
-                            <br />
-                            <RaisedButton label="Go" labelColor="rgb(103, 118, 141)" style={{ opacity: .8 }}
-                                secondary={true} className="loginbutton" onClick={(e) => this.handleClick(e)} />
-                        </div>
-                    </form>
-                }
+                </form>
             </MuiThemeProvider>
         );
     }
