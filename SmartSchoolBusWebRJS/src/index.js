@@ -6,6 +6,8 @@ import AboutUs from './AboutUs';
 import Login from './Login';
 import Admin from './Admin';
 import AdminHome from './AdminHome';
+import SchoolStaff from './SchoolStaff';
+import CompanyOfficer from './CompanyOfficer';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 const NotFound = () => (
@@ -23,6 +25,8 @@ ReactDOM.render(
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/admin' component={Admin} />
                 <Route exact path='/admin/home' component={AdminHome} />
+                <Route exact path='/schoolstaff' component={SchoolStaff} />
+                <Route exact path='/companyofficer' component={CompanyOfficer} />
                 <Route path='*' component={NotFound} />
             </Switch>
         </div>

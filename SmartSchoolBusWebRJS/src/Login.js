@@ -10,7 +10,7 @@ import Info from 'material-ui/svg-icons/action/info';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Phone from 'react-phone-number-input';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import './Styles.css';
 
 var request = require("request");
@@ -22,6 +22,7 @@ class Login extends React.Component {
             visible: false,
             isLogin: false,
             errortext: '',
+            role: '',
             phone: '',
             password: ''
         }
@@ -56,10 +57,9 @@ class Login extends React.Component {
             else {
                 var info = JSON.parse(body);
                 if (response.status === 200) {
-                    console.log(body);
-                    alert(info.role);
                     self.setState({
-                        isLogin: true
+                        isLogin: true,
+                        role: info.role
                     });
                 } else {
                     console.log(body);
@@ -84,6 +84,16 @@ class Login extends React.Component {
     }
 
     render() {
+        if (this.state.isLogin) {
+            if (this.state.role === 'SchoolStaff') {
+                window.localStorage.setItem('isLoggedInSchoolStaff', true);
+                return (<Redirect to="/schoolstaff" />);
+            }
+            else if (this.state.role === 'CompanyOfficer') {
+                window.localStorage.setItem('isLoggedInCompanyOfficer', true);
+                return (<Redirect to="/companyofficer" />);
+            }
+        }
         return (
             <MuiThemeProvider>
                 <div className="homepageoutter">
@@ -99,31 +109,25 @@ class Login extends React.Component {
                             <Link to="/contact" className="links"><Contact color="rgb(255,255,255)" />Contact Us</Link>
                         </div>
                     </section>
-                    {this.state.isLogin ?
-                        <div>
-
+                    <form className="loginform">
+                        <div className="outer">
+                            <h2 className="signin">Sign in</h2>
+                            <br />
+                            <Phone required placeholder="Phone Number*" value={this.state.phone} country="TR"
+                                onChange={(event, value) => this.setState({ phone: value })} nativeExpanded />
+                            <TextField required floatingLabelText="Password*" type="password" id="pass"
+                                onChange={(event, value) => this.setState({ password: value })} />
+                            {this.state.visible ? <ActionVisibilityOff color="rgb(103, 118, 141)" onClick={() => this.show('pass')} /> :
+                                <ActionVisibility color="rgb(103, 118, 141)" onClick={() => this.show('pass')} />}
+                            <br /><br />
+                            {this.state.errortext ? <div className="errorText">{this.state.errortext}!</div> : true}
+                            <br />
+                            <RaisedButton label="Login" className="loginbutton" backgroundColor="rgba(51, 105, 30, 0.7)" labelColor="rgb(255, 255, 255)"
+                                onClick={(e) => this.handleClick(e)} labelStyle={{ fontSize: 18 }} style={{ width: 120, height: 40, opacity: 0.8 }} />
+                            <br /> <br />
+                            <a href="" className="pass-forgot">Forgot your password?</a>
                         </div>
-                        :
-                        <form className="loginform">
-                            <div className="outer">
-                                <h2 className="signin">Sign in</h2>
-                                <br />
-                                <Phone required placeholder="Phone Number*" value={this.state.phone} country="TR"
-                                    onChange={(event, value) => this.setState({ phone: value })} nativeExpanded />
-                                <TextField required floatingLabelText="Password*" type="password" id="pass"
-                                    onChange={(event, value) => this.setState({ password: value })} />
-                                {this.state.visible ? <ActionVisibilityOff color="rgb(103, 118, 141)" onClick={() => this.show('pass')} /> :
-                                    <ActionVisibility color="rgb(103, 118, 141)" onClick={() => this.show('pass')} />}
-                                <br /><br />
-                                {this.state.errortext ? <div className="errorText">{this.state.errortext}!</div> : true}
-                                <br />
-                                <RaisedButton label="Login" className="loginbutton" backgroundColor="rgba(51, 105, 30, 0.7)" labelColor="rgb(255, 255, 255)"
-                                    onClick={(e) => this.handleClick(e)} labelStyle={{ fontSize: 18 }} style={{ width: 120, height: 40, opacity: 0.8 }} />
-                                <br /> <br />
-                                <a href="" className="pass-forgot">Forgot your password?</a>
-                            </div>
-                        </form>
-                    }
+                    </form>
                 </div>
             </MuiThemeProvider>
         );

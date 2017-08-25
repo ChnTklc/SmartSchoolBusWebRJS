@@ -14,12 +14,11 @@ class AdminHome extends React.Component {
         self.setState({
             isLogin: false
         });
-        window.localStorage.setItem('isLogin', false);
+        window.localStorage.setItem('isLoggedInAdmin', false);
     }
 
     render() {
-        //Admin.propTypes.isLogin = this.state.isLogin;
-        if (window.localStorage.getItem('isLogin') === 'false') {
+        if (window.localStorage.getItem('isLoggedInAdmin') === 'false') {
             return (<Redirect to="/admin" />);
         }
         return (
