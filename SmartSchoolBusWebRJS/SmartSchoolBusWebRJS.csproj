@@ -81,7 +81,7 @@
     <Content Include="src\AboutUs.js" />
     <Content Include="src\Admin.js" />
     <Content Include="src\AdminHome.js" />
-    <Content Include="src\App.js" />
+    <Content Include="src\Home.js" />
     <Content Include="src\App.test.js" />
     <Content Include="src\CompanyOfficer.js" />
     <Content Include="src\ContactUs.js" />

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Home from './Home';
 import ContactUs from './ContactUs';
 import AboutUs from './AboutUs';
 import Login from './Login';
@@ -19,7 +19,7 @@ ReactDOM.render(
     <BrowserRouter>
         <div>
             <Switch>
-                <Route exact path='/' component={App} />
+                <Route exact path='/' component={Home} />
                 <Route exact path='/contact' component={ContactUs} />
                 <Route exact path='/about' component={AboutUs} />
                 <Route exact path='/login' component={Login} />
