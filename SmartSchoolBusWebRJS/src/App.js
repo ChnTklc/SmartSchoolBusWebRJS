@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';
-import { Link } from 'react-router-dom';
 import Home from 'material-ui/svg-icons/action/home';
 import Info from 'material-ui/svg-icons/action/info';
 import Contact from 'material-ui/svg-icons/communication/contact-mail';
@@ -22,20 +21,20 @@ class App extends Component {
                 <div className="homepageoutter">
                     <section role="navigation" className="nav-bar">
                         <div className="slogan">
-                            <Link to="/" className="sloganlink">
+                            <a href="/" className="sloganlink">
                                 <h2><strong>Smart School Bus</strong></h2>
-                            </Link>
+                            </a>
                         </div>
                         <div className="linksdiv">
-                            <Link to="/" className="links"><Home color="rgb(255,255,255)" />Home</Link>
-                            <Link to="/about" className="links"><Info color="rgb(255,255,255)" />About Us</Link>
-                            <Link to="/contact" className="links"><Contact color="rgb(255,255,255)" />Contact Us</Link>
+                            <a href="/" className="links"><Home color="rgb(255,255,255)" viewBox="0 -7 28 28" />Home</a>
+                            <a href="/about" className="links"><Info color="rgb(255,255,255)" viewBox="0 -7 28 28" />About Us</a>
+                            <a href="/contact" className="links"><Contact color="rgb(255,255,255)" viewBox="0 -7 28 28" />Contact Us</a>
                         </div>
                     </section>
                     <div>
-                        <Link to='/login'><FlatButton labelPosition="center" backgroundColor="rgb(51, 105, 30)"
+                        <a href='/login'><FlatButton labelPosition="center" backgroundColor="rgb(51, 105, 30)"
                             labelStyle={{ fontSize: 30, color: "rgba(255, 255, 255, 1)" }}
-                            style={styles} label="Login" /></Link>
+                            style={styles} label="Login" /></a>
                     </div>
                 </div >
             </MuiThemeProvider >

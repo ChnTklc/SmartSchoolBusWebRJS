@@ -71,8 +71,8 @@ class Admin extends React.Component {
     }
 
     render() {
-        if (this.state.isLogin) {
-            window.localStorage.setItem('isLoggedInAdmin', true);
+        if (this.state.isLogin || localStorage.getItem('isLoggedInAdmin') === 'true') {
+            localStorage.setItem('isLoggedInAdmin', true);
             return (<Redirect to="/admin/home" />);
         }
         return (

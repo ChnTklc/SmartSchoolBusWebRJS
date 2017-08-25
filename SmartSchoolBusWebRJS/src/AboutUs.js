@@ -3,7 +3,6 @@ import Contact from 'material-ui/svg-icons/communication/contact-mail';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Home from 'material-ui/svg-icons/action/home';
 import Info from 'material-ui/svg-icons/action/info';
-import { Link } from 'react-router-dom';
 
 class AboutUs extends Component {
     render() {
@@ -12,14 +11,14 @@ class AboutUs extends Component {
                 <div className="homepageoutter">
                     <section role="navigation" className="nav-bar">
                         <div className="slogan">
-                            <Link to="/" className="sloganlink">
+                            <a href="/" className="sloganlink">
                                 <h2><strong>Smart School Bus</strong></h2>
-                            </Link>
+                            </a>
                         </div>
                         <div className="linksdiv">
-                            <Link to="/" className="links"><Home color="rgb(255,255,255)" />Home</Link>
-                            <Link to="/about" className="links"><Info color="rgb(255,255,255)" />About Us</Link>
-                            <Link to="/contact" className="links"><Contact color="rgb(255,255,255)" />Contact Us</Link>
+                            <a href="/" className="links"><Home color="rgb(255,255,255)" viewBox="0 -7 28 28" />Home</a>
+                            <a href="/about" className="links"><Info color="rgb(255,255,255)" viewBox="0 -7 28 28" />About Us</a>
+                            <a href="/contact" className="links"><Contact color="rgb(255,255,255)" viewBox="0 -7 28 28" />Contact Us</a>
                         </div>
                     </section>
                     <div className="aboutdiv">
@@ -33,18 +32,18 @@ class AboutUs extends Component {
                             <br />
                             <img alt="" src="http://www.freeiconspng.com/uploads/comment-png-25.png" width={50} height={50} color="black" />
                             <p>Akıllı Olay Yönetim Çözümü <br />
-                                daha fazla bilgi için <Link to="/contact" className="links">iletişime geçin</Link></p>
+                                daha fazla bilgi için <a href="/contact" className="links">iletişime geçin</a></p>
                             <br />
                             <img alt="" src="https://maxcdn.icons8.com/Share/icon/Business//advertising1600.png" width={50} height={50} color="black" />
                             <p>Akıllı Ürün Toplama Çözümü (Arttırılmış Gerçeklik ile) <br />
-                                daha fazla bilgi için <Link to="/contact" className="links">iletişime geçin</Link></p>
+                                daha fazla bilgi için <a href="/contact" className="links">iletişime geçin</a></p>
                             <br />
                             <img alt="" src="http://www.freeiconspng.com/uploads/parking-icon-png-13.png" width={50} height={50} color="black" />
                             <p>Akıllı Otopark Yönetim Çözümü <br />
-                                daha fazla bilgi için <Link to="/contact" className="links">iletişime geçin</Link></p>
+                                daha fazla bilgi için <a href="/contact" className="links">iletişime geçin</a></p>
                             <br />
                             <img alt="" src="http://www.freeiconspng.com/uploads/school-bus-icon-png-24.png" width={50} height={50} color="black" />
-                            <p>Akıllı Öğrenci Servis Çözümü <br /> daha fazla bilgi için <Link to="/contact" className="links">iletişime geçin</Link></p>
+                            <p>Akıllı Öğrenci Servis Çözümü <br /> daha fazla bilgi için <a href="/contact" className="links">iletişime geçin</a></p>
                         </div>
                     </div>
                 </div >

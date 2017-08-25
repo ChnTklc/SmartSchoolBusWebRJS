@@ -10,7 +10,7 @@ import Info from 'material-ui/svg-icons/action/info';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Phone from 'react-phone-number-input';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import './Styles.css';
 
 var request = require("request");
@@ -84,13 +84,20 @@ class Login extends React.Component {
     }
 
     render() {
-        if (this.state.isLogin) {
-            if (this.state.role === 'SchoolStaff') {
-                window.localStorage.setItem('isLoggedInSchoolStaff', true);
+        if (this.state.isLogin ||
+            localStorage.getItem('isLoggedInSchoolStaff') === 'true' ||
+            localStorage.getItem('isLoggedInCompanyOfficer') === 'true') {
+
+            if (this.state.role === 'SchoolStaff' ||
+                localStorage.getItem('isLoggedInSchoolStaff') === 'true') {
+
+                localStorage.setItem('isLoggedInSchoolStaff', true);
                 return (<Redirect to="/schoolstaff" />);
             }
-            else if (this.state.role === 'CompanyOfficer') {
-                window.localStorage.setItem('isLoggedInCompanyOfficer', true);
+            else if (this.state.role === 'CompanyOfficer' ||
+                localStorage.getItem('isLoggedInCompanyOfficer') === 'true') {
+
+                localStorage.setItem('isLoggedInCompanyOfficer', true);
                 return (<Redirect to="/companyofficer" />);
             }
         }
@@ -99,14 +106,14 @@ class Login extends React.Component {
                 <div className="homepageoutter">
                     <section role="navigation" className="nav-bar">
                         <div className="slogan">
-                            <Link to="/" className="sloganlink" >
+                            <a href="/" className="sloganlink">
                                 <h2><strong>Smart School Bus</strong></h2>
-                            </Link>
+                            </a>
                         </div>
                         <div className="linksdiv">
-                            <Link to="/" className="links"><Home color="rgb(255,255,255)" />Home</Link>
-                            <Link to="/about" className="links"><Info color="rgb(255,255,255)" />About Us</Link>
-                            <Link to="/contact" className="links"><Contact color="rgb(255,255,255)" />Contact Us</Link>
+                            <a href="/" className="links"><Home color="rgb(255,255,255)" viewBox="0 -7 28 28" />Home</a>
+                            <a href="/about" className="links"><Info color="rgb(255,255,255)" viewBox="0 -7 28 28" />About Us</a>
+                            <a href="/contact" className="links"><Contact color="rgb(255,255,255)" viewBox="0 -7 28 28" />Contact Us</a>
                         </div>
                     </section>
                     <form className="loginform">

@@ -1,5 +1,7 @@
 ﻿import React from 'react';
 import { Redirect } from 'react-router-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class AdminHome extends React.Component {
     constructor(props) {
@@ -14,17 +16,19 @@ class AdminHome extends React.Component {
         self.setState({
             isLogin: false
         });
-        window.localStorage.setItem('isLoggedInAdmin', false);
+        localStorage.setItem('isLoggedInAdmin', false);
     }
 
     render() {
-        if (window.localStorage.getItem('isLoggedInAdmin') === 'false') {
+        if (localStorage.getItem('isLoggedInAdmin') === 'false') {
             return (<Redirect to="/admin" />);
         }
         return (
-            <div>
-                <button onClick={(e) => this.logoutClick(e)}>LOGOUT</button>
-            </div>
+            <MuiThemeProvider>
+                <div>
+                    <RaisedButton label="LOGOUT" backgroundColor="rgba(51, 105, 30, 0.8)" className="logout" onClick={(e) => this.logoutClick(e)} />
+                </div>
+            </MuiThemeProvider>
         );
     }
 }

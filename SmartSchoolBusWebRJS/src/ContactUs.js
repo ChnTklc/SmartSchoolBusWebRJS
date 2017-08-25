@@ -10,7 +10,6 @@ import Info from 'material-ui/svg-icons/action/info';
 import Fax from 'material-ui/svg-icons/action/print';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import { Link } from 'react-router-dom';
 
 const styles = {
     floatingLabelStyle: {
@@ -54,14 +53,14 @@ class ContactUs extends Component {
                 <div className="homepageoutter">
                     <section role="navigation" className="nav-bar">
                         <div className="slogan">
-                            <Link to="/" className="sloganlink">
+                            <a href="/" className="sloganlink">
                                 <h2><strong>Smart School Bus</strong></h2>
-                            </Link>
+                            </a>
                         </div>
                         <div className="linksdiv">
-                            <Link to="/" className="links"><Home color="rgb(255,255,255)" />Home</Link>
-                            <Link to="/about" className="links"><Info color="rgb(255,255,255)" />About Us</Link>
-                            <Link to="/contact" className="links"><Contact color="rgb(255,255,255)" />Contact Us</Link>
+                            <a href="/" className="links"><Home color="rgb(255,255,255)" viewBox="0 -7 28 28" />Home</a>
+                            <a href="/about" className="links"><Info color="rgb(255,255,255)" viewBox="0 -7 28 28" />About Us</a>
+                            <a href="/contact" className="links"><Contact color="rgb(255,255,255)" viewBox="0 -7 28 28" />Contact Us</a>
                         </div>
                     </section>
                     <main>
@@ -88,22 +87,22 @@ class ContactUs extends Component {
                                 <h2>DELTA Smart Technologies</h2>
                                 <ul>
                                     <li>
-                                        <Email /><strong>E-mail</strong>
+                                        <Email viewBox="0 -9 30 30"/><strong>E-mail</strong>
                                         <div><a href="mailto:info@DeltaSmart.Tech">info@DeltaSmart.Tech</a></div>
                                     </li>
                                     <br />
                                     <li>
-                                        <Phone /><strong>Telephone</strong>
+                                        <Phone viewBox="0 -9 30 30"/><strong>Telephone</strong>
                                         <div>+90-232-5024749</div>
                                     </li>
                                     <br />
                                     <li>
-                                        <Fax /><strong>Fax</strong>
+                                        <Fax viewBox="0 -9 30 30"/><strong>Fax</strong>
                                         <div>+90-232-5024749</div>
                                     </li>
                                     <br />
                                     <li>
-                                        <Address /><strong>Adress</strong>
+                                        <Address viewBox="0 -9 30 30"/><strong>Adress</strong>
                                         <div>
                                             Gulbahce Mahallesi IYTE Kampusu
                                             <br />
