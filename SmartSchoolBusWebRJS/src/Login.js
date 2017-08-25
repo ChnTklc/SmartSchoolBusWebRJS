@@ -86,7 +86,7 @@ class Login extends React.Component {
     render() {
         return (
             <MuiThemeProvider>
-                <div>
+                <div className="homepageoutter">
                     <section role="navigation" className="nav-bar">
                         <div className="slogan">
                             <Link to="/" className="sloganlink" >

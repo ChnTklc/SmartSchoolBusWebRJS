@@ -160,3 +160,12 @@ body {
             list-style: none;
             margin-left: -2.7em;
         }
+
+.notfound {
+    background-color: white;
+    text-align: left;
+    width: 1366px;
+    height: 672px;
+    position: absolute;
+    padding-left: 25px; 
+}

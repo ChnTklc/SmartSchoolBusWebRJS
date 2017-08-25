@@ -1,10 +1,6 @@
 ﻿import React, { Component } from 'react';
 import Contact from 'material-ui/svg-icons/communication/contact-mail';
-import Lightbulb from 'material-ui/svg-icons/action/lightbulb-outline';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Forum from 'material-ui/svg-icons/communication/forum';
-import Park from 'material-ui/svg-icons/maps/local-parking';
-import Bus from 'material-ui/svg-icons/maps/directions-bus';
 import Home from 'material-ui/svg-icons/action/home';
 import Info from 'material-ui/svg-icons/action/info';
 import { Link } from 'react-router-dom';
