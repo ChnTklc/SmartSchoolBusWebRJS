@@ -87,22 +87,22 @@ class ContactUs extends Component {
                                 <h2>DELTA Smart Technologies</h2>
                                 <ul>
                                     <li>
-                                        <Email viewBox="0 -9 30 30"/><strong>E-mail</strong>
+                                        <Email viewBox="0 -9 30 30" /><strong>E-mail</strong>
                                         <div><a href="mailto:info@DeltaSmart.Tech">info@DeltaSmart.Tech</a></div>
                                     </li>
                                     <br />
                                     <li>
-                                        <Phone viewBox="0 -9 30 30"/><strong>Telephone</strong>
+                                        <Phone viewBox="0 -9 30 30" /><strong>Telephone</strong>
                                         <div>+90-232-5024749</div>
                                     </li>
                                     <br />
                                     <li>
-                                        <Fax viewBox="0 -9 30 30"/><strong>Fax</strong>
+                                        <Fax viewBox="0 -9 30 30" /><strong>Fax</strong>
                                         <div>+90-232-5024749</div>
                                     </li>
                                     <br />
                                     <li>
-                                        <Address viewBox="0 -9 30 30"/><strong>Adress</strong>
+                                        <Address viewBox="0 -9 30 30" /><strong>Adress</strong>
                                         <div>
                                             Gulbahce Mahallesi IYTE Kampusu
                                             <br />
@@ -113,8 +113,8 @@ class ContactUs extends Component {
                                     </li>
                                     <br />
                                     <li>
-                                        <iframe src="https://www.google.com/maps?q=Gulbahce+Mahallesi+IYTE+Kampusu%0AA8+Binasi+No%3A1%2F37+D%3A18%0AUrla+%2F+Izmir+%2F+Turkey&output=embed&hl=tr&z=14">
-                                        </iframe>
+                                        <iframe title="This is a unique title"
+                                            src="https://www.google.com/maps?q=Gulbahce+Mahallesi+IYTE+Kampusu%0AA8+Binasi+No%3A1%2F37+D%3A18%0AUrla+%2F+Izmir+%2F+Turkey&output=embed&hl=tr&z=14" />
                                     </li>
                                 </ul>
                             </div>

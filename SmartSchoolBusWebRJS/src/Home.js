@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';
-import Home from 'material-ui/svg-icons/action/home';
+import HomeIcon from 'material-ui/svg-icons/action/home';
 import Info from 'material-ui/svg-icons/action/info';
 import Contact from 'material-ui/svg-icons/communication/contact-mail';
 
@@ -26,7 +26,7 @@ class Home extends Component {
                             </a>
                         </div>
                         <div className="linksdiv">
-                            <a href="/" className="links"><Home color="rgb(255,255,255)" viewBox="0 -7 28 28" />Home</a>
+                            <a href="/" className="links"><HomeIcon color="rgb(255,255,255)" viewBox="0 -7 28 28" />Home</a>
                             <a href="/about" className="links"><Info color="rgb(255,255,255)" viewBox="0 -7 28 28" />About Us</a>
                             <a href="/contact" className="links"><Contact color="rgb(255,255,255)" viewBox="0 -7 28 28" />Contact Us</a>
                         </div>
