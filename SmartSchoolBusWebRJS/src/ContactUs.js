@@ -1,15 +1,13 @@
 ﻿import React, { Component } from 'react';
 import { lightGreen900, lightBlue900 } from 'material-ui/styles/colors';
-import Contact from 'material-ui/svg-icons/communication/contact-mail';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Email from 'material-ui/svg-icons/communication/email';
 import Phone from 'material-ui/svg-icons/communication/phone';
 import Address from 'material-ui/svg-icons/maps/place';
-import Home from 'material-ui/svg-icons/action/home';
-import Info from 'material-ui/svg-icons/action/info';
 import Fax from 'material-ui/svg-icons/action/print';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import NavigationBar from './NavigationBar';
 
 const styles = {
     floatingLabelStyle: {
@@ -51,18 +49,7 @@ class ContactUs extends Component {
         return (
             <MuiThemeProvider>
                 <div className="homepageoutter">
-                    <section role="navigation" className="nav-bar">
-                        <div className="slogan">
-                            <a href="/" className="sloganlink">
-                                <h2><strong>Smart School Bus</strong></h2>
-                            </a>
-                        </div>
-                        <div className="linksdiv">
-                            <a href="/" className="links"><Home color="rgb(255,255,255)" viewBox="0 -7 28 28" />Home</a>
-                            <a href="/about" className="links"><Info color="rgb(255,255,255)" viewBox="0 -7 28 28" />About Us</a>
-                            <a href="/contact" className="links"><Contact color="rgb(255,255,255)" viewBox="0 -7 28 28" />Contact Us</a>
-                        </div>
-                    </section>
+                    <NavigationBar />
                     <main>
                         <form className="contactform">
                             {this.state.sent ? <div className="contactfields"><strong>Thank you for your message. We will reply your email soon.</strong></div> :

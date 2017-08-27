@@ -1,16 +1,14 @@
 import React from 'react';
 import ActionVisibilityOff from 'material-ui/svg-icons/action/visibility-off';
 import ActionVisibility from 'material-ui/svg-icons/action/visibility';
-import Contact from 'material-ui/svg-icons/communication/contact-mail';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import rpni from 'react-phone-number-input/style.css';
 import rrui from 'react-phone-number-input/rrui.css';
-import Home from 'material-ui/svg-icons/action/home';
-import Info from 'material-ui/svg-icons/action/info';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Phone from 'react-phone-number-input';
 import { Redirect } from 'react-router-dom';
+import NavigationBar from './NavigationBar';
 import './Styles.css';
 
 var request = require("request");
@@ -104,18 +102,7 @@ class Login extends React.Component {
         return (
             <MuiThemeProvider>
                 <div className="homepageoutter">
-                    <section role="navigation" className="nav-bar">
-                        <div className="slogan">
-                            <a href="/" className="sloganlink">
-                                <h2><strong>Smart School Bus</strong></h2>
-                            </a>
-                        </div>
-                        <div className="linksdiv">
-                            <a href="/" className="links"><Home color="rgb(255,255,255)" viewBox="0 -7 28 28" />Home</a>
-                            <a href="/about" className="links"><Info color="rgb(255,255,255)" viewBox="0 -7 28 28" />About Us</a>
-                            <a href="/contact" className="links"><Contact color="rgb(255,255,255)" viewBox="0 -7 28 28" />Contact Us</a>
-                        </div>
-                    </section>
+                    <NavigationBar />
                     <form className="loginform">
                         <div className="outer">
                             <h2 className="signin">Sign in</h2>
