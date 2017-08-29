@@ -9,6 +9,7 @@ import AdminHome from './Admin/AdminHome';
 import SchoolStaff from './User/SchoolStaff';
 import CompanyOfficer from './User/CompanyOfficer';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import './Styles.css';
 
 const NotFound = () => (
     <div className="notfound">

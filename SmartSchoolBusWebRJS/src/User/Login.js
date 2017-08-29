@@ -8,8 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Phone from 'react-phone-number-input';
 import { Redirect } from 'react-router-dom';
-import NavigationBar from './Home/NavigationBar';
-import './Styles.css';
+import NavigationBar from '../Home/NavigationBar';
 
 var request = require("request");
 
