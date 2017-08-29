@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Home from './Home';
-import ContactUs from './ContactUs';
-import AboutUs from './AboutUs';
-import Login from './Login';
-import Admin from './Admin';
-import AdminHome from './AdminHome';
-import SchoolStaff from './SchoolStaff';
-import CompanyOfficer from './CompanyOfficer';
+import Home from './Home/Home';
+import ContactUs from './Home/ContactUs';
+import AboutUs from './Home/AboutUs';
+import Login from './User/Login';
+import Admin from './Admin/Admin';
+import AdminHome from './Admin/AdminHome';
+import SchoolStaff from './User/SchoolStaff';
+import CompanyOfficer from './User/CompanyOfficer';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 const NotFound = () => (

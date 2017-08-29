@@ -8,7 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Phone from 'react-phone-number-input';
 import { Redirect } from 'react-router-dom';
-import NavigationBar from './NavigationBar';
+import NavigationBar from './Home/NavigationBar';
 import './Styles.css';
 
 var request = require("request");
@@ -29,7 +29,6 @@ class Login extends React.Component {
     handleClick(event) {
         event.preventDefault();
         var self = this;
-
         if (self.state.phone === '' || self.state.password === '') {
             return false;
         }
