@@ -166,9 +166,16 @@ body {
     width: 1366px;
     height: 672px;
     position: absolute;
-    padding-left: 25px; 
+    padding-left: 25px;
 }
-.logout{
+
+.logout {
     float: right;
-    margin: 20px;
+}
+
+.appbar {
+    flex: 1 auto;
+    height: 70px;
+    background-color: rgba(128, 128, 128, .5);
+    width: 100%;
 }

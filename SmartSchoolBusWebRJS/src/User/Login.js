@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import ActionVisibilityOff from 'material-ui/svg-icons/action/visibility-off';
 import ActionVisibility from 'material-ui/svg-icons/action/visibility';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -11,6 +11,27 @@ import { Redirect } from 'react-router-dom';
 import NavigationBar from '../Home/NavigationBar';
 
 var request = require("request");
+
+var loggedinPhone = 'Name';
+
+let varsAsLanguage = {
+    en: {
+        loginTitle: "Log In",
+        loginButton: "Log In",
+        phone: "Phone Number*",
+        pass: "Password*",
+        forgotPass: "Forgot your password?",
+    },
+    tr: {
+        loginTitle: "Giriş Yap",
+        loginButton: "GİRİŞ",
+        phone: "Telefon Numarası*",
+        pass: "Şifre*",
+        forgotPass: "Şifrenizi mi unuttunuz?"
+    }
+};
+
+let language = varsAsLanguage.tr;
 
 class Login extends React.Component {
     constructor(props) {
@@ -41,9 +62,9 @@ class Login extends React.Component {
             },
             form:
             {
-                client_id: 'cde01d2db10b2bc2d81a6dc738ccf16f7b99973a57737486903436a685f0e7fa',
-                username: self.state.username,
+                username: self.state.phone,
                 password: self.state.password,
+                client_id: 'ec37e34e0b04195199383c45a595412161629a92d01d676460f2e8e553d5b83e',
                 grant_type: 'password'
             }
         };
@@ -52,7 +73,7 @@ class Login extends React.Component {
             if (error) throw new Error(error);
             else {
                 var info = JSON.parse(body);
-                if (response.status === 200) {
+                if (info.access_token !== null) {
                     self.setState({
                         isLogin: true,
                         role: info.role
@@ -65,6 +86,11 @@ class Login extends React.Component {
                 }
             }
         });
+        loggedinPhone = self.state.phone;
+    }
+
+    getLoggedinPhone() {
+        return loggedinPhone;
     }
 
     show(id) {
@@ -79,7 +105,21 @@ class Login extends React.Component {
         });
     }
 
+    enteredPhoneChange(value) {
+        this.setState({ phone: value });
+    }
+
+    languageSetting() {
+        if (NavigationBar.prototype.getLanguage() === "EN") {
+            language = varsAsLanguage.tr;
+        }
+        else if (NavigationBar.prototype.getLanguage() === "TR") {
+            language = varsAsLanguage.en;
+        }
+    }
+
     render() {
+        this.languageSetting();
         if (this.state.isLogin ||
             localStorage.getItem('isLoggedInSchoolStaff') === 'true' ||
             localStorage.getItem('isLoggedInCompanyOfficer') === 'true') {
@@ -103,21 +143,21 @@ class Login extends React.Component {
                     <NavigationBar />
                     <form className="loginform">
                         <div className="outer">
-                            <h2 className="signin">Sign in</h2>
+                            <h2 className="signin">{language.loginTitle}</h2>
                             <br />
-                            <Phone required placeholder="Phone Number*" value={this.state.phone} country="TR"
-                                onChange={(event, value) => this.setState({ phone: value })} nativeExpanded />
-                            <TextField required floatingLabelText="Password*" type="password" id="pass"
+                            <Phone required placeholder={language.phone} value={this.state.phone} country="TR"
+                                onChange={(value) => this.enteredPhoneChange(value)} nativeExpanded />
+                            <TextField required floatingLabelText={language.pass} type="password" id="pass"
                                 onChange={(event, value) => this.setState({ password: value })} />
                             {this.state.visible ? <ActionVisibilityOff color="rgb(103, 118, 141)" onClick={() => this.show('pass')} /> :
                                 <ActionVisibility color="rgb(103, 118, 141)" onClick={() => this.show('pass')} />}
                             <br /><br />
                             {this.state.errortext ? <div className="errorText">{this.state.errortext}!</div> : true}
                             <br />
-                            <RaisedButton label="Login" className="loginbutton" backgroundColor="rgba(51, 105, 30, 0.7)" labelColor="rgb(255, 255, 255)"
+                            <RaisedButton id="loginButton" label={language.loginButton} className="loginbutton" backgroundColor="rgba(51, 105, 30, 0.7)" labelColor="rgb(255, 255, 255)"
                                 onClick={(e) => this.handleClick(e)} labelStyle={{ fontSize: 18 }} style={{ width: 120, height: 40, opacity: 0.8 }} />
                             <br /> <br />
-                            <a href="" className="pass-forgot">Forgot your password?</a>
+                            <a href="" className="pass-forgot">{language.forgotPass}</a>
                         </div>
                     </form>
                 </div>
