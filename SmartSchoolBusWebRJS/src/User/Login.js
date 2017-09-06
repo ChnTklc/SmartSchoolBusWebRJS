@@ -154,7 +154,7 @@ class Login extends React.Component {
                             <br /><br />
                             {this.state.errortext ? <div className="errorText">{this.state.errortext}!</div> : true}
                             <br />
-                            <RaisedButton id="loginButton" label={language.loginButton} className="loginbutton" backgroundColor="rgba(51, 105, 30, 0.7)" labelColor="rgb(255, 255, 255)"
+                            <RaisedButton label={language.loginButton} className="loginbutton" backgroundColor="rgba(51, 105, 30, 0.7)" labelColor="rgb(255, 255, 255)"
                                 onClick={(e) => this.handleClick(e)} labelStyle={{ fontSize: 18 }} style={{ width: 120, height: 40, opacity: 0.8 }} />
                             <br /> <br />
                             <a href="" className="pass-forgot">{language.forgotPass}</a>

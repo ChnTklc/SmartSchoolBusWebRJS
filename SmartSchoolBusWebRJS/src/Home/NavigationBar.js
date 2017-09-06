@@ -21,22 +21,31 @@ let varsAsLanguage = {
     }
 };
 
-let language = varsAsLanguage.en;
+var language = varsAsLanguage.en;
 
 class NavigationBar extends React.Component {
-    setLanguage(lang) {
+    /* Fix language button */
+
+    /*
+    <FlatButton id="langBtn" label={this.getLanguage()} labelStyle={{ padding: 0, fontSize: 17.5 }}
+        style={{ color: "rgba(128, 128, 128, .5)", border: 2, textAlign: "center", minWidth: 40, minHeight: 38, width: 40, height: 38, bottom: "8%" }}
+        onClick={() => this.setLanguage(language.id, 'langBtn')} />
+
+    setLanguage(lang, id) {
         if (lang === "EN") {
-            language = varsAsLanguage.en;
-        } else if (lang === "TR") {
-            language = varsAsLanguage.tr;
+            var language = varsAsLanguage.en;
+        } else {
+            var language = varsAsLanguage.tr;
         }
+        var tag = document.getElementById(id);
+        tag.setAttribute('label', language.id);
     }
+    */
 
     getLanguage() {
         return language.id;
     }
-    /* Fix language button
-     */
+
     render() {
         return (
             <section role="navigation" className="nav-bar" >
@@ -49,9 +58,6 @@ class NavigationBar extends React.Component {
                     <a href="/" className="links"><HomeIcon color="rgb(255,255,255)" viewBox="0 -7 28 28" />{language.home}</a>
                     <a href="/about" className="links"><Info color="rgb(255,255,255)" viewBox="0 -7 28 28" />{language.about}</a>
                     <a href="/contact" className="links"><Contact color="rgb(255,255,255)" viewBox="0 -7 28 28" />{language.contact}</a>
-                    <FlatButton labelStyle={{ padding: 0, fontSize: 17.5, color: "white" }}
-                        style={{ border: 2, textAlign: "center", minWidth: 40, minHeight: 38, width: 40, height: 38, bottom: "8%" }}
-                        onClick={() => this.setLanguage(language.id)} label={language.id} />
                 </div>
             </section >
         );

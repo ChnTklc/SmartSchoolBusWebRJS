@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartSchoolBusWebRJS", "SmartSchoolBusWebRJS\SmartSchoolBusWebRJS.csproj", "{AF3E84A0-3294-4D9E-AFFB-73A1FA763A83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartSchoolBus", "..\SmartSchoolBus.API.Development\SmartSchoolBusAPI.Development\SmartSchoolBus\SmartSchoolBus.csproj", "{EEDF7B93-E044-4D11-BE85-5AAE429C8083}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartSchoolBus.Tests", "..\SmartSchoolBus.API.Development\SmartSchoolBusAPI.Development\SmartSchoolBus.Tests\SmartSchoolBus.Tests.csproj", "{323A8532-C5BC-42AE-B21E-EC5FCA8D977B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartSchoolBus.Contract", "..\SmartSchoolBus.API.Development\SmartSchoolBusAPI.Development\SmartSchoolBus.Contract\SmartSchoolBus.Contract.csproj", "{C2D32EF1-1932-464A-9C47-E81C6DCD5A25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{AF3E84A0-3294-4D9E-AFFB-73A1FA763A83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF3E84A0-3294-4D9E-AFFB-73A1FA763A83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF3E84A0-3294-4D9E-AFFB-73A1FA763A83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEDF7B93-E044-4D11-BE85-5AAE429C8083}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEDF7B93-E044-4D11-BE85-5AAE429C8083}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEDF7B93-E044-4D11-BE85-5AAE429C8083}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEDF7B93-E044-4D11-BE85-5AAE429C8083}.Release|Any CPU.Build.0 = Release|Any CPU
+		{323A8532-C5BC-42AE-B21E-EC5FCA8D977B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{323A8532-C5BC-42AE-B21E-EC5FCA8D977B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{323A8532-C5BC-42AE-B21E-EC5FCA8D977B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{323A8532-C5BC-42AE-B21E-EC5FCA8D977B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2D32EF1-1932-464A-9C47-E81C6DCD5A25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2D32EF1-1932-464A-9C47-E81C6DCD5A25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2D32EF1-1932-464A-9C47-E81C6DCD5A25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2D32EF1-1932-464A-9C47-E81C6DCD5A25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

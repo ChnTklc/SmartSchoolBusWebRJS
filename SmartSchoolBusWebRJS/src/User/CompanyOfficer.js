@@ -9,6 +9,22 @@ import Divider from 'material-ui/Divider';
 import ArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import { List, ListItem } from 'material-ui/List';
 import Login from './Login';
+import NavigationBar from '../Home/NavigationBar';
+
+let varsAsLanguage = {
+    en: {
+        id: "TR",
+        title: "Company Officer",
+        logout: "Logout",
+    },
+    tr: {
+        id: "EN",
+        title: "Şirket Çalışanı",
+        logout: "Çıkış",
+    }
+};
+
+var language = varsAsLanguage.en;
 
 const SchoolNames = [
     "İYTE",
@@ -18,7 +34,8 @@ const SchoolNames = [
 ];
 
 const SubListOfSchools = [
-    "Company Officers",
+    "Route",
+    "Students",
     "Buses",
     "Drivers",
     "Hostesses",
@@ -30,6 +47,15 @@ class CompanyOfficer extends React.Component {
         this.state = {
             isLogin: true,
             isDrawerOpen: false
+        }
+    }
+
+    languageSetting() {
+        if (NavigationBar.prototype.getLanguage() === "EN") {
+            language = varsAsLanguage.tr;
+        }
+        else if (NavigationBar.prototype.getLanguage() === "TR") {
+            language = varsAsLanguage.en;
         }
     }
 
@@ -47,7 +73,34 @@ class CompanyOfficer extends React.Component {
         localStorage.setItem('isLoggedInCompanyOfficer', false);
     }
 
-    showshowCompanyOfficers(id) {
+    createListWithItems(schoolId, schoolName, itemNames) {
+        var itemIds = [];
+        for (var i = 0; i < itemNames.length; i++) {
+            itemIds[i] = schoolId + itemNames[i];
+        }
+
+        return (
+            <ListItem
+                id={schoolId}
+                primaryText={schoolName}
+                initiallyOpen={true}
+                onClick={() => this.showSchoolInfo(schoolId)}
+                nestedItems={[
+                    <ListItem id={itemIds[0]} primaryText={itemNames[0]} onClick={() => this.showRoute(itemIds[0])} />,
+                    <ListItem id={itemIds[1]} primaryText={itemNames[1]} onClick={() => this.showStudents(itemIds[1])} />,
+                    <ListItem id={itemIds[2]} primaryText={itemNames[2]} onClick={() => this.showBuses(itemIds[2])} />,
+                    <ListItem id={itemIds[3]} primaryText={itemNames[3]} onClick={() => this.showDrivers(itemIds[3])} />,
+                    <ListItem id={itemIds[4]} primaryText={itemNames[4]} onClick={() => this.showHostesses(itemIds[4])} />,
+                ]}
+            />
+        );
+    }
+
+    showSchoolInfo(id) {
+        return true;
+    }
+
+    showStudents(id) {
         return true;
     }
 
@@ -63,7 +116,12 @@ class CompanyOfficer extends React.Component {
         return true;
     }
 
+    showRoute(id) {
+        return true;
+    }
+
     render() {
+        this.languageSetting();
         /*if (localStorage.getItem('isLoggedInCompanyOfficer') === 'false') {
             return (<Redirect to="/login" />);
         }*/
@@ -72,8 +130,8 @@ class CompanyOfficer extends React.Component {
                 <div>
                     <AppBar
                         className="appbar" style={{ backgroundColor: "rgba(61, 59, 59, 1)" }}
-                        title={<a style={{ textDecoration: "none", cursor: "pointer", color: "white" }} href="/companyofficer">Company Officer</a>}
-                        iconElementRight={<Button label="Logout" style={{ margin: 0 }} labelStyle={{ fontSize: 18 }} onClick={(e) => this.logoutClick(e)} />}
+                        title={<a style={{ textDecoration: "none", cursor: "pointer", color: "white" }} href="/companyofficer">{language.title}</a>}
+                        iconElementRight={<Button label={language.logout} style={{ margin: 0 }} labelStyle={{ fontSize: 18 }} onClick={(e) => this.logoutClick(e)} />}
                         onLeftIconButtonTouchTap={() => this.handleMenuToggle()} />
                     <Drawer
                         docked={false}
@@ -87,56 +145,17 @@ class CompanyOfficer extends React.Component {
                             <strong>Welcome {Login.prototype.getLoggedinPhone()}</strong>
                         </div>
                         <List>
-                            <ListItem
-                                id="School1"
-                                primaryText={SchoolNames[0]}
-                                initiallyOpen={true}
-                                nestedItems={[
-                                    <ListItem primaryText={SubListOfSchools[0]} onClick={() => this.showCompanyOfficers('School1')} />,
-                                    <ListItem primaryText={SubListOfSchools[1]} onClick={() => this.showBuses('School1')} />,
-                                    <ListItem primaryText={SubListOfSchools[2]} onClick={() => this.showDrivers('School1')} />,
-                                    <ListItem primaryText={SubListOfSchools[3]} onClick={() => this.showHostesses('School1')} />
-                                ]}
-                            />
+                            {this.createListWithItems("School1", SchoolNames[0], SubListOfSchools)}
                             <Divider />
-                            <ListItem
-                                id="School2"
-                                primaryText={SchoolNames[1]}
-                                initiallyOpen={true}
-                                nestedItems={[
-                                    <ListItem primaryText={SubListOfSchools[0]} onClick={() => this.showCompanyOfficers('School2')} />,
-                                    <ListItem primaryText={SubListOfSchools[1]} onClick={() => this.showBuses('School2')} />,
-                                    <ListItem primaryText={SubListOfSchools[2]} onClick={() => this.showDrivers('School2')} />,
-                                    <ListItem primaryText={SubListOfSchools[3]} onClick={() => this.showHostesses('School2')} />
-                                ]}
-                            />
+                            {this.createListWithItems("School2", SchoolNames[1], SubListOfSchools)}
                             <Divider />
-                            <ListItem
-                                id="School3"
-                                primaryText={SchoolNames[2]}
-                                initiallyOpen={true}
-                                nestedItems={[
-                                    <ListItem primaryText={SubListOfSchools[0]} onClick={() => this.showCompanyOfficers('School3')} />,
-                                    <ListItem primaryText={SubListOfSchools[1]} onClick={() => this.showBuses('School3')} />,
-                                    <ListItem primaryText={SubListOfSchools[2]} onClick={() => this.showDrivers('School3')} />,
-                                    <ListItem primaryText={SubListOfSchools[3]} onClick={() => this.showHostesses('School3')} />
-                                ]}
-                            />
+                            {this.createListWithItems("School3", SchoolNames[2], SubListOfSchools)}
                             <Divider />
-                            <ListItem
-                                id="School4"
-                                primaryText={SchoolNames[3]}
-                                initiallyOpen={true}
-                                nestedItems={[
-                                    <ListItem primaryText={SubListOfSchools[0]} onClick={() => this.showCompanyOfficers('School4')} />,
-                                    <ListItem primaryText={SubListOfSchools[1]} onClick={() => this.showBuses('School4')} />,
-                                    <ListItem primaryText={SubListOfSchools[2]} onClick={() => this.showDrivers('School4')} />,
-                                    <ListItem primaryText={SubListOfSchools[3]} onClick={() => this.showHostesses('School4')} />
-                                ]}
-                            />
+                            {this.createListWithItems("School4", SchoolNames[3], SubListOfSchools)}
                             <Divider />
                         </List>
                     </Drawer>
+
                 </div>
             </MuiThemeProvider>
         );
