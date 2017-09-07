@@ -12,7 +12,7 @@ import NavigationBar from '../Home/NavigationBar';
 
 var request = require("request");
 
-var loggedinPhone = 'Name';
+var loggedinPhone = 'Cihan';
 
 let varsAsLanguage = {
     en: {
