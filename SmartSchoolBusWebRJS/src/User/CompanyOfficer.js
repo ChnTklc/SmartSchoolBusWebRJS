@@ -4,14 +4,11 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import Button from 'material-ui/FlatButton';
 import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
-import ArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
 import Login from './Login';
 import NavigationBar from '../Home/NavigationBar';
 import { Table, TableRow, TableRowColumn, TableBody, TableHeader, TableHeaderColumn } from 'material-ui/Table';
-import FlatButton from 'material-ui/FlatButton';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 
@@ -21,32 +18,56 @@ let varsAsLanguage = {
     en: {
         id: "TR",
         title: "Company Officer",
+        drawerTitle: "Welcome ",
         logout: "Logout",
+        route: "Route",
+        students: "Students",
+        buses: "Buses",
+        drivers: "Drivers",
+        hostesses: "Hostesses",
     },
     tr: {
         id: "EN",
         title: "Şirket Çalışanı",
+        drawerTitle: "Hoşgeldin ",
         logout: "Çıkış",
+        route: "Güzergah",
+        students: "Öğrenciler",
+        buses: "Otobüsler",
+        drivers: "Sürücüler",
+        hostesses: "Hostesler",
     }
 };
 
 var language = varsAsLanguage.en;
 
+function languageSetting() {
+    if (NavigationBar.prototype.getLanguage() === "EN") {
+        language = varsAsLanguage.tr;
+    }
+    else if (NavigationBar.prototype.getLanguage() === "TR") {
+        language = varsAsLanguage.en;
+    }
+}
+
 var Students = []
 
-const SchoolNames = [
+var SchoolNames = [
     "İYTE",
     "DEU",
     "EGEÜ",
     "İKÇÜ",
 ];
 
-const SubListOfSchools = [
-    "Route",
-    "Students",
-    "Buses",
-    "Drivers",
-    "Hostesses",
+/**
+ * fix me
+ */
+var SubListOfSchools = [
+    language.route,
+    language.students,
+    language.buses,
+    language.drivers,
+    language.hostesses,
 ];
 
 function addStudent(photo, name, surname, classNo, studentNo, parent, homeAdress, service) {
@@ -84,15 +105,6 @@ class CompanyOfficer extends React.Component {
             isDrawerOpen: true,
             students: Students,
             selectedIndex: null,
-        }
-    }
-
-    languageSetting() {
-        if (NavigationBar.prototype.getLanguage() === "EN") {
-            language = varsAsLanguage.tr;
-        }
-        else if (NavigationBar.prototype.getLanguage() === "TR") {
-            language = varsAsLanguage.en;
         }
     }
 
@@ -230,7 +242,7 @@ class CompanyOfficer extends React.Component {
     }
 
     render() {
-        this.languageSetting();
+        languageSetting();
         /*if (localStorage.getItem('isLoggedInCompanyOfficer') === 'false') {
             return (<Redirect to="/login" />);
         }*/
@@ -248,13 +260,11 @@ class CompanyOfficer extends React.Component {
                         onRequestChange={(open) => this.setState({ isDrawerOpen: open })}>
                         <AppBar
                             className="appbar" style={{ backgroundColor: "rgba(61, 59, 59, 1)" }}
-                            title={<a style={{ textDecoration: "none", cursor: "pointer", color: "white", fontSize: 18 }} href="/companyofficer">{language.title}</a>}
+                            title={<a style={{ textDecoration: "none", cursor: "pointer", color: "white", fontSize: 18 }} href="/companyofficer">{language.drawerTitle}{Login.prototype.getLoggedinPhone()}</a>}
                             onLeftIconButtonTouchTap={() => this.handleMenuToggle()} />
                         <div style={{ textAlign: "center" }}>
                             <img src="http://vvcexpl.com/wordpress/wp-content/uploads/2013/09/profile-default-male.png"
                                 style={{ width: 60, height: 60, marginTop: 10 }} />
-                            <br /> <br />
-                            <strong>Welcome {Login.prototype.getLoggedinPhone()}</strong>
                         </div>
                         <SelectableList
                             value={this.state.selectedIndex}
