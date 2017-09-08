@@ -186,9 +186,7 @@ class CompanyOfficer extends React.Component {
                         <TableHeaderColumn tooltip="Student's School Number">Student No</TableHeaderColumn>
                         <TableHeaderColumn tooltip="Student's Name">Name</TableHeaderColumn>
                         <TableHeaderColumn tooltip="Student's Surname">Surname</TableHeaderColumn>
-                        <TableHeaderColumn tooltip="Student's Class">Class</TableHeaderColumn>
                         <TableHeaderColumn tooltip="Student's Parent">Parent</TableHeaderColumn>
-                        <TableHeaderColumn tooltip="Student's Adress">Adress</TableHeaderColumn>
                         <TableHeaderColumn tooltip="Student's Service">Service</TableHeaderColumn>
                         <TableHeaderColumn tooltip="Settings">Settings</TableHeaderColumn>
                     </TableRow>
@@ -204,9 +202,7 @@ class CompanyOfficer extends React.Component {
                             <TableRowColumn>{row.studentNo}</TableRowColumn>
                             <TableRowColumn>{row.name}</TableRowColumn>
                             <TableRowColumn>{row.surname}</TableRowColumn>
-                            <TableRowColumn>{row.classNo}</TableRowColumn>
                             <TableRowColumn>{row.parent}</TableRowColumn>
-                            <TableRowColumn>{row.homeAdress}</TableRowColumn>
                             <TableRowColumn>{row.service}</TableRowColumn>
                             <TableRowColumn>
                                 <InfoIcon hoverColor="rgba(0, 0, 0, 1)" color="rgb(100, 100, 100)" onClick={() => this.openInfoDialog(index)} />
@@ -311,7 +307,7 @@ class CompanyOfficer extends React.Component {
         return (
             <Dialog
                 contentStyle={{ width: 550 }}
-                title="Student Information Detail"
+                title="Student Information Details"
                 actions={actions}
                 modal={false}
                 open={self.state.isInfoDialogOpen}
@@ -331,8 +327,7 @@ class CompanyOfficer extends React.Component {
             </Dialog>
         );
     }
-
-
+    
     updateStudentsList() {
         var self = this;
         var index = self.state.editIndex;
