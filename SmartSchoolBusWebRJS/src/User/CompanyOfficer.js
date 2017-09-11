@@ -167,11 +167,11 @@ class CompanyOfficer extends React.Component {
                 initiallyOpen={true}
                 onClick={(e) => this.showSchoolInfo(e, schoolId)}
                 nestedItems={[
-                    <ListItem key={itemIds[0]} value={itemIds[0]} id={itemIds[0]} primaryText={itemNames[0]} onClick={(e) => this.showRoute(e, itemIds[0])} />,
-                    <ListItem key={itemIds[1]} value={itemIds[1]} id={itemIds[1]} primaryText={itemNames[1]} onClick={(e) => this.showStudents(e, itemIds[1])} />,
-                    <ListItem key={itemIds[2]} value={itemIds[2]} id={itemIds[2]} primaryText={itemNames[2]} onClick={(e) => this.showBuses(e, itemIds[2])} />,
-                    <ListItem key={itemIds[3]} value={itemIds[3]} id={itemIds[3]} primaryText={itemNames[3]} onClick={(e) => this.showDrivers(e, itemIds[3])} />,
-                    <ListItem key={itemIds[4]} value={itemIds[4]} id={itemIds[4]} primaryText={itemNames[4]} onClick={(e) => this.showHostesses(e, itemIds[4])} />,
+                    <ListItem key={itemIds[0]} value={itemIds[0]} primaryText={itemNames[0]} />,
+                    <ListItem key={itemIds[1]} value={itemIds[1]} primaryText={itemNames[1]} />,
+                    <ListItem key={itemIds[2]} value={itemIds[2]} primaryText={itemNames[2]} />,
+                    <ListItem key={itemIds[3]} value={itemIds[3]} primaryText={itemNames[3]} />,
+                    <ListItem key={itemIds[4]} value={itemIds[4]} primaryText={itemNames[4]} />,
                 ]}
             />
         );
@@ -403,28 +403,6 @@ class CompanyOfficer extends React.Component {
 
     /* Functions about dialog sections */
 
-    /* Drawer select actions */
-
-    showSchoolInfo(e, id) {
-    }
-
-    showStudents(e, id) {
-    }
-
-    showBuses(e) {
-    }
-
-    showDrivers(e) {
-    }
-
-    showHostesses(e) {
-    }
-
-    showRoute(e) {
-    }
-
-    /* Drawer select actions */
-
     render() {
         /*if (localStorage.getItem('isLoggedInCompanyOfficer') === 'false') {
             return (<Redirect to="/login" />);
@@ -463,7 +441,7 @@ class CompanyOfficer extends React.Component {
                             {self.resizableTableView()}
                             {self.state.isEditDialogOpen ? self.editStudentInfo(self.state.editIndex) : false}
                             {self.state.isInfoDialogOpen ? self.showInfoDetail(self.state.infoIndex) : false}
-                        </div>
+                        </div> 
                         : false}
                 </div>
             </MuiThemeProvider>
