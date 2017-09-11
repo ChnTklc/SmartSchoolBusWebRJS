@@ -53,7 +53,9 @@ function languageSetting() {
     }
 }
 
-var Students = []
+var Students = [];
+
+var drawerListItemIds = [];
 
 var SchoolNames = [
     "İYTE",
@@ -87,6 +89,17 @@ function addStudent(photo, name, surname, classNo, studentNo, parent, homeAdress
     return Students;
 }
 
+function fillItemList() {
+    for (var i = 0; i < SchoolNames.length; i++) {
+        for (var k = 0; k < SubListOfSchools.length; k++) {
+            drawerListItemIds.push("School" + i + SubListOfSchools[k]);
+        }
+    }
+    return drawerListItemIds;
+}
+
+drawerListItemIds = fillItemList();
+
 /*DUMMY DATA*/
 for (var i = 1; i < 15; i++) {
     Students = addStudent("http://studentreasures.com/wp-content/themes/kingpower-v1-08/images/profile_default.jpg",
@@ -107,7 +120,7 @@ class CompanyOfficer extends React.Component {
             isLogin: true,
             isDrawerOpen: true,
             students: Students,
-            selectedIndex: null,
+            selectedIndex: 'School0',
             isEditDialogOpen: false,
             isInfoDialogOpen: false,
             editIndex: null,
@@ -138,11 +151,13 @@ class CompanyOfficer extends React.Component {
         localStorage.setItem('isLoggedInCompanyOfficer', false);
     }
 
-    createListWithItems(schoolId, schoolName, itemNames) {
+    createListWithItems(id, schoolName, itemNames) {
         var itemIds = [];
-        for (var i = 0; i < itemNames.length; i++) {
-            itemIds[i] = schoolId + itemNames[i];
+        for (var j = (id * SubListOfSchools.length); j < ((id + 1) * SubListOfSchools.length); j++) {
+            itemIds.push(drawerListItemIds[j]);
         }
+
+        var schoolId = "School" + id
         return (
             <ListItem
                 key={schoolId}
@@ -165,7 +180,7 @@ class CompanyOfficer extends React.Component {
     generateSelectableList(numberOfSchools) {
         var listItems = [];
         for (var i = 0; i < numberOfSchools; i++) {
-            listItems.push(this.createListWithItems("School" + i, SchoolNames[i], SubListOfSchools));
+            listItems.push(this.createListWithItems(i, SchoolNames[i], SubListOfSchools));
         }
         return listItems;
     }
@@ -327,7 +342,7 @@ class CompanyOfficer extends React.Component {
             </Dialog>
         );
     }
-    
+
     updateStudentsList() {
         var self = this;
         var index = self.state.editIndex;
@@ -443,9 +458,13 @@ class CompanyOfficer extends React.Component {
                             {this.generateSelectableList(SchoolNames.length)}
                         </SelectableList>
                     </Drawer>
-                    {self.resizableTableView()}
-                    {self.state.isEditDialogOpen ? self.editStudentInfo(self.state.editIndex) : false}
-                    {self.state.isInfoDialogOpen ? self.showInfoDetail(self.state.infoIndex) : false}
+                    {this.state.selectedIndex === drawerListItemIds[1] ?
+                        <div>
+                            {self.resizableTableView()}
+                            {self.state.isEditDialogOpen ? self.editStudentInfo(self.state.editIndex) : false}
+                            {self.state.isInfoDialogOpen ? self.showInfoDetail(self.state.infoIndex) : false}
+                        </div>
+                        : false}
                 </div>
             </MuiThemeProvider>
         );
