@@ -116,10 +116,10 @@ body {
         column-count: 2;
     }
 
-.altinfo .links {
-    text-decoration: none;
-    color: orangered;
-}
+    .homepageoutter .aboutdiv .links {
+        text-decoration: none;
+        color: orangered;
+    }
 
 .contactform {
     text-align: right;
@@ -179,6 +179,7 @@ body {
     background-color: rgba(128, 128, 128, .5);
     width: 100%;
 }
+
 .studentTableDiv {
     margin: 15px;
     padding: 15px;

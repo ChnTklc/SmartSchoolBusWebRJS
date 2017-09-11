@@ -12,8 +12,14 @@ import InfoIcon from 'material-ui/svg-icons/action/info';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
+
 import NavigationBar from '../Home/NavigationBar';
 import Login from './Login';
+import School from './School';
+
+var obj = School;
+
 
 let SelectableList = makeSelectable(List);
 
@@ -54,14 +60,14 @@ function languageSetting() {
 }
 
 var Students = [];
-
-var drawerListItemIds = [];
+var drawerListIds = [];
 
 var SchoolNames = [
-    "İYTE",
-    "DEU",
-    "EGEÜ",
-    "İKÇÜ",
+    "İzmir Yüksek Teknoloji Enstitüsü",
+    "Dokuz Eylül Üniversitesi",
+    "Ege Üniversitesi",
+    "İzmir Katip Çelebi Üniversitesi",
+    "İzmir Ekonomi Üniversitesi",
 ];
 
 /**
@@ -89,16 +95,17 @@ function addStudent(photo, name, surname, classNo, studentNo, parent, homeAdress
     return Students;
 }
 
-function fillItemList() {
+function fillDrawerListIds() {
     for (var i = 0; i < SchoolNames.length; i++) {
+        drawerListIds.push("School" + i);
         for (var k = 0; k < SubListOfSchools.length; k++) {
-            drawerListItemIds.push("School" + i + SubListOfSchools[k]);
+            drawerListIds.push("School" + i + SubListOfSchools[k]);
         }
     }
-    return drawerListItemIds;
+    return drawerListIds;
 }
 
-drawerListItemIds = fillItemList();
+drawerListIds = fillDrawerListIds();
 
 /*DUMMY DATA*/
 for (var i = 1; i < 15; i++) {
@@ -120,11 +127,11 @@ class CompanyOfficer extends React.Component {
             isLogin: true,
             isDrawerOpen: true,
             students: Students,
-            selectedIndex: 'School0',
-            isEditDialogOpen: false,
-            isInfoDialogOpen: false,
-            editIndex: null,
-            infoIndex: null,
+            selectedIndex: drawerListIds[0],
+            isStudentEditDialogOpen: false,
+            isStudentInfoDialogOpen: false,
+            studentEditIndex: null,
+            studentInfoIndex: null,
             sName: '',
             sSurname: '',
             sClassNo: '',
@@ -153,25 +160,22 @@ class CompanyOfficer extends React.Component {
 
     createListWithItems(id, schoolName, itemNames) {
         var itemIds = [];
-        for (var j = (id * SubListOfSchools.length); j < ((id + 1) * SubListOfSchools.length); j++) {
-            itemIds.push(drawerListItemIds[j]);
+        for (var j = (id * (SubListOfSchools.length + 1)); j < ((id + 1) * (SubListOfSchools.length + 1)); j++) {
+            itemIds.push(drawerListIds[j]);
         }
 
-        var schoolId = "School" + id
         return (
             <ListItem
-                key={schoolId}
-                value={schoolId}
-                id={schoolId}
+                key={itemIds[0]}
+                value={itemIds[0]}
                 primaryText={schoolName}
                 initiallyOpen={true}
-                onClick={(e) => this.showSchoolInfo(e, schoolId)}
                 nestedItems={[
-                    <ListItem key={itemIds[0]} value={itemIds[0]} primaryText={itemNames[0]} />,
-                    <ListItem key={itemIds[1]} value={itemIds[1]} primaryText={itemNames[1]} />,
-                    <ListItem key={itemIds[2]} value={itemIds[2]} primaryText={itemNames[2]} />,
-                    <ListItem key={itemIds[3]} value={itemIds[3]} primaryText={itemNames[3]} />,
-                    <ListItem key={itemIds[4]} value={itemIds[4]} primaryText={itemNames[4]} />,
+                    <ListItem key={itemIds[1]} value={itemIds[1]} primaryText={itemNames[0]} />,
+                    <ListItem key={itemIds[2]} value={itemIds[2]} primaryText={itemNames[1]} />,
+                    <ListItem key={itemIds[3]} value={itemIds[3]} primaryText={itemNames[2]} />,
+                    <ListItem key={itemIds[4]} value={itemIds[4]} primaryText={itemNames[3]} />,
+                    <ListItem key={itemIds[5]} value={itemIds[5]} primaryText={itemNames[4]} />,
                 ]}
             />
         );
@@ -220,7 +224,7 @@ class CompanyOfficer extends React.Component {
                             <TableRowColumn>{row.parent}</TableRowColumn>
                             <TableRowColumn>{row.service}</TableRowColumn>
                             <TableRowColumn>
-                                <InfoIcon hoverColor="rgba(0, 0, 0, 1)" color="rgb(100, 100, 100)" onClick={() => this.openInfoDialog(index)} />
+                                <InfoIcon hoverColor="rgba(0, 0, 0, 1)" color="rgb(100, 100, 100)" onClick={() => this.openStudentInfoDialog(index)} />
                                 <EditIcon hoverColor="rgba(0, 0, 0, 1)" color="rgb(100, 100, 100)" onClick={() => this.openEditDialog(index)} />
                                 <DeleteIcon hoverColor="rgb(255, 0, 0)" color="rgb(100, 100, 100)" onClick={() => this.deleteStudent(index)} /></TableRowColumn>
                         </TableRow>
@@ -261,7 +265,7 @@ class CompanyOfficer extends React.Component {
 
     /* Functions about dialog sections */
 
-    attachItemsToState(index) {
+    attachStudentItemsToState(index) {
         var stdlist = this.state.students;
         var std = stdlist[index];
         this.setState({
@@ -277,37 +281,37 @@ class CompanyOfficer extends React.Component {
 
     openEditDialog(index) {
         this.setState({
-            editIndex: index
+            studentEditIndex: index
         });
         this.setState({
-            isEditDialogOpen: true
+            isStudentEditDialogOpen: true
         });
-        this.attachItemsToState(index);
+        this.attachStudentItemsToState(index);
     }
 
     closeEditDialog() {
         this.setState({
-            isEditDialogOpen: false
+            isStudentEditDialogOpen: false
         });
     }
 
-    openInfoDialog(index) {
+    openStudentInfoDialog(index) {
         this.setState({
-            infoIndex: index
+            studentInfoIndex: index
         });
         this.setState({
-            isInfoDialogOpen: true
+            isStudentInfoDialogOpen: true
         });
-        this.attachItemsToState(index);
+        this.attachStudentItemsToState(index);
     }
 
-    closeInfoDialog() {
+    closeStudentInfoDialog() {
         this.setState({
-            isInfoDialogOpen: false
+            isStudentInfoDialogOpen: false
         });
     }
 
-    showInfoDetail(index) {
+    showStudentInfoDetail(index) {
         var self = this;
         var stdlist = this.state.students;
         var std = stdlist[index];
@@ -316,7 +320,7 @@ class CompanyOfficer extends React.Component {
             <FlatButton
                 label="Ok"
                 primary={true}
-                onClick={() => self.closeInfoDialog()}
+                onClick={() => self.closeStudentInfoDialog()}
             />
         ];
         return (
@@ -325,8 +329,8 @@ class CompanyOfficer extends React.Component {
                 title="Student Information Details"
                 actions={actions}
                 modal={false}
-                open={self.state.isInfoDialogOpen}
-                onRequestClose={() => self.closeInfoDialog()}
+                open={self.state.isStudentInfoDialogOpen}
+                onRequestClose={() => self.closeStudentInfoDialog()}
                 autoScrollBodyContent={true} >
 
                 <p style={{ fontSize: 20 }}>
@@ -343,9 +347,9 @@ class CompanyOfficer extends React.Component {
         );
     }
 
-    updateStudentsList() {
+    updateStudentsList() { // student update request will be send from here to server.
         var self = this;
-        var index = self.state.editIndex;
+        var index = self.state.studentEditIndex;
         var stdlist = self.state.students;
         var elem = {
             photo: stdlist[index].photo,
@@ -385,7 +389,7 @@ class CompanyOfficer extends React.Component {
                 title="Edit Student"
                 actions={actions}
                 modal={false}
-                open={self.state.isEditDialogOpen}
+                open={self.state.isStudentEditDialogOpen}
                 onRequestClose={() => self.closeEditDialog()}
                 autoScrollBodyContent={true} >
 
@@ -402,6 +406,10 @@ class CompanyOfficer extends React.Component {
     }
 
     /* Functions about dialog sections */
+
+    isItem(item) {
+        return (this.state.selectedIndex === item);
+    }
 
     render() {
         /*if (localStorage.getItem('isLoggedInCompanyOfficer') === 'false') {
@@ -436,13 +444,30 @@ class CompanyOfficer extends React.Component {
                             {this.generateSelectableList(SchoolNames.length)}
                         </SelectableList>
                     </Drawer>
-                    {this.state.selectedIndex === drawerListItemIds[1] ?
+                    {this.isItem(drawerListIds[0]) ?
                         <div>
-                            {self.resizableTableView()}
-                            {self.state.isEditDialogOpen ? self.editStudentInfo(self.state.editIndex) : false}
-                            {self.state.isInfoDialogOpen ? self.showInfoDetail(self.state.infoIndex) : false}
-                        </div> 
-                        : false}
+
+                        </div>
+                        :
+                        <div>
+                            {this.isItem(drawerListIds[1]) ?
+                                <div>
+
+                                </div>
+                                :
+                                <div>
+                                    {this.isItem(drawerListIds[2]) ?
+                                        <div>
+                                            {self.resizableTableView()}
+                                            {self.state.isStudentEditDialogOpen ? self.editStudentInfo(self.state.studentEditIndex) : false}
+                                            {self.state.isStudentInfoDialogOpen ? self.showStudentInfoDetail(self.state.studentInfoIndex) : false}
+                                        </div>
+                                        : false
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
                 </div>
             </MuiThemeProvider>
         );

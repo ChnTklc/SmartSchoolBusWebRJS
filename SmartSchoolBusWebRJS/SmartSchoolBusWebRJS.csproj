@@ -66,6 +66,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="src\assets\advertising1600.png" />
+    <Content Include="src\assets\CommentIcon.png" />
+    <Content Include="src\assets\ParkingIcon.png" />
+    <Content Include="src\assets\SchoolBusIcon.png" />
     <Content Include="package-lock.json" />
     <Content Include="package.json" />
     <None Include="packages.config" />
@@ -85,10 +89,17 @@
     <Content Include="src\User\CompanyOfficer.js" />
     <Content Include="src\Home\ContactUs.js" />
     <Content Include="src\index.js" />
+    <Content Include="src\User\Location.js" />
     <Content Include="src\User\Login.js" />
     <Content Include="src\Home\NavigationBar.js" />
+    <Content Include="src\User\Parent.js" />
+    <Content Include="src\User\PhotoFile.js" />
+    <Content Include="src\User\Relationship.js" />
+    <Content Include="src\User\School.js" />
     <Content Include="src\User\SchoolStaff.js" />
     <Content Include="src\Styles.css" />
+    <Content Include="src\User\Student.js" />
+    <Content Include="src\User\User.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
