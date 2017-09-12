@@ -1,4 +1,4 @@
-﻿import StudentRouteSchedule from './StudentRouteSchedule';
+﻿var StudentRouteSchedule = require('./StudentRouteSchedule').default;
 
 const StudentDailyRotueRelation = {
     date: "",

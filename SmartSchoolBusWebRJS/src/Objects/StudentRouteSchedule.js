@@ -1,5 +1,5 @@
-﻿import Parent from './Parent';
-import BusStation from './BusStation';
+﻿var Parent = require('./Parent').default;
+var BusStation = require('./BusStation').default;
 //import Frequency from './Frequency';
 //import RouteDirection from './RouteDirection';
 

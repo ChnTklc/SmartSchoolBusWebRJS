@@ -1,8 +1,8 @@
-﻿import School from './School';
-import User from './User';
-import Parent from './Parent';
-import StudentAdress from './StudentAdress';
-import StudentDailyRotueRelation from './StudentDailyRotueRelation';
+﻿var School = require('./School').default;
+var User = require('./User').default;
+var Parent = require('./Parent').default;
+var StudentAdress = require('./StudentAdress').default;
+var StudentDailyRotueRelation = require('./StudentDailyRotueRelation').default;
 
 const Student = {
     id: 0,

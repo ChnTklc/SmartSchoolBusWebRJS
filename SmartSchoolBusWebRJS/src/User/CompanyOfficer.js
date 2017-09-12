@@ -15,7 +15,6 @@ import FlatButton from 'material-ui/FlatButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import NavigationBar from '../Home/NavigationBar';
-import Login from './Login';
 import Student from '../Objects/Student';
 
 let SelectableList = makeSelectable(List);
@@ -78,16 +77,17 @@ var SubListOfSchools = [
     language.hostesses,
 ];
 
-function addStudent(photo, name, surname, classNo, studentNo, parentName, parentSurname, homeAdress, service) {
+function addStudent(photo, name, surname, classNo, studentNo, parentName, parentSurname, homeAdress, morningBusId, nightBusId) {
     var stdObj = Student;
-    stdObj.user.photo.contents = photo
+    stdObj.user.photo.contents = photo // patlıyor bir sorun var bul.
     stdObj.user.name = name
     stdObj.user.surname = surname
     stdObj.class = classNo
     stdObj.studentNo = studentNo
     stdObj.parents.push({ user: { name: parentName, surname: parentSurname } })
     stdObj.adress.push({ location: { adress: homeAdress }, name: "Home" })
-
+    stdObj.serviceRoute.getOn.id = morningBusId // fix me: iki id'ye de aynı değeri atıyor object tpye'ları aynı diye olabilir. nedeni bilinmiyor.
+    stdObj.serviceRoute.getOff.id = nightBusId // fix me: iki id'ye de aynı değeri atıyor object tpye'ları aynı diye olabilir. nedeni bilinmiyor.
     Students.push(stdObj);
     return Students;
 }
@@ -114,7 +114,7 @@ for (var i = 1; i < 15; i++) {
         "Ali ",
         "Veli",
         "Gulbahce Mahallesi IYTE Kampusu A8 Binasi No:1 / 37 D:18 Urla / Izmir / Turkey",
-        "Service1");
+        1, 2);
 }
 /*DUMMY DATA*/
 
@@ -208,7 +208,7 @@ class CompanyOfficer extends React.Component {
                         <TableHeaderColumn tooltip="Student's Name">Name</TableHeaderColumn>
                         <TableHeaderColumn tooltip="Student's Surname">Surname</TableHeaderColumn>
                         <TableHeaderColumn tooltip="Student's Parent">Parent</TableHeaderColumn>
-                        <TableHeaderColumn tooltip="Student's Service">Service</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Student's Regular Service">Route Morning/Night</TableHeaderColumn>
                         <TableHeaderColumn tooltip="Settings">Settings</TableHeaderColumn>
                     </TableRow>
                 </TableHeader>
@@ -224,7 +224,7 @@ class CompanyOfficer extends React.Component {
                             <TableRowColumn>{row.user.name}</TableRowColumn>
                             <TableRowColumn>{row.user.surname}</TableRowColumn>
                             <TableRowColumn>{row.parents[1].user.name}{row.parents[1].user.surname}</TableRowColumn>
-                            <TableRowColumn>{row.service}</TableRowColumn>
+                            <TableRowColumn>{row.serviceRoute.getOn.id}/{row.serviceRoute.getOff.id}</TableRowColumn>
                             <TableRowColumn>
                                 <InfoIcon hoverColor="rgba(0, 0, 0, 1)" color="rgb(100, 100, 100)" onClick={() => this.openStudentInfoDialog(index)} />
                                 <EditIcon hoverColor="rgba(0, 0, 0, 1)" color="rgb(100, 100, 100)" onClick={() => this.openEditDialog(index)} />
