@@ -16,9 +16,6 @@ import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import NavigationBar from '../Home/NavigationBar';
 import Login from './Login';
-import School from './School';
-
-var obj = School;
 
 
 let SelectableList = makeSelectable(List);
