@@ -1,11 +1,13 @@
 ﻿import React from 'react';
 import Location from './Location';
+import CompanyOfficerObj from './CompanyOfficerObj';
+import SchoolStaffObj from './SchoolStaffObj';
 
 const School = {
     name: "",
     location: Location,
     numberOfStudents: null,
-    companyOfficers: [], //companyofficer object will be attached
-    schoolStaffs: [] //schoolstaff object will be attached
+    companyOfficers: [CompanyOfficerObj],
+    schoolStaffs: [SchoolStaffObj]
 };
 export default School;

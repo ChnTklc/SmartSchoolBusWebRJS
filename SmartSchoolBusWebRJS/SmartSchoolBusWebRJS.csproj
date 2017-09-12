@@ -89,6 +89,7 @@
     <Content Include="src\User\CompanyOfficer.js" />
     <Content Include="src\Home\ContactUs.js" />
     <Content Include="src\index.js" />
+    <Content Include="src\User\CompanyOfficerObj.js" />
     <Content Include="src\User\Location.js" />
     <Content Include="src\User\Login.js" />
     <Content Include="src\Home\NavigationBar.js" />
@@ -98,6 +99,8 @@
     <Content Include="src\User\School.js" />
     <Content Include="src\User\SchoolStaff.js" />
     <Content Include="src\Styles.css" />
+    <Content Include="src\User\SchoolStaffObj.js" />
+    <Content Include="src\User\ServiceCompany.js" />
     <Content Include="src\User\Student.js" />
     <Content Include="src\User\User.js" />
     <Content Include="Web.config" />
