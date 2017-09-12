@@ -12,8 +12,6 @@ import NavigationBar from '../Home/NavigationBar';
 
 var request = require("request");
 
-var loggedinPhone = 'Cihan';
-
 let varsAsLanguage = {
     en: {
         loginTitle: "Log In",
@@ -86,11 +84,6 @@ class Login extends React.Component {
                 }
             }
         });
-        loggedinPhone = self.state.phone;
-    }
-
-    getLoggedinPhone() {
-        return loggedinPhone;
     }
 
     show(id) {

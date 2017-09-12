@@ -86,6 +86,11 @@
     <Content Include="src\Admin\Admin.js" />
     <Content Include="src\Admin\AdminHome.js" />
     <Content Include="src\Home\Home.js" />
+    <Content Include="src\Objects\Contract.js" />
+    <Content Include="src\Objects\Hostess.js" />
+    <Content Include="src\Objects\SchoolBus.js" />
+    <Content Include="src\Objects\ServiceBus.js" />
+    <Content Include="src\Objects\ServiceBusDriver.js" />
     <Content Include="src\User\CompanyOfficer.js" />
     <Content Include="src\Home\ContactUs.js" />
     <Content Include="src\index.js" />

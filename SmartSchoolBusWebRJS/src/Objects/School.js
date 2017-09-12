@@ -4,6 +4,7 @@ import CompanyOfficerObj from './CompanyOfficerObj';
 import SchoolStaffObj from './SchoolStaffObj';
 
 const School = {
+    id: null,
     name: "",
     location: Location,
     numberOfStudents: null,

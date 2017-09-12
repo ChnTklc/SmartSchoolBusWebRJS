@@ -4,6 +4,7 @@ import User from './User';
 import Parent from './Parent';
 
 const Student = {
+    id: null,
     user: User,
     studentNo: "",
     class: "",

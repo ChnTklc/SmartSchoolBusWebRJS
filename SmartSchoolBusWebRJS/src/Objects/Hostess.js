@@ -1,9 +1,9 @@
 ﻿import React from 'react';
 import User from './User';
 
-const SchoolStaffObj = {
+const Hostess = {
     id: null,
     user: User,
-    schoolId: null,
+    serviceCompanyIds: [0],
 };
-export default SchoolStaffObj;
+export default Hostess;

@@ -2,6 +2,7 @@
 import Location from './Location';
 
 const ServiceCompany = {
+    id: null,
     name: "",
     location: Location,
 };

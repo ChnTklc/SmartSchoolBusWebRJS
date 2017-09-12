@@ -1,11 +1,11 @@
 ﻿import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { Table, TableRow, TableRowColumn, TableBody, TableHeader, TableHeaderColumn } from 'material-ui/Table';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import Button from 'material-ui/FlatButton';
 import Drawer from 'material-ui/Drawer';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
-import { Table, TableRow, TableRowColumn, TableBody, TableHeader, TableHeaderColumn } from 'material-ui/Table';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import InfoIcon from 'material-ui/svg-icons/action/info';
@@ -16,7 +16,6 @@ import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import NavigationBar from '../Home/NavigationBar';
 import Login from './Login';
-
 
 let SelectableList = makeSelectable(List);
 
@@ -145,8 +144,12 @@ class CompanyOfficer extends React.Component {
         });
     }
 
-    handleMenuToggle() {
-        this.setState({ isDrawerOpen: !this.state.isDrawerOpen });
+    openDrawerMenu() {
+        this.setState({ isDrawerOpen: true });
+    };
+
+    closeDrawerMenu() {
+        this.setState({ isDrawerOpen: false });
     };
 
     logoutClick() {
@@ -421,7 +424,7 @@ class CompanyOfficer extends React.Component {
                         className="appbar" style={{ backgroundColor: "rgba(61, 59, 59, 1)" }}
                         title={<a style={{ textDecoration: "none", cursor: "pointer", color: "white" }} href="/companyofficer">{language.title}</a>}
                         iconElementRight={<Button label={language.logout} style={{ margin: 0 }} labelStyle={{ fontSize: 18 }} onClick={(e) => self.logoutClick(e)} />}
-                        onLeftIconButtonTouchTap={() => self.handleMenuToggle()} />
+                        onLeftIconButtonTouchTap={() => self.openDrawerMenu()} />
                     <Drawer
                         width={250}
                         open={self.state.isDrawerOpen}
@@ -429,8 +432,8 @@ class CompanyOfficer extends React.Component {
                         <AppBar
                             className="appbar" style={{ backgroundColor: "rgba(61, 59, 59, 1)" }}
                             title={<a style={{ textDecoration: "none", cursor: "pointer", color: "white", fontSize: 18 }}
-                                href="/companyofficer"> {language.drawerTitle}{Login.prototype.getLoggedinPhone()} </a>}
-                            onLeftIconButtonTouchTap={() => self.handleMenuToggle()} />
+                                href="/companyofficer"> {language.drawerTitle}{"Cihan"} </a>}
+                            onLeftIconButtonTouchTap={() => self.closeDrawerMenu()} />
                         <div style={{ textAlign: "center" }}>
                             <img alt="" src="http://vvcexpl.com/wordpress/wp-content/uploads/2013/09/profile-default-male.png"
                                 style={{ width: 60, height: 60, marginTop: 10 }} />

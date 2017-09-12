@@ -2,6 +2,7 @@
 import PhotoFile from './PhotoFile'
 
 const User = {
+    id: null,
     username: "",
     password: "",
     name: "",
