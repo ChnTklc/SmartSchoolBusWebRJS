@@ -1,12 +1,11 @@
-﻿import React from 'react';
-import School from './School';
+﻿import School from './School';
 import ServiceCompany from './ServiceCompany';
 
 const Contract = {
-    id: null,
+    id: 0,
     school: School,
-    schoolId: null,
-    serviceCompanyId: null,
+    schoolId: 0,
+    serviceCompanyId: 0,
     serviceCompany: ServiceCompany,
 };
 export default Contract;

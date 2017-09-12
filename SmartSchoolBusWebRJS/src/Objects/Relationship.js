@@ -1,8 +1,7 @@
-﻿import React from 'react';
-
-const Relationship = {
+﻿
+const Relationship = Object.freeze({
     father: 1,
     mother: 2,
     relatives: 3,
-};
+});
 export default Relationship;

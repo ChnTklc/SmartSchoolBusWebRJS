@@ -16,6 +16,7 @@ import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import NavigationBar from '../Home/NavigationBar';
 import Login from './Login';
+import Student from '../Objects/Student';
 
 let SelectableList = makeSelectable(List);
 
@@ -55,7 +56,7 @@ function languageSetting() {
     }
 }
 
-var Students = [];
+var Students = [Student];
 var drawerListIds = [];
 
 var SchoolNames = [
@@ -77,17 +78,17 @@ var SubListOfSchools = [
     language.hostesses,
 ];
 
-function addStudent(photo, name, surname, classNo, studentNo, parent, homeAdress, service) {
-    Students.push({
-        photo: photo,
-        studentNo: studentNo,
-        name: name,
-        surname: surname,
-        classNo: classNo,
-        parent: parent,
-        homeAdress: homeAdress,
-        service: service,
-    });
+function addStudent(photo, name, surname, classNo, studentNo, parentName, parentSurname, homeAdress, service) {
+    var stdObj = Student;
+    stdObj.user.photo.contents = photo
+    stdObj.user.name = name
+    stdObj.user.surname = surname
+    stdObj.class = classNo
+    stdObj.studentNo = studentNo
+    stdObj.parents.push({ user: { name: parentName, surname: parentSurname } })
+    stdObj.adress.push({ location: { adress: homeAdress }, name: "Home" })
+
+    Students.push(stdObj);
     return Students;
 }
 
@@ -95,7 +96,7 @@ function fillDrawerListIds() {
     for (var i = 0; i < SchoolNames.length; i++) {
         drawerListIds.push("School" + i);
         for (var k = 0; k < SubListOfSchools.length; k++) {
-            drawerListIds.push("School" + i + SubListOfSchools[k]);
+            drawerListIds.push("School" + i + "." + k);
         }
     }
     return drawerListIds;
@@ -106,11 +107,12 @@ drawerListIds = fillDrawerListIds();
 /*DUMMY DATA*/
 for (var i = 1; i < 15; i++) {
     Students = addStudent("http://studentreasures.com/wp-content/themes/kingpower-v1-08/images/profile_default.jpg",
-        "Cihan",
+        "Cihan ",
         "Toklucu",
         "4",
         "210201027",
-        "Ali Veli",
+        "Ali ",
+        "Veli",
         "Gulbahce Mahallesi IYTE Kampusu A8 Binasi No:1 / 37 D:18 Urla / Izmir / Turkey",
         "Service1");
 }
@@ -217,11 +219,11 @@ class CompanyOfficer extends React.Component {
                     {this.state.students.map((row, index) => (
                         <TableRow key={index + 1}>
                             <TableRowColumn>{index + 1}</TableRowColumn>
-                            <TableRowColumn><img alt="" src={row.photo} style={{ width: 25, height: 25 }} /></TableRowColumn>
+                            <TableRowColumn><img alt="" src={row.user.photo.contents} style={{ width: 25, height: 25 }} /></TableRowColumn>
                             <TableRowColumn>{row.studentNo}</TableRowColumn>
-                            <TableRowColumn>{row.name}</TableRowColumn>
-                            <TableRowColumn>{row.surname}</TableRowColumn>
-                            <TableRowColumn>{row.parent}</TableRowColumn>
+                            <TableRowColumn>{row.user.name}</TableRowColumn>
+                            <TableRowColumn>{row.user.surname}</TableRowColumn>
+                            <TableRowColumn>{row.parents[1].user.name}{row.parents[1].user.surname}</TableRowColumn>
                             <TableRowColumn>{row.service}</TableRowColumn>
                             <TableRowColumn>
                                 <InfoIcon hoverColor="rgba(0, 0, 0, 1)" color="rgb(100, 100, 100)" onClick={() => this.openStudentInfoDialog(index)} />
@@ -253,16 +255,6 @@ class CompanyOfficer extends React.Component {
         );
     }
 
-    deleteStudent(index) {
-        if (index !== -1) {
-            Students.splice(index, 1);
-            this.setState({ students: Students });
-        }
-        else {
-            alert("error!");
-        }
-    }
-
     /* Functions about dialog sections */
 
     attachStudentItemsToState(index) {
@@ -270,11 +262,11 @@ class CompanyOfficer extends React.Component {
         var std = stdlist[index];
         this.setState({
             sStudentNo: std.studentNo,
-            sName: std.name,
-            sSurname: std.surname,
-            sClassNo: std.classNo,
-            sParent: std.parent,
-            sAdress: std.homeAdress,
+            sName: std.user.name,
+            sSurname: std.user.surname,
+            sClassNo: std.class,
+            sParent: std.parents[1].user.name + std.parents[1].user.surname,
+            sAdress: std.adress[1].location.adress,
             sService: std.service,
         });
     }
@@ -334,7 +326,7 @@ class CompanyOfficer extends React.Component {
                 autoScrollBodyContent={true} >
 
                 <p style={{ fontSize: 20 }}>
-                    {<div style={{ textAlign: "center" }}> <img alt="" src={std.photo} style={{ width: 100, height: 100 }} /> </div>} <br />
+                    {<div style={{ textAlign: "center" }}> <img alt="" src={std.user.photo.contents} style={{ width: 100, height: 100 }} /> </div>} <br />
                     <strong>Name:</strong> {self.state.sName} <br />
                     <strong>Surname:</strong> {self.state.sSurname} <br />
                     <strong>Class Number:</strong> {self.state.sClassNo} <br />
@@ -345,6 +337,16 @@ class CompanyOfficer extends React.Component {
                 </p>
             </Dialog>
         );
+    }
+
+    deleteStudent(index) { // Student delete request will be send from here.
+        if (index !== -1) {
+            Students.splice(index, 1);
+            this.setState({ students: Students });
+        }
+        else {
+            alert("error!");
+        }
     }
 
     updateStudentsList() { // student update request will be send from here to server.

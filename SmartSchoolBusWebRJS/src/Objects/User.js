@@ -1,13 +1,12 @@
-﻿import React from 'react';
-import PhotoFile from './PhotoFile'
+﻿import PhotoFile from './PhotoFile'
 
 const User = {
-    id: null,
+    id: 0,
     username: "",
     password: "",
     name: "",
     surname: "",
-    phoneNumber: null,
+    phoneNumber: 0,
     ssn: "",
     role: "",
     photo: PhotoFile,

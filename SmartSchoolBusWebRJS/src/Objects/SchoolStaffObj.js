@@ -1,9 +1,8 @@
-﻿import React from 'react';
-import User from './User';
+﻿import User from './User';
 
 const SchoolStaffObj = {
-    id: null,
+    id: 0,
     user: User,
-    schoolId: null,
+    schoolId: 0,
 };
 export default SchoolStaffObj;

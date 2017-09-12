@@ -1,13 +1,12 @@
-﻿import React from 'react';
-import Location from './Location';
+﻿import Location from './Location';
 import CompanyOfficerObj from './CompanyOfficerObj';
 import SchoolStaffObj from './SchoolStaffObj';
 
 const School = {
-    id: null,
+    id: 0,
     name: "",
     location: Location,
-    numberOfStudents: null,
+    numberOfStudents: 0,
     companyOfficers: [CompanyOfficerObj],
     schoolStaffs: [SchoolStaffObj]
 };

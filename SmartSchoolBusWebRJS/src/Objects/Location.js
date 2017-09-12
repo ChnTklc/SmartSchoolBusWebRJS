@@ -1,8 +1,7 @@
-﻿import React from 'react';
-
+﻿
 const Location = {
     adress: "",
-    latitude: null,
-    longitude: null,
+    latitude: 0,
+    longitude: 0,
 };
 export default Location;

@@ -1,9 +1,8 @@
-﻿import React from 'react';
-
+﻿
 const ServiceBus = {
-    id: null,
-    serviceCompanyId: null,
+    id: 0,
+    serviceCompanyId: 0,
     plateNumber: "",
-    capacity: null,
+    capacity: 0,
 };
 export default ServiceBus;

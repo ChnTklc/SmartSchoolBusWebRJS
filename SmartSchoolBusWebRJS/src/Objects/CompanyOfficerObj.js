@@ -1,11 +1,10 @@
-﻿import React from 'react';
-import User from './User';
+﻿import User from './User';
 import ServiceCompany from './ServiceCompany';
 
 const CompanyOfficerObj = {
-    id: null,
+    id: 0,
     user: User,
-    serviceCompanyIds: [],
+    serviceCompanyIds: [0],
     serviceCompanies: [ServiceCompany],
 };
 export default CompanyOfficerObj;

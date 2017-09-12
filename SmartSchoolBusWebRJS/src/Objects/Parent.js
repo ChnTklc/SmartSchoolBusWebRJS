@@ -1,10 +1,10 @@
-﻿import React from 'react';
-import Relationship from './Relationship';
+﻿import User from './User';
+//import Relationship from './Relationship';
 
 const Parent = {
-    id: null,
+    id: 0,
     user: User,
-    studentId: null,
-    relationship: null,
+    studentId: 0,
+    relationship: 0,
 };
 export default Parent;

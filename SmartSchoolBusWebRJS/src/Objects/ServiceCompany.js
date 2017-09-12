@@ -1,8 +1,7 @@
-﻿import React from 'react';
-import Location from './Location';
+﻿import Location from './Location';
 
 const ServiceCompany = {
-    id: null,
+    id: 0,
     name: "",
     location: Location,
 };

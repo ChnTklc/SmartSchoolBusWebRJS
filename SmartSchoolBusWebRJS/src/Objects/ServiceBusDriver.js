@@ -1,7 +1,6 @@
-﻿import React from 'react';
-
+﻿
 const ServiceBusDriver = {
-    id: null,
+    id: 0,
     serviceCompanyIds: [0],
 };
 export default ServiceBusDriver;
