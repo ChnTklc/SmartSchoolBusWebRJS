@@ -20,20 +20,19 @@ let varsAsLanguage = {
     }
 };
 
-let language = varsAsLanguage.tr;
+let language = varsAsLanguage.en;
+
+(function languageSetting() {
+    if (NavigationBar.getLanguage() === "EN") {
+        language = varsAsLanguage.tr;
+    }
+    else if (NavigationBar.getLanguage() === "TR") {
+        language = varsAsLanguage.en;
+    }
+})();
 
 class Home extends Component {
-    languageSetting() {
-        if (NavigationBar.prototype.getLanguage() === "EN") {
-            language = varsAsLanguage.tr;
-        }
-        else if (NavigationBar.prototype.getLanguage() === "TR") {
-            language = varsAsLanguage.en;
-        }
-    }
-
     render() {
-        this.languageSetting();
         return (
             <MuiThemeProvider>
                 <div className="homepageoutter">

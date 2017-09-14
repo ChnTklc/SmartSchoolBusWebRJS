@@ -10,7 +10,7 @@ import Phone from 'react-phone-number-input';
 import { Redirect } from 'react-router-dom';
 import NavigationBar from '../Home/NavigationBar';
 
-var request = require("request");
+let request = require("request");
 
 let varsAsLanguage = {
     en: {
@@ -29,7 +29,17 @@ let varsAsLanguage = {
     }
 };
 
-let language = varsAsLanguage.tr;
+let language = varsAsLanguage.en;
+
+(function languageSetting() {
+    if (NavigationBar.getLanguage() === "EN") {
+        language = varsAsLanguage.tr;
+    }
+    else if (NavigationBar.getLanguage() === "TR") {
+        language = varsAsLanguage.en;
+    }
+})();
+
 
 class Login extends React.Component {
     constructor(props) {
@@ -44,14 +54,14 @@ class Login extends React.Component {
         }
     };
 
-    handleClick(event) {
+    handleClick = (event) => {
         event.preventDefault();
-        var self = this;
+        let self = this;
         if (self.state.phone === '' || self.state.password === '') {
             return false;
         }
 
-        var options = {
+        let options = {
             method: 'POST',
             url: 'http://smartschoolbusdevelopmentapi.azurewebsites.net/api/token',
             headers:
@@ -70,7 +80,7 @@ class Login extends React.Component {
         request(options, function (error, response, body) {
             if (error) throw new Error(error);
             else {
-                var info = JSON.parse(body);
+                let info = JSON.parse(body);
                 if (info.access_token !== null) {
                     self.setState({
                         isLogin: true,
@@ -84,10 +94,10 @@ class Login extends React.Component {
                 }
             }
         });
-    }
+    };
 
-    show(id) {
-        var tag = document.getElementById(id);
+    show = (id) => {
+        let tag = document.getElementById(id);
         if (tag.getAttribute('type') === 'password') {
             tag.setAttribute('type', 'text');
         } else {
@@ -96,23 +106,13 @@ class Login extends React.Component {
         this.setState({
             visible: !this.state.visible
         });
-    }
+    };
 
-    enteredPhoneChange(value) {
+    enteredPhoneChange = (value) => {
         this.setState({ phone: value });
-    }
-
-    languageSetting() {
-        if (NavigationBar.prototype.getLanguage() === "EN") {
-            language = varsAsLanguage.tr;
-        }
-        else if (NavigationBar.prototype.getLanguage() === "TR") {
-            language = varsAsLanguage.en;
-        }
-    }
+    };
 
     render() {
-        this.languageSetting();
         if (this.state.isLogin ||
             localStorage.getItem('isLoggedInSchoolStaff') === 'true' ||
             localStorage.getItem('isLoggedInCompanyOfficer') === 'true') {

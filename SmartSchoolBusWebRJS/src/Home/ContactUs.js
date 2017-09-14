@@ -53,7 +53,16 @@ let varsAsLanguage = {
     }
 };
 
-let language = varsAsLanguage.tr;
+let language = varsAsLanguage.en;
+
+(function languageSetting() {
+    if (NavigationBar.getLanguage() === "EN") {
+        language = varsAsLanguage.tr;
+    }
+    else if (NavigationBar.getLanguage() === "TR") {
+        language = varsAsLanguage.en;
+    }
+})();
 
 class ContactUs extends Component {
     constructor(props) {
@@ -67,30 +76,19 @@ class ContactUs extends Component {
         }
     }
 
-    handleClick() {
-        var self = this;
-        if (self.state.name && self.state.email && self.state.message) {
-            self.setState({
+    handleClick = () => {
+        if (this.state.name && this.state.email && this.state.message) {
+            this.setState({
                 sent: true
             });
         } else {
-            self.setState({
+            this.setState({
                 errortext: language.errortext
             });
         }
-    }
-
-    languageSetting() {
-        if (NavigationBar.prototype.getLanguage() === "EN") {
-            language = varsAsLanguage.tr;
-        }
-        else if (NavigationBar.prototype.getLanguage() === "TR") {
-            language = varsAsLanguage.en;
-        }
-    }
+    };
 
     render() {
-        this.languageSetting();
         return (
             <MuiThemeProvider>
                 <div className="homepageoutter">

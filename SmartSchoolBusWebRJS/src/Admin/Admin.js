@@ -5,7 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { Redirect } from 'react-router-dom';
-var request = require("request");
+let request = require("request");
 
 class Admin extends React.Component {
     constructor(props) {
@@ -18,15 +18,15 @@ class Admin extends React.Component {
         }
     };
 
-    handleClick(event) {
+    handleClick = (event) => {
         event.preventDefault();
-        var self = this;
+        let self = this;
 
         if (self.state.username === '' || self.state.password === '') {
             return false;
         }
 
-        var options = {
+        let options = {
             method: 'POST',
             url: 'http://smartschoolbusdevelopmentapi.azurewebsites.net/api/token',
             headers:
@@ -45,7 +45,7 @@ class Admin extends React.Component {
         request(options, function (error, response, body) {
             if (error) throw new Error(error);
             else {
-                var info = JSON.parse(body);
+                let info = JSON.parse(body);
                 if (response.statusCode === 200) {
                     self.setState({
                         isLogin: true
@@ -56,10 +56,10 @@ class Admin extends React.Component {
                 }
             }
         });
-    }
+    };
 
-    show(id) {
-        var tag = document.getElementById(id);
+    show = (id) => {
+        let tag = document.getElementById(id);
         if (tag.getAttribute('type') === 'password') {
             tag.setAttribute('type', 'text');
         } else {
@@ -68,7 +68,7 @@ class Admin extends React.Component {
         this.setState({
             visible: !this.state.visible
         });
-    }
+    };
 
     render() {
         if (this.state.isLogin || localStorage.getItem('isLoggedInAdmin') === 'true') {

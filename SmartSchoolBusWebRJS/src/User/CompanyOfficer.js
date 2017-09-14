@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { Table, TableRow, TableRowColumn, TableBody, TableHeader, TableHeaderColumn } from 'material-ui/Table';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
@@ -15,7 +14,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import NavigationBar from '../Home/NavigationBar';
-var Student = require('../Objects/Student').Student;
+let Student = require('../Objects/Student').Student;
 
 let SelectableList = makeSelectable(List);
 
@@ -46,16 +45,16 @@ let varsAsLanguage = {
 
 let language = varsAsLanguage.en;
 
-function languageSetting() {
-    if (NavigationBar.prototype.getLanguage() === "EN") {
+(function languageSetting() {
+    if (NavigationBar.getLanguage() === "EN") {
         language = varsAsLanguage.tr;
     }
-    else if (NavigationBar.prototype.getLanguage() === "TR") {
+    else if (NavigationBar.getLanguage() === "TR") {
         language = varsAsLanguage.en;
     }
-}
+})();
 
-var Students = [Student];
+let Students = [Student];
 let drawerListIds = [];
 
 let SchoolNames = [
@@ -104,29 +103,13 @@ function fillDrawerListIds() {
 
 drawerListIds = fillDrawerListIds();
 
-function getStudents(){
-    /*DUMMY DATA*/
-    for (let i = 1; i < 15; i++) {
-        Students = addStudent("http://studentreasures.com/wp-content/themes/kingpower-v1-08/images/profile_default.jpg",
-            "Cihan ",
-            "Toklucu",
-            "4",
-            "210201027",
-            "Ali ",
-            "Veli",
-            "Gulbahce Mahallesi IYTE Kampusu A8 Binasi No:1 / 37 D:18 Urla / Izmir / Turkey",
-            1, 2);
-    }
-    /*DUMMY DATA*/
-}
-
 class CompanyOfficer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isLogin: true,
             isDrawerOpen: true,
-            students: Students,
+            students: this.getStudents(),
             selectedIndex: drawerListIds[0],
             isStudentEditDialogOpen: false,
             isStudentInfoDialogOpen: false,
@@ -141,6 +124,23 @@ class CompanyOfficer extends React.Component {
             sService: '',
         }
     }
+
+    getStudents = () => { //student lists get request will be send from here and fill the Students list.
+        /*DUMMY DATA*/
+        for (let i = 1; i < 15; i++) {
+            Students = addStudent("http://studentreasures.com/wp-content/themes/kingpower-v1-08/images/profile_default.jpg",
+                "Cihan ",
+                "Toklucu",
+                "4",
+                "210201027",
+                "Ali ",
+                "Veli",
+                "Gulbahce Mahallesi IYTE Kampusu A8 Binasi No:1 / 37 D:18 Urla / Izmir / Turkey",
+                1, 2);
+        }
+        /*DUMMY DATA*/
+        return Students;
+    };
 
     handleSelectMenuItem = (event, index) => {
         this.setState({
@@ -425,7 +425,7 @@ class CompanyOfficer extends React.Component {
         });
     };
 
-    editStudentInfo = (index) => {
+    editStudentInfo = () => {
         const actions = [
             <FlatButton
                 label="Save"
@@ -471,7 +471,6 @@ class CompanyOfficer extends React.Component {
         /*if (localStorage.getItem('isLoggedInCompanyOfficer') === 'false') {
             return (<Redirect to="/login" />);
         }*/
-        languageSetting();
         return (
             <MuiThemeProvider>
                 <div>
@@ -514,7 +513,7 @@ class CompanyOfficer extends React.Component {
                                     {this.isItem(drawerListIds[2]) ?
                                         <div>
                                             {this.resizableTableView(2)}
-                                            {this.state.isStudentEditDialogOpen ? this.editStudentInfo(this.state.studentEditIndex) : false}
+                                            {this.state.isStudentEditDialogOpen ? this.editStudentInfo() : false}
                                             {this.state.isStudentInfoDialogOpen ? this.showStudentInfoDetail(this.state.studentInfoIndex) : false}
                                         </div>
                                         : false

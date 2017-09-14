@@ -11,13 +11,13 @@ class AdminHome extends React.Component {
         }
     }
 
-    logoutClick() {
-        var self = this;
+    logoutClick = () => {
+        let self = this;
         self.setState({
             isLogin: false
         });
         localStorage.setItem('isLoggedInAdmin', false);
-    }
+    };
 
     render() {
         if (localStorage.getItem('isLoggedInAdmin') === 'false') {
