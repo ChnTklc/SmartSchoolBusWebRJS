@@ -1,5 +1,5 @@
 ﻿export const RouteDirection = Object.freeze({
-    getOn: 1,
-    getOff: 2,
+    getOnD: 1,
+    getOffD: 2,
     both: 3,
 });

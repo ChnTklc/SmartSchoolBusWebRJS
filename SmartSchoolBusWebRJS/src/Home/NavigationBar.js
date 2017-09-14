@@ -21,7 +21,7 @@ let varsAsLanguage = {
     }
 };
 
-let language = varsAsLanguage.tr;
+let language = varsAsLanguage.en; // to change all project's language just do "en" to "tr"
 
 class NavigationBar extends React.Component {
     constructor(props) {

@@ -324,9 +324,9 @@ class CompanyOfficer extends React.Component {
             sName: std.user.name,
             sSurname: std.user.surname,
             sClassNo: std.class,
-            sParent: std.parents[0].user.name + std.parents[0].user.surname,
-            sAdress: std.adress[0].location.adress,
-            sService: std.service,
+            sParent: std.parents[1].user.name + std.parents[1].user.surname,
+            sAdress: std.adress[1].location.adress,
+            sService: std.serviceRoute.getOn.id + "/" + std.serviceRoute.getOff.id,
         });
     };
 

@@ -1,7 +1,5 @@
-﻿let StudentRouteSchedule = require('./StudentRouteSchedule').StudentRouteSchedule;
-
-export let StudentDailyRouteRelation = {
+﻿export let StudentDailyRouteRelation = {
     date: "",
-    getOn: StudentRouteSchedule,
-    getOff: StudentRouteSchedule,
+    getOn: require('./StudentRouteSchedule').StudentRouteSchedule,
+    getOff: require('./StudentRouteSchedule').StudentRouteSchedule,
 };
