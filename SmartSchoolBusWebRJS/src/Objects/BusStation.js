@@ -1,7 +1,4 @@
-﻿import Location from './Location';
-
-const BusStation = {
+﻿export let BusStation = {
     order: 0,
-    location: Location,
+    location: require('./Location').Location,
 };
-export default BusStation;

@@ -1,7 +1,8 @@
 {
   "name": "webrjs",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Cihan Toklucu <cihantoklucu2@outlook.com> (https://github.com/chntklc)",
   "dependencies": {
     "material-ui": "^0.19.1",
     "react": "^15.6.1",
@@ -16,5 +17,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "eslint": "^4.6.1"
   }
 }

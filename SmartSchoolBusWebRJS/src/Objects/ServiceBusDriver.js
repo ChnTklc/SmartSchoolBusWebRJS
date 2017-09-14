@@ -1,6 +1,4 @@
-﻿
-const ServiceBusDriver = {
+﻿export let ServiceBusDriver = {
     id: 0,
     serviceCompanyIds: [0],
 };
-export default ServiceBusDriver;

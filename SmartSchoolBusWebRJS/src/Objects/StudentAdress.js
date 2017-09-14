@@ -1,11 +1,8 @@
-﻿import Location from './Location';
-
-const StudentAdress = {
+﻿export let StudentAdress = {
     id: 0,
     studentId: 0,
-    location: Location,
+    location: require('./Location').Location,
     name: "",
     isActive: false,
 
 };
-export default StudentAdress;

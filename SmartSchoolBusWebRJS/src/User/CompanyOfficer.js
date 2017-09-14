@@ -15,7 +15,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import NavigationBar from '../Home/NavigationBar';
-import Student from '../Objects/Student';
+var Student = require('../Objects/Student').Student;
 
 let SelectableList = makeSelectable(List);
 
@@ -44,7 +44,7 @@ let varsAsLanguage = {
     }
 };
 
-var language = varsAsLanguage.en;
+let language = varsAsLanguage.en;
 
 function languageSetting() {
     if (NavigationBar.prototype.getLanguage() === "EN") {
@@ -56,9 +56,9 @@ function languageSetting() {
 }
 
 var Students = [Student];
-var drawerListIds = [];
+let drawerListIds = [];
 
-var SchoolNames = [
+let SchoolNames = [
     "İzmir Yüksek Teknoloji Enstitüsü",
     "Dokuz Eylül Üniversitesi",
     "Ege Üniversitesi",
@@ -69,7 +69,7 @@ var SchoolNames = [
 /**
  * fix me
  */
-var SubListOfSchools = [
+let SubListOfSchools = [
     language.route,
     language.students,
     language.buses,
@@ -78,24 +78,24 @@ var SubListOfSchools = [
 ];
 
 function addStudent(photo, name, surname, classNo, studentNo, parentName, parentSurname, homeAdress, morningBusId, nightBusId) {
-    var stdObj = Student;
-    stdObj.user.photo.contents = photo // patlıyor bir sorun var bul.
-    stdObj.user.name = name
-    stdObj.user.surname = surname
-    stdObj.class = classNo
-    stdObj.studentNo = studentNo
-    stdObj.parents.push({ user: { name: parentName, surname: parentSurname } })
-    stdObj.adress.push({ location: { adress: homeAdress }, name: "Home" })
-    stdObj.serviceRoute.getOn.id = morningBusId // fix me: iki id'ye de aynı değeri atıyor object tpye'ları aynı diye olabilir. nedeni bilinmiyor.
-    stdObj.serviceRoute.getOff.id = nightBusId // fix me: iki id'ye de aynı değeri atıyor object tpye'ları aynı diye olabilir. nedeni bilinmiyor.
+    let stdObj = Student;
+    stdObj.user.photo.contents = photo; // patlıyor bir sorun var bul.
+    stdObj.user.name = name;
+    stdObj.user.surname = surname;
+    stdObj.class = classNo;
+    stdObj.studentNo = studentNo;
+    stdObj.parents.push({ user: { name: parentName, surname: parentSurname } });
+    stdObj.adress.push({ location: { adress: homeAdress }, name: "Home" });
+    stdObj.serviceRoute.getOn.id = morningBusId; // fix me: iki id'ye de aynı değeri atıyor object tpye'ları aynı diye olabilir. nedeni bilinmiyor.
+    stdObj.serviceRoute.getOff.id = nightBusId; // fix me: iki id'ye de aynı değeri atıyor object tpye'ları aynı diye olabilir. nedeni bilinmiyor.
     Students.push(stdObj);
     return Students;
 }
 
 function fillDrawerListIds() {
-    for (var i = 0; i < SchoolNames.length; i++) {
+    for (let i = 0; i < SchoolNames.length; i++) {
         drawerListIds.push("School" + i);
-        for (var k = 0; k < SubListOfSchools.length; k++) {
+        for (let k = 0; k < SubListOfSchools.length; k++) {
             drawerListIds.push("School" + i + "." + k);
         }
     }
@@ -104,19 +104,21 @@ function fillDrawerListIds() {
 
 drawerListIds = fillDrawerListIds();
 
-/*DUMMY DATA*/
-for (var i = 1; i < 15; i++) {
-    Students = addStudent("http://studentreasures.com/wp-content/themes/kingpower-v1-08/images/profile_default.jpg",
-        "Cihan ",
-        "Toklucu",
-        "4",
-        "210201027",
-        "Ali ",
-        "Veli",
-        "Gulbahce Mahallesi IYTE Kampusu A8 Binasi No:1 / 37 D:18 Urla / Izmir / Turkey",
-        1, 2);
+function getStudents(){
+    /*DUMMY DATA*/
+    for (let i = 1; i < 15; i++) {
+        Students = addStudent("http://studentreasures.com/wp-content/themes/kingpower-v1-08/images/profile_default.jpg",
+            "Cihan ",
+            "Toklucu",
+            "4",
+            "210201027",
+            "Ali ",
+            "Veli",
+            "Gulbahce Mahallesi IYTE Kampusu A8 Binasi No:1 / 37 D:18 Urla / Izmir / Turkey",
+            1, 2);
+    }
+    /*DUMMY DATA*/
 }
-/*DUMMY DATA*/
 
 class CompanyOfficer extends React.Component {
     constructor(props) {
@@ -140,29 +142,28 @@ class CompanyOfficer extends React.Component {
         }
     }
 
-    handleSelectMenuItem(event, index) {
+    handleSelectMenuItem = (event, index) => {
         this.setState({
             selectedIndex: index,
         });
-    }
+    };
 
-    openDrawerMenu() {
+    openDrawerMenu = () => {
         this.setState({ isDrawerOpen: true });
     };
 
-    closeDrawerMenu() {
+    closeDrawerMenu = () => {
         this.setState({ isDrawerOpen: false });
     };
 
-    logoutClick() {
-        var self = this;
-        self.setState({ isLogin: false });
+    logoutClick = () => {
+        this.setState({ isLogin: false });
         localStorage.setItem('isLoggedInCompanyOfficer', false);
-    }
+    };
 
-    createListWithItems(id, schoolName, itemNames) {
-        var itemIds = [];
-        for (var j = (id * (SubListOfSchools.length + 1)); j < ((id + 1) * (SubListOfSchools.length + 1)); j++) {
+    createListWithItems = (id, schoolName, itemNames) => {
+        let itemIds = [];
+        for (let j = (id * (SubListOfSchools.length + 1)); j < ((id + 1) * (SubListOfSchools.length + 1)); j++) {
             itemIds.push(drawerListIds[j]);
         }
 
@@ -181,17 +182,17 @@ class CompanyOfficer extends React.Component {
                 ]}
             />
         );
-    }
+    };
 
-    generateSelectableList(numberOfSchools) {
-        var listItems = [];
-        for (var i = 0; i < numberOfSchools; i++) {
+    generateSelectableList = (numberOfSchools) => {
+        let listItems = [];
+        for (let i = 0; i < numberOfSchools; i++) {
             listItems.push(this.createListWithItems(i, SchoolNames[i], SubListOfSchools));
         }
         return listItems;
-    }
+    };
 
-    studentTable() {
+    studentTable = () => {
         return (
             <Table
                 height="540px"
@@ -223,7 +224,7 @@ class CompanyOfficer extends React.Component {
                             <TableRowColumn>{row.studentNo}</TableRowColumn>
                             <TableRowColumn>{row.user.name}</TableRowColumn>
                             <TableRowColumn>{row.user.surname}</TableRowColumn>
-                            <TableRowColumn>{row.parents[1].user.name}{row.parents[1].user.surname}</TableRowColumn>
+                            <TableRowColumn>{row.parents[0].user.name}{row.parents[0].user.surname}</TableRowColumn>
                             <TableRowColumn>{row.serviceRoute.getOn.id}/{row.serviceRoute.getOff.id}</TableRowColumn>
                             <TableRowColumn>
                                 <InfoIcon hoverColor="rgba(0, 0, 0, 1)" color="rgb(100, 100, 100)" onClick={() => this.openStudentInfoDialog(index)} />
@@ -234,10 +235,68 @@ class CompanyOfficer extends React.Component {
                 </TableBody>
             </Table>
         );
-    }
+    };
 
-    resizableTableView() {
-        var divstyle;
+    routeTable = () => {
+        return (
+            <Table
+                height="540px"
+                fixedHeader={false}
+                fixedFooter={false}
+                selectable={false}>
+            </Table>
+        );
+    };
+
+    busesTable = () => {
+        return (
+            <Table
+                height="540px"
+                fixedHeader={false}
+                fixedFooter={false}
+                selectable={false}>
+            </Table>
+        );
+    };
+
+    driversTable = () => {
+        return (
+            <Table
+                height="540px"
+                fixedHeader={false}
+                fixedFooter={false}
+                selectable={false}>
+            </Table>
+        );
+    };
+
+    hostessesTable = () => {
+        return (
+            <Table
+                height="540px"
+                fixedHeader={false}
+                fixedFooter={false}
+                selectable={false}>
+            </Table>
+        );
+    };
+
+    resizableTableView = (num) => {
+        let divstyle;
+
+        let tableType;
+        if (num === 1) {
+            tableType = this.routeTable();
+        } else if (num === 2) {
+            tableType = this.studentTable();
+        } else if (num === 3) {
+            tableType = this.busesTable();
+        } else if (num === 4) {
+            tableType = this.driversTable();
+        } else if (num === 5) {
+            tableType = this.hostessesTable();
+        }
+
         if (this.state.isDrawerOpen) {
             divstyle = {
                 left: "18%",
@@ -250,28 +309,28 @@ class CompanyOfficer extends React.Component {
         }
         return (
             <div className="studentTableDiv" style={divstyle} >
-                {this.studentTable()}
+                {tableType}
             </div>
         );
-    }
+    };
 
     /* Functions about dialog sections */
 
-    attachStudentItemsToState(index) {
-        var stdlist = this.state.students;
-        var std = stdlist[index];
+    attachStudentItemsToState = (index) => {
+        let stdlist = this.state.students;
+        let std = stdlist[index];
         this.setState({
             sStudentNo: std.studentNo,
             sName: std.user.name,
             sSurname: std.user.surname,
             sClassNo: std.class,
-            sParent: std.parents[1].user.name + std.parents[1].user.surname,
-            sAdress: std.adress[1].location.adress,
+            sParent: std.parents[0].user.name + std.parents[0].user.surname,
+            sAdress: std.adress[0].location.adress,
             sService: std.service,
         });
-    }
+    };
 
-    openEditDialog(index) {
+    openEditDialog = (index) => {
         this.setState({
             studentEditIndex: index
         });
@@ -279,15 +338,15 @@ class CompanyOfficer extends React.Component {
             isStudentEditDialogOpen: true
         });
         this.attachStudentItemsToState(index);
-    }
+    };
 
-    closeEditDialog() {
+    closeEditDialog = () => {
         this.setState({
             isStudentEditDialogOpen: false
         });
-    }
+    };
 
-    openStudentInfoDialog(index) {
+    openStudentInfoDialog = (index) => {
         this.setState({
             studentInfoIndex: index
         });
@@ -295,24 +354,23 @@ class CompanyOfficer extends React.Component {
             isStudentInfoDialogOpen: true
         });
         this.attachStudentItemsToState(index);
-    }
+    };
 
-    closeStudentInfoDialog() {
+    closeStudentInfoDialog = () => {
         this.setState({
             isStudentInfoDialogOpen: false
         });
-    }
+    };
 
-    showStudentInfoDetail(index) {
-        var self = this;
-        var stdlist = this.state.students;
-        var std = stdlist[index];
+    showStudentInfoDetail = (index) => {
+        let stdlist = this.state.students;
+        let std = stdlist[index];
 
         const actions = [
             <FlatButton
                 label="Ok"
                 primary={true}
-                onClick={() => self.closeStudentInfoDialog()}
+                onClick={() => this.closeStudentInfoDialog()}
             />
         ];
         return (
@@ -321,25 +379,25 @@ class CompanyOfficer extends React.Component {
                 title="Student Information Details"
                 actions={actions}
                 modal={false}
-                open={self.state.isStudentInfoDialogOpen}
-                onRequestClose={() => self.closeStudentInfoDialog()}
+                open={this.state.isStudentInfoDialogOpen}
+                onRequestClose={() => this.closeStudentInfoDialog()}
                 autoScrollBodyContent={true} >
 
                 <p style={{ fontSize: 20 }}>
                     {<div style={{ textAlign: "center" }}> <img alt="" src={std.user.photo.contents} style={{ width: 100, height: 100 }} /> </div>} <br />
-                    <strong>Name:</strong> {self.state.sName} <br />
-                    <strong>Surname:</strong> {self.state.sSurname} <br />
-                    <strong>Class Number:</strong> {self.state.sClassNo} <br />
-                    <strong>Student Number:</strong> {self.state.sStudentNo} <br />
-                    <strong>Parent Name:</strong> {self.state.sParent} <br />
-                    <strong>Adress:</strong> {self.state.sAdress} <br />
-                    <strong>Service:</strong> {self.state.sService}
+                    <strong>Name:</strong> {this.state.sName} <br />
+                    <strong>Surname:</strong> {this.state.sSurname} <br />
+                    <strong>Class Number:</strong> {this.state.sClassNo} <br />
+                    <strong>Student Number:</strong> {this.state.sStudentNo} <br />
+                    <strong>Parent Name:</strong> {this.state.sParent} <br />
+                    <strong>Adress:</strong> {this.state.sAdress} <br />
+                    <strong>Service:</strong> {this.state.sService}
                 </p>
             </Dialog>
         );
-    }
+    };
 
-    deleteStudent(index) { // Student delete request will be send from here.
+    deleteStudent = (index) => { // Student delete request will be send from here.
         if (index !== -1) {
             Students.splice(index, 1);
             this.setState({ students: Students });
@@ -347,42 +405,38 @@ class CompanyOfficer extends React.Component {
         else {
             alert("error!");
         }
-    }
+    };
 
-    updateStudentsList() { // student update request will be send from here to server.
-        var self = this;
-        var index = self.state.studentEditIndex;
-        var stdlist = self.state.students;
-        var elem = {
+    updateStudentsList = () => { // student update request will be send from here to server.
+        let index = this.state.studentEditIndex;
+        let stdlist = this.state.students;
+        stdlist[index] = {
             photo: stdlist[index].photo,
-            studentNo: self.state.sStudentNo,
-            name: self.state.sName,
-            surname: self.state.sSurname,
-            classNo: self.state.sClassNo,
-            parent: self.state.sParent,
-            homeAdress: self.state.sAdress,
-            service: self.state.sService,
-        }
-        stdlist[index] = elem;
-        self.setState({
+            studentNo: this.state.sStudentNo,
+            name: this.state.sName,
+            surname: this.state.sSurname,
+            classNo: this.state.sClassNo,
+            parent: this.state.sParent,
+            homeAdress: this.state.sAdress,
+            service: this.state.sService,
+        };
+        this.setState({
             students: stdlist
         });
-    }
+    };
 
-    editStudentInfo(index) {
-        var self = this;
-
+    editStudentInfo = (index) => {
         const actions = [
             <FlatButton
                 label="Save"
                 primary={true}
                 keyboardFocused={true}
-                onClick={() => self.updateStudentsList()}
+                onClick={() => this.updateStudentsList()}
             />,
             <FlatButton
                 label="Ok"
                 primary={true}
-                onClick={() => self.closeEditDialog()}
+                onClick={() => this.closeEditDialog()}
             />
         ];
         return (
@@ -391,33 +445,32 @@ class CompanyOfficer extends React.Component {
                 title="Edit Student"
                 actions={actions}
                 modal={false}
-                open={self.state.isStudentEditDialogOpen}
-                onRequestClose={() => self.closeEditDialog()}
+                open={this.state.isStudentEditDialogOpen}
+                onRequestClose={() => this.closeEditDialog()}
                 autoScrollBodyContent={true} >
 
-                <TextField required defaultValue={self.state.sName} floatingLabelText="Name" onChange={(event, value) => self.setState({ sName: value })} /> <br />
-                <TextField required defaultValue={self.state.sSurname} floatingLabelText="Surname" onChange={(event, value) => self.setState({ sSurname: value })} /> <br />
-                <TextField required defaultValue={self.state.sClassNo} floatingLabelText="Class Number" onChange={(event, value) => self.setState({ sClassNo: value })} /> <br />
-                <TextField required defaultValue={self.state.sStudentNo} floatingLabelText="Student Number" onChange={(event, value) => self.setState({ sStudentNo: value })} /> <br />
-                <TextField required defaultValue={self.state.sParent} floatingLabelText="Parent" onChange={(event, value) => self.setState({ sParent: value })} /> <br />
+                <TextField required defaultValue={this.state.sName} floatingLabelText="Name" onChange={(event, value) => this.setState({ sName: value })} /> <br />
+                <TextField required defaultValue={this.state.sSurname} floatingLabelText="Surname" onChange={(event, value) => this.setState({ sSurname: value })} /> <br />
+                <TextField required defaultValue={this.state.sClassNo} floatingLabelText="Class Number" onChange={(event, value) => this.setState({ sClassNo: value })} /> <br />
+                <TextField required defaultValue={this.state.sStudentNo} floatingLabelText="Student Number" onChange={(event, value) => this.setState({ sStudentNo: value })} /> <br />
+                <TextField required defaultValue={this.state.sParent} floatingLabelText="Parent" onChange={(event, value) => this.setState({ sParent: value })} /> <br />
                 <TextField required fullWidth={true} multiLine={true}
-                    defaultValue={self.state.sAdress} floatingLabelText="Adress" onChange={(event, value) => self.setState({ sAdress: value })} /> <br />
-                <TextField required defaultValue={self.state.sService} floatingLabelText="Service" onChange={(event, value) => self.setState({ sService: value })} /> <br />
+                    defaultValue={this.state.sAdress} floatingLabelText="Adress" onChange={(event, value) => this.setState({ sAdress: value })} /> <br />
+                <TextField required defaultValue={this.state.sService} floatingLabelText="Service" onChange={(event, value) => this.setState({ sService: value })} /> <br />
             </Dialog>
         );
-    }
+    };
 
     /* Functions about dialog sections */
 
-    isItem(item) {
+    isItem = (item) => {
         return (this.state.selectedIndex === item);
-    }
+    };
 
-    render() {
+    render = () => {
         /*if (localStorage.getItem('isLoggedInCompanyOfficer') === 'false') {
             return (<Redirect to="/login" />);
         }*/
-        var self = this;
         languageSetting();
         return (
             <MuiThemeProvider>
@@ -425,24 +478,24 @@ class CompanyOfficer extends React.Component {
                     <AppBar
                         className="appbar" style={{ backgroundColor: "rgba(61, 59, 59, 1)" }}
                         title={<a style={{ textDecoration: "none", cursor: "pointer", color: "white" }} href="/companyofficer">{language.title}</a>}
-                        iconElementRight={<Button label={language.logout} style={{ margin: 0 }} labelStyle={{ fontSize: 18 }} onClick={(e) => self.logoutClick(e)} />}
-                        onLeftIconButtonTouchTap={() => self.openDrawerMenu()} />
+                        iconElementRight={<Button label={language.logout} style={{ margin: 0 }} labelStyle={{ fontSize: 18 }} onClick={(e) => this.logoutClick(e)} />}
+                        onLeftIconButtonTouchTap={() => this.openDrawerMenu()} />
                     <Drawer
                         width={250}
-                        open={self.state.isDrawerOpen}
-                        onRequestChange={(open) => self.setState({ isDrawerOpen: open })}>
+                        open={this.state.isDrawerOpen}
+                        onRequestChange={(open) => this.setState({ isDrawerOpen: open })}>
                         <AppBar
                             className="appbar" style={{ backgroundColor: "rgba(61, 59, 59, 1)" }}
                             title={<a style={{ textDecoration: "none", cursor: "pointer", color: "white", fontSize: 18 }}
                                 href="/companyofficer"> {language.drawerTitle}{"Cihan"} </a>}
-                            onLeftIconButtonTouchTap={() => self.closeDrawerMenu()} />
+                            onLeftIconButtonTouchTap={() => this.closeDrawerMenu()} />
                         <div style={{ textAlign: "center" }}>
                             <img alt="" src="http://vvcexpl.com/wordpress/wp-content/uploads/2013/09/profile-default-male.png"
                                 style={{ width: 60, height: 60, marginTop: 10 }} />
                         </div>
                         <SelectableList
-                            value={self.state.selectedIndex}
-                            onChange={(e, value) => self.handleSelectMenuItem(e, value)} >
+                            value={this.state.selectedIndex}
+                            onChange={(e, value) => this.handleSelectMenuItem(e, value)} >
                             {this.generateSelectableList(SchoolNames.length)}
                         </SelectableList>
                     </Drawer>
@@ -460,9 +513,9 @@ class CompanyOfficer extends React.Component {
                                 <div>
                                     {this.isItem(drawerListIds[2]) ?
                                         <div>
-                                            {self.resizableTableView()}
-                                            {self.state.isStudentEditDialogOpen ? self.editStudentInfo(self.state.studentEditIndex) : false}
-                                            {self.state.isStudentInfoDialogOpen ? self.showStudentInfoDetail(self.state.studentInfoIndex) : false}
+                                            {this.resizableTableView(2)}
+                                            {this.state.isStudentEditDialogOpen ? this.editStudentInfo(this.state.studentEditIndex) : false}
+                                            {this.state.isStudentInfoDialogOpen ? this.showStudentInfoDetail(this.state.studentInfoIndex) : false}
                                         </div>
                                         : false
                                     }

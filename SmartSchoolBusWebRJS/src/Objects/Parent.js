@@ -1,10 +1,8 @@
-﻿import User from './User';
-//import Relationship from './Relationship';
+﻿//let Relationship = require('./Relationship').Relationship;
 
-const Parent = {
+export let Parent = {
     id: 0,
-    user: User,
+    user: require('./User').User,
     studentId: 0,
     relationship: 0,
 };
-export default Parent;

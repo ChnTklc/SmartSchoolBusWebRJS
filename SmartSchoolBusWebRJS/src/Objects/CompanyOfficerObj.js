@@ -1,10 +1,6 @@
-﻿import User from './User';
-import ServiceCompany from './ServiceCompany';
-
-const CompanyOfficerObj = {
+﻿export let CompanyOfficerObj = {
     id: 0,
-    user: User,
+    user: require('./User').User,
     serviceCompanyIds: [0],
-    serviceCompanies: [ServiceCompany],
+    serviceCompanies: [require('./ServiceCompany').ServiceCompany],
 };
-export default CompanyOfficerObj;

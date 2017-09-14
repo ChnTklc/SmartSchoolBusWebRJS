@@ -1,6 +1,4 @@
-﻿import PhotoFile from './PhotoFile'
-
-const User = {
+﻿export let User = {
     id: 0,
     username: "",
     password: "",
@@ -9,6 +7,5 @@ const User = {
     phoneNumber: 0,
     ssn: "",
     role: "",
-    photo: PhotoFile,
+    photo: require('./PhotoFile').PhotoFile,
 };
-export default User;

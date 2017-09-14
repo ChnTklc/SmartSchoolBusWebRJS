@@ -1,8 +1,5 @@
-﻿import User from './User';
-
-const SchoolStaffObj = {
+﻿export let SchoolStaffObj = {
     id: 0,
-    user: User,
+    user: require('./User').User,
     schoolId: 0,
 };
-export default SchoolStaffObj;

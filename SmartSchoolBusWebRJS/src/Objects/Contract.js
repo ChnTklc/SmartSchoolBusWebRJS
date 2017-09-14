@@ -1,11 +1,7 @@
-﻿import School from './School';
-import ServiceCompany from './ServiceCompany';
-
-const Contract = {
+﻿export let Contract = {
     id: 0,
-    school: School,
+    school: require('./School').School,
     schoolId: 0,
     serviceCompanyId: 0,
-    serviceCompany: ServiceCompany,
+    serviceCompany: require('./ServiceCompany').ServiceCompany,
 };
-export default Contract;

@@ -1,8 +1,5 @@
-﻿import User from './User';
-
-const Hostess = {
+﻿export let Hostess = {
     id: 0,
-    user: User,
+    user: require('./User').User,
     serviceCompanyIds: [0],
 };
-export default Hostess;

@@ -1,9 +1,9 @@
-﻿var Parent = require('./Parent').default;
-var BusStation = require('./BusStation').default;
-//import Frequency from './Frequency';
-//import RouteDirection from './RouteDirection';
+﻿let Parent = require('./Parent').Parent;
+let BusStation = require('./BusStation').BusStation;
+//var Frequency = require('./Frequency').Frequency;
+//var RouteDirection = require('./RouteDirection').RouteDirection;
 
-const StudentRouteSchedule = {
+export let StudentRouteSchedule = {
     id: 0,
     direction: 0,
     startDate: "",
@@ -18,4 +18,3 @@ const StudentRouteSchedule = {
     busStation: BusStation,
     routeBusStations: [BusStation],
 };
-export default StudentRouteSchedule;

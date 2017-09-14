@@ -95,7 +95,7 @@
     <Content Include="src\Objects\ServiceBus.js" />
     <Content Include="src\Objects\ServiceBusDriver.js" />
     <Content Include="src\Objects\StudentAdress.js" />
-    <Content Include="src\Objects\StudentDailyRotueRelation.js" />
+    <Content Include="src\Objects\StudentDailyRouteRelation.js" />
     <Content Include="src\Objects\StudentRouteSchedule.js" />
     <Content Include="src\User\CompanyOfficer.js" />
     <Content Include="src\Home\ContactUs.js" />

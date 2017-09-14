@@ -1,13 +1,8 @@
-﻿import Location from './Location';
-import CompanyOfficerObj from './CompanyOfficerObj';
-import SchoolStaffObj from './SchoolStaffObj';
-
-const School = {
+﻿export let School = {
     id: 0,
     name: "",
-    location: Location,
+    location: require('./Location').Location,
     numberOfStudents: 0,
-    companyOfficers: [CompanyOfficerObj],
-    schoolStaffs: [SchoolStaffObj]
+    companyOfficers: [require('./CompanyOfficerObj').CompanyOfficerObj],
+    schoolStaffs: [require('./SchoolStaffObj').SchoolStaffObj]
 };
-export default School;

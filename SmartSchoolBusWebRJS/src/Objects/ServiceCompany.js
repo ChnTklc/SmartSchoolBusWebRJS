@@ -1,8 +1,5 @@
-﻿import Location from './Location';
-
-const ServiceCompany = {
+﻿export let ServiceCompany = {
     id: 0,
     name: "",
-    location: Location,
+    location: require('./Location').Location,
 };
-export default ServiceCompany;

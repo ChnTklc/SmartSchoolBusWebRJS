@@ -1,6 +1,4 @@
-﻿
-const PhotoFile = {
+﻿export let PhotoFile = {
     contents: "",
     mimeType: "",
 };
-export default PhotoFile;
