@@ -54,9 +54,6 @@ let language = varsAsLanguage.en;
     }
 })();
 
-let Students = [Student];
-let drawerListIds = [];
-
 let SchoolNames = [
     "İzmir Yüksek Teknoloji Enstitüsü",
     "Dokuz Eylül Üniversitesi",
@@ -76,7 +73,9 @@ let SubListOfSchools = [
     language.hostesses,
 ];
 
-function addStudent(photo, name, surname, classNo, studentNo, parentName, parentSurname, homeAdress, morningBusId, nightBusId) {
+let Students = [Student];
+
+function addStudent(photo, name, surname, classNo, studentNo, parentName, parentSurname, homeAddress, morningBusId, nightBusId) {
     let stdObj = Student;
     stdObj.user.photo.contents = photo; // patlıyor bir sorun var bul.
     stdObj.user.name = name;
@@ -84,12 +83,14 @@ function addStudent(photo, name, surname, classNo, studentNo, parentName, parent
     stdObj.class = classNo;
     stdObj.studentNo = studentNo;
     stdObj.parents.push({ user: { name: parentName, surname: parentSurname } });
-    stdObj.adress.push({ location: { adress: homeAdress }, name: "Home" });
+    stdObj.address.push({ location: { address: homeAddress }, name: "Home" });
     stdObj.serviceRoute.getOn.id = morningBusId; // fix me: iki id'ye de aynı değeri atıyor object tpye'ları aynı diye olabilir. nedeni bilinmiyor.
     stdObj.serviceRoute.getOff.id = nightBusId; // fix me: iki id'ye de aynı değeri atıyor object tpye'ları aynı diye olabilir. nedeni bilinmiyor.
     Students.push(stdObj);
     return Students;
 }
+
+let drawerListIds = [];
 
 function fillDrawerListIds() {
     for (let i = 0; i < SchoolNames.length; i++) {
@@ -255,6 +256,20 @@ class CompanyOfficer extends React.Component {
                 fixedHeader={false}
                 fixedFooter={false}
                 selectable={false}>
+                <TableHeader
+                    adjustForCheckbox={false}
+                    displaySelectAll={false}>
+                    <TableRow>
+                        <TableHeaderColumn tooltip="Number">No</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Student's Photo">Photo</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Student's School Number">Student No</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Student's Name">Name</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Student's Surname">Surname</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Student's Parent">Parent</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Student's Regular Service">Route Morning/Night</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Settings">Settings</TableHeaderColumn>
+                    </TableRow>
+                </TableHeader>
             </Table>
         );
     };
@@ -324,8 +339,8 @@ class CompanyOfficer extends React.Component {
             sName: std.user.name,
             sSurname: std.user.surname,
             sClassNo: std.class,
-            sParent: std.parents[1].user.name + std.parents[1].user.surname,
-            sAdress: std.adress[1].location.adress,
+            sParent: std.parents[0].user.name + std.parents[0].user.surname,
+            sAdress: std.adress[0].location.adress,
             sService: std.serviceRoute.getOn.id + "/" + std.serviceRoute.getOff.id,
         });
     };
@@ -467,6 +482,44 @@ class CompanyOfficer extends React.Component {
         return (this.state.selectedIndex === item);
     };
 
+
+    contentsArray = (i) => {
+        const itemContents = [
+            <div>
+                {this.resizableTableView(0)}
+                {this.state.isStudentEditDialogOpen ? this.editStudentInfo() : false}
+                {this.state.isStudentInfoDialogOpen ? this.showStudentInfoDetail(this.state.studentInfoIndex) : false}
+            </div>,
+            <div>
+                {this.resizableTableView(1)}
+                {this.state.isStudentEditDialogOpen ? this.editStudentInfo() : false}
+                {this.state.isStudentInfoDialogOpen ? this.showStudentInfoDetail(this.state.studentInfoIndex) : false}
+            </div>,
+            <div>
+                {this.resizableTableView(2)}
+                {this.state.isStudentEditDialogOpen ? this.editStudentInfo() : false}
+                {this.state.isStudentInfoDialogOpen ? this.showStudentInfoDetail(this.state.studentInfoIndex) : false}
+            </div>,
+        ];
+        return itemContents[i];
+    };
+
+    fillSelectedItemContents = (i, len) => {
+        if (i > len) {
+            return false;
+        }
+        return (
+            <div>
+                {this.isItem(drawerListIds[i]) ? this.contentsArray(i) : this.fillSelectedItemContents(i + 1)}
+            </div>
+        );
+    };
+
+    showSelectedItemContents = () => {
+        let len = SchoolNames.length * SubListOfSchools.length;
+        return this.fillSelectedItemContents(0, len);
+    };
+
     render = () => {
         /*if (localStorage.getItem('isLoggedInCompanyOfficer') === 'false') {
             return (<Redirect to="/login" />);
@@ -498,30 +551,7 @@ class CompanyOfficer extends React.Component {
                             {this.generateSelectableList(SchoolNames.length)}
                         </SelectableList>
                     </Drawer>
-                    {this.isItem(drawerListIds[0]) ?
-                        <div>
-
-                        </div>
-                        :
-                        <div>
-                            {this.isItem(drawerListIds[1]) ?
-                                <div>
-
-                                </div>
-                                :
-                                <div>
-                                    {this.isItem(drawerListIds[2]) ?
-                                        <div>
-                                            {this.resizableTableView(2)}
-                                            {this.state.isStudentEditDialogOpen ? this.editStudentInfo() : false}
-                                            {this.state.isStudentInfoDialogOpen ? this.showStudentInfoDetail(this.state.studentInfoIndex) : false}
-                                        </div>
-                                        : false
-                                    }
-                                </div>
-                            }
-                        </div>
-                    }
+                    {this.showSelectedItemContents()}
                 </div>
             </MuiThemeProvider>
         );

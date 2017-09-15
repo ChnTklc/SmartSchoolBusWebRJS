@@ -1,20 +1,47 @@
-﻿let Parent = require('./Parent').Parent;
-let BusStation = require('./BusStation').BusStation;
-//var Frequency = require('./Frequency').Frequency;
-//var RouteDirection = require('./RouteDirection').RouteDirection;
-
-export let StudentRouteSchedule = {
+﻿export let StudentRouteSchedule = {
     id: 0,
     direction: 0,
     startDate: "",
     endDate: "",
-    studentParents: [Parent],
+    studentParents: [{
+        id: 0,
+        user: {
+            id: 0,
+            username: "",
+            password: "",
+            name: "",
+            surname: "",
+            phoneNumber: 0,
+            ssn: "",
+            role: "",
+            photo: {
+                contents: "",
+                mimeType: "",
+            },
+        },
+        studentId: 0,
+        relationship: 0,
+    }], // Parent object array
     frequency: 0,
     frequencyEvery: 0,
     frequencyEveryOn: "",
     explanation: "",
     schoolBusId: 0,
     offDay: false,
-    busStation: BusStation,
-    routeBusStations: [BusStation],
+    busStation: {
+        order: 0,
+        location: {
+            address: "",
+            latitude: 0,
+            longitude: 0,
+        },
+    },
+    busStationsOnRoute: [{
+        order: 0,
+        location: {
+            address: "",
+            latitude: 0,
+            longitude: 0,
+        },
+    }], // BusStation object array
 };

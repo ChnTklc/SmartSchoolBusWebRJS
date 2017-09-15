@@ -1,5 +1,9 @@
 ﻿export let ServiceCompany = {
     id: 0,
     name: "",
-    location: require('./Location').Location,
+    location: {
+        address: "",
+        latitude: 0,
+        longitude: 0,
+    },
 };

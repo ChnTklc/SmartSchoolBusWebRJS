@@ -7,5 +7,8 @@
     phoneNumber: 0,
     ssn: "",
     role: "",
-    photo: require('./PhotoFile').PhotoFile,
+    photo: {
+        contents: "",
+        mimeType: "",
+    },
 };

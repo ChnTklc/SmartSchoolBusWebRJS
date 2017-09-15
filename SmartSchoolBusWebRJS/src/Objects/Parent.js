@@ -1,8 +1,19 @@
-﻿//let Relationship = require('./Relationship').Relationship;
-
-export let Parent = {
+﻿export let Parent = {
     id: 0,
-    user: require('./User').User,
+    user: {
+        id: 0,
+        username: "",
+        password: "",
+        name: "",
+        surname: "",
+        phoneNumber: 0,
+        ssn: "",
+        role: "",
+        photo: {
+            contents: "",
+            mimeType: "",
+        },
+    },
     studentId: 0,
     relationship: 0,
 };

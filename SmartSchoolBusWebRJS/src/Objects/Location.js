@@ -1,5 +1,5 @@
 ﻿export let Location = {
-    adress: "",
+    address: "",
     latitude: 0,
     longitude: 0,
 };

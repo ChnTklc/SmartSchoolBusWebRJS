@@ -1,4 +1,8 @@
 ﻿export let BusStation = {
     order: 0,
-    location: require('./Location').Location,
+    location: {
+        address: "",
+        latitude: 0,
+        longitude: 0,
+    },
 };
