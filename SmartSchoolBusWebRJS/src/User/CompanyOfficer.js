@@ -17,6 +17,7 @@ import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import NavigationBar from '../Home/NavigationBar';
 let Student = require('../Objects/Student').Student;
+let StudentObj = JSON.parse(JSON.stringify(Student)); // saved life copy object to another object without bind them.
 
 let SelectableList = makeSelectable(List);
 
@@ -75,11 +76,11 @@ let SubListOfSchools = [
     language.hostesses,
 ];
 
-let Students = [Student];
+let Students = [StudentObj];
 Students.pop();
 
 function addStudent(photo, name, surname, classNo, studentNo, parentName, parentSurname, homeAddress, morningBusId, nightBusId) {
-    let stdObj = Student;
+    let stdObj = JSON.parse(JSON.stringify(Student));
     stdObj.user.photo.contents = photo;
     stdObj.user.name = name;
     stdObj.user.surname = surname;
@@ -117,7 +118,7 @@ function fillDrawerListIds() {
 
 function getStudents() { //student lists get request will be send from here and fill the Students list.
     /*DUMMY DATA*/
-    for (let i = 1; i < 15; i++) {
+    for (let i = 0; i < 20; i++) {
         Students = addStudent(StudentPicture,
             "Cihan",
             "Toklucu",
@@ -131,7 +132,6 @@ function getStudents() { //student lists get request will be send from here and 
     /*DUMMY DATA*/
     return Students;
 }
-Students = getStudents();
 drawerListIds = fillDrawerListIds();
 
 class CompanyOfficer extends React.Component {
@@ -140,7 +140,7 @@ class CompanyOfficer extends React.Component {
         this.state = {
             isLogin: true,
             isDrawerOpen: true,
-            students: Students,
+            students: getStudents(),
             selectedIndex: drawerListIds[0],
             isStudentEditDialogOpen: false,
             isStudentInfoDialogOpen: false,
