@@ -1,4 +1,6 @@
-﻿export let Student = {
+﻿import StudentPicture from '../assets/studentDefaultPicture.jpg';
+
+export let Student = {
     id: 0,
     user: {
         id: 0,
@@ -10,12 +12,12 @@
         ssn: "",
         role: "",
         photo: {
-            contents: "",
+            contents: StudentPicture,
             mimeType: "",
         },
     },
     studentNo: "",
-    class: "",
+    classNo: "",
     schoolId: 0,
     school: {
         id: 0,
@@ -72,7 +74,7 @@
             schoolId: 0,
         }] //SchoolStaffObj object array
     },
-    parents: [{
+    parent: [{
         id: 0,
         user: {
             id: 0,

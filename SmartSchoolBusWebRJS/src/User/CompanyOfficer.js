@@ -11,6 +11,8 @@ import InfoIcon from 'material-ui/svg-icons/action/info';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
+import StudentPicture from '../assets/studentDefaultPicture.jpg';
+import UserPicture from '../assets/defaultProfilePicture.png';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import NavigationBar from '../Home/NavigationBar';
@@ -74,18 +76,29 @@ let SubListOfSchools = [
 ];
 
 let Students = [Student];
+Students.pop();
 
 function addStudent(photo, name, surname, classNo, studentNo, parentName, parentSurname, homeAddress, morningBusId, nightBusId) {
     let stdObj = Student;
-    stdObj.user.photo.contents = photo; // patlıyor bir sorun var bul.
+    stdObj.user.photo.contents = photo;
     stdObj.user.name = name;
     stdObj.user.surname = surname;
-    stdObj.class = classNo;
+    stdObj.classNo = classNo;
     stdObj.studentNo = studentNo;
-    stdObj.parents.push({ user: { name: parentName, surname: parentSurname } });
-    stdObj.address.push({ location: { address: homeAddress }, name: "Home" });
-    stdObj.serviceRoute.getOn.id = morningBusId; // fix me: iki id'ye de aynı değeri atıyor object tpye'ları aynı diye olabilir. nedeni bilinmiyor.
-    stdObj.serviceRoute.getOff.id = nightBusId; // fix me: iki id'ye de aynı değeri atıyor object tpye'ları aynı diye olabilir. nedeni bilinmiyor.
+    stdObj.parent.push({
+        user: {
+            name: parentName,
+            surname: parentSurname
+        }
+    });
+    stdObj.address.push({
+        location: {
+            address: homeAddress
+        },
+        name: "Home"
+    });
+    stdObj.serviceRoute.getOn.id = morningBusId;
+    stdObj.serviceRoute.getOff.id = nightBusId;
     Students.push(stdObj);
     return Students;
 }
@@ -102,6 +115,23 @@ function fillDrawerListIds() {
     return drawerListIds;
 }
 
+function getStudents() { //student lists get request will be send from here and fill the Students list.
+    /*DUMMY DATA*/
+    for (let i = 1; i < 15; i++) {
+        Students = addStudent(StudentPicture,
+            "Cihan",
+            "Toklucu",
+            "4",
+            "210201027",
+            "Ali",
+            "Veli",
+            "Gulbahce Mahallesi IYTE Kampusu A8 Binasi No:1 / 37 D:18 Urla / Izmir / Turkey",
+            1, 2);
+    }
+    /*DUMMY DATA*/
+    return Students;
+}
+Students = getStudents();
 drawerListIds = fillDrawerListIds();
 
 class CompanyOfficer extends React.Component {
@@ -110,38 +140,24 @@ class CompanyOfficer extends React.Component {
         this.state = {
             isLogin: true,
             isDrawerOpen: true,
-            students: this.getStudents(),
+            students: Students,
             selectedIndex: drawerListIds[0],
             isStudentEditDialogOpen: false,
             isStudentInfoDialogOpen: false,
             studentEditIndex: null,
             studentInfoIndex: null,
+            sPhoto: '',
             sName: '',
             sSurname: '',
             sClassNo: '',
             sStudentNo: '',
-            sParent: '',
-            sAdress: '',
-            sService: '',
+            sParentName: '',
+            sParentSurname: '',
+            sAddress: '',
+            sServiceRouteOn: '',
+            sServiceRouteOff: ''
         }
     }
-
-    getStudents = () => { //student lists get request will be send from here and fill the Students list.
-        /*DUMMY DATA*/
-        for (let i = 1; i < 15; i++) {
-            Students = addStudent("http://studentreasures.com/wp-content/themes/kingpower-v1-08/images/profile_default.jpg",
-                "Cihan ",
-                "Toklucu",
-                "4",
-                "210201027",
-                "Ali ",
-                "Veli",
-                "Gulbahce Mahallesi IYTE Kampusu A8 Binasi No:1 / 37 D:18 Urla / Izmir / Turkey",
-                1, 2);
-        }
-        /*DUMMY DATA*/
-        return Students;
-    };
 
     handleSelectMenuItem = (event, index) => {
         this.setState({
@@ -208,7 +224,6 @@ class CompanyOfficer extends React.Component {
                         <TableHeaderColumn tooltip="Student's Photo">Photo</TableHeaderColumn>
                         <TableHeaderColumn tooltip="Student's School Number">Student No</TableHeaderColumn>
                         <TableHeaderColumn tooltip="Student's Name">Name</TableHeaderColumn>
-                        <TableHeaderColumn tooltip="Student's Surname">Surname</TableHeaderColumn>
                         <TableHeaderColumn tooltip="Student's Parent">Parent</TableHeaderColumn>
                         <TableHeaderColumn tooltip="Student's Regular Service">Route Morning/Night</TableHeaderColumn>
                         <TableHeaderColumn tooltip="Settings">Settings</TableHeaderColumn>
@@ -219,13 +234,12 @@ class CompanyOfficer extends React.Component {
                     showRowHover={false}
                     stripedRows={true}>
                     {this.state.students.map((row, index) => (
-                        <TableRow key={index + 1}>
+                        <TableRow key={index + 1} hoverable={true} style={{ textAlign: "center" }}>
                             <TableRowColumn>{index + 1}</TableRowColumn>
                             <TableRowColumn><img alt="" src={row.user.photo.contents} style={{ width: 25, height: 25 }} /></TableRowColumn>
                             <TableRowColumn>{row.studentNo}</TableRowColumn>
-                            <TableRowColumn>{row.user.name}</TableRowColumn>
-                            <TableRowColumn>{row.user.surname}</TableRowColumn>
-                            <TableRowColumn>{row.parents[0].user.name}{row.parents[0].user.surname}</TableRowColumn>
+                            <TableRowColumn>{row.user.name} {row.user.surname}</TableRowColumn>
+                            <TableRowColumn>{row.parent[1].user.name} {row.parent[1].user.surname}</TableRowColumn>
                             <TableRowColumn>{row.serviceRoute.getOn.id}/{row.serviceRoute.getOff.id}</TableRowColumn>
                             <TableRowColumn>
                                 <InfoIcon hoverColor="rgba(0, 0, 0, 1)" color="rgb(100, 100, 100)" onClick={() => this.openStudentInfoDialog(index)} />
@@ -266,7 +280,7 @@ class CompanyOfficer extends React.Component {
                         <TableHeaderColumn tooltip="Student's Name">Name</TableHeaderColumn>
                         <TableHeaderColumn tooltip="Student's Surname">Surname</TableHeaderColumn>
                         <TableHeaderColumn tooltip="Student's Parent">Parent</TableHeaderColumn>
-                        <TableHeaderColumn tooltip="Student's Regular Service">Route Morning/Night</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Student's Regular Service">Route Departure/Return</TableHeaderColumn>
                         <TableHeaderColumn tooltip="Settings">Settings</TableHeaderColumn>
                     </TableRow>
                 </TableHeader>
@@ -335,13 +349,16 @@ class CompanyOfficer extends React.Component {
         let stdlist = this.state.students;
         let std = stdlist[index];
         this.setState({
+            sPhoto: std.user.photo.contents,
             sStudentNo: std.studentNo,
             sName: std.user.name,
             sSurname: std.user.surname,
-            sClassNo: std.class,
-            sParent: std.parents[0].user.name + std.parents[0].user.surname,
-            sAdress: std.adress[0].location.adress,
-            sService: std.serviceRoute.getOn.id + "/" + std.serviceRoute.getOff.id,
+            sClassNo: std.classNo,
+            sParentName: std.parent[1].user.name,
+            sParentSurname: std.parent[1].user.surname,
+            sAddress: std.address[1].location.address,
+            sServiceRouteOn: std.serviceRoute.getOn.id,
+            sServiceRouteOff: std.serviceRoute.getOff.id
         });
     };
 
@@ -404,9 +421,9 @@ class CompanyOfficer extends React.Component {
                     <strong>Surname:</strong> {this.state.sSurname} <br />
                     <strong>Class Number:</strong> {this.state.sClassNo} <br />
                     <strong>Student Number:</strong> {this.state.sStudentNo} <br />
-                    <strong>Parent Name:</strong> {this.state.sParent} <br />
-                    <strong>Adress:</strong> {this.state.sAdress} <br />
-                    <strong>Service:</strong> {this.state.sService}
+                    <strong>Parent:</strong> {this.state.sParentName} {this.state.sParentSurname} <br />
+                    <strong>Address:</strong> {this.state.sAddress} <br />
+                    <strong>Departure/Return Service:</strong> {this.state.sServiceRouteOn}/{this.state.sServiceRouteOff}
                 </p>
             </Dialog>
         );
@@ -425,16 +442,18 @@ class CompanyOfficer extends React.Component {
     updateStudentsList = () => { // student update request will be send from here to server.
         let index = this.state.studentEditIndex;
         let stdlist = this.state.students;
-        stdlist[index] = {
-            photo: stdlist[index].photo,
-            studentNo: this.state.sStudentNo,
-            name: this.state.sName,
-            surname: this.state.sSurname,
-            classNo: this.state.sClassNo,
-            parent: this.state.sParent,
-            homeAdress: this.state.sAdress,
-            service: this.state.sService,
-        };
+
+        stdlist[index].user.name = this.state.sName;
+        stdlist[index].user.surname = this.state.sSurname;
+        stdlist[index].user.photo.contents = this.state.sPhoto;
+        stdlist[index].studentNo = this.state.sStudentNo;
+        stdlist[index].classNo = this.state.sClassNo;
+        stdlist[index].parent[1].user.name = this.state.sParentName;
+        stdlist[index].parent[1].user.surname = this.state.sParentSurname;
+        stdlist[index].address[1].location.address = this.state.sAddress;
+        stdlist[index].serviceRoute.getOn.id = this.state.sServiceRouteOn;
+        stdlist[index].serviceRoute.getOff.id = this.state.sServiceRouteOff;
+
         this.setState({
             students: stdlist
         });
@@ -468,40 +487,62 @@ class CompanyOfficer extends React.Component {
                 <TextField required defaultValue={this.state.sSurname} floatingLabelText="Surname" onChange={(event, value) => this.setState({ sSurname: value })} /> <br />
                 <TextField required defaultValue={this.state.sClassNo} floatingLabelText="Class Number" onChange={(event, value) => this.setState({ sClassNo: value })} /> <br />
                 <TextField required defaultValue={this.state.sStudentNo} floatingLabelText="Student Number" onChange={(event, value) => this.setState({ sStudentNo: value })} /> <br />
-                <TextField required defaultValue={this.state.sParent} floatingLabelText="Parent" onChange={(event, value) => this.setState({ sParent: value })} /> <br />
+                <TextField required defaultValue={this.state.sParentName} floatingLabelText="Parent Name" onChange={(event, value) => this.setState({ sParentName: value })} /> <br />
+                <TextField required defaultValue={this.state.sParentSurname} floatingLabelText="Parent Surname" onChange={(event, value) => this.setState({ sParentSurname: value })} /> <br />
                 <TextField required fullWidth={true} multiLine={true}
-                    defaultValue={this.state.sAdress} floatingLabelText="Adress" onChange={(event, value) => this.setState({ sAdress: value })} /> <br />
-                <TextField required defaultValue={this.state.sService} floatingLabelText="Service" onChange={(event, value) => this.setState({ sService: value })} /> <br />
+                    defaultValue={this.state.sAddress} floatingLabelText="Address" onChange={(event, value) => this.setState({ sAddress: value })} /> <br />
+                <TextField required defaultValue={this.state.sServiceRouteOn} floatingLabelText="Departure Service" onChange={(event, value) => this.setState({ sServiceRouteOn: value })} /> <br />
+                <TextField required defaultValue={this.state.sServiceRouteOff} floatingLabelText="Return Service" onChange={(event, value) => this.setState({ sServiceRouteOff: value })} /> <br />
             </Dialog>
         );
     };
 
     /* Functions about dialog sections */
 
+    ///CONTENTS SHOWING FUNCTIONS
+
     isItem = (item) => {
         return (this.state.selectedIndex === item);
     };
 
+    showSchoolInfo(i) {
 
-    contentsArray = (i) => {
-        const itemContents = [
+    }
+
+    itemContents(i) {
+        switch (i) {
+            case 1:
+                return (
+                    <div>
+                    </div>
+                );
+                break;
+            case 2:
+                return (
+                    <div>
+                        {this.state.isStudentEditDialogOpen ? this.editStudentInfo() : false}
+                        {this.state.isStudentInfoDialogOpen ? this.showStudentInfoDetail(this.state.studentInfoIndex) : false}
+                    </div>
+                );
+                break;
+            case 3:
+                return (
+                    <div>
+                    </div>
+                );
+                break;
+            default: return (<div>""</div>); break;
+        }
+    }
+
+    selectContent = (i) => {
+        let t = i % 6;
+        return (
             <div>
-                {this.resizableTableView(0)}
-                {this.state.isStudentEditDialogOpen ? this.editStudentInfo() : false}
-                {this.state.isStudentInfoDialogOpen ? this.showStudentInfoDetail(this.state.studentInfoIndex) : false}
-            </div>,
-            <div>
-                {this.resizableTableView(1)}
-                {this.state.isStudentEditDialogOpen ? this.editStudentInfo() : false}
-                {this.state.isStudentInfoDialogOpen ? this.showStudentInfoDetail(this.state.studentInfoIndex) : false}
-            </div>,
-            <div>
-                {this.resizableTableView(2)}
-                {this.state.isStudentEditDialogOpen ? this.editStudentInfo() : false}
-                {this.state.isStudentInfoDialogOpen ? this.showStudentInfoDetail(this.state.studentInfoIndex) : false}
-            </div>,
-        ];
-        return itemContents[i];
+                {t === 0 ? this.showSchoolInfo(i) : this.resizableTableView(i)}
+                {this.itemContents(i)}
+            </div>
+        );
     };
 
     fillSelectedItemContents = (i, len) => {
@@ -510,7 +551,7 @@ class CompanyOfficer extends React.Component {
         }
         return (
             <div>
-                {this.isItem(drawerListIds[i]) ? this.contentsArray(i) : this.fillSelectedItemContents(i + 1)}
+                {this.isItem(drawerListIds[i]) ? this.selectContent(i) : this.fillSelectedItemContents(i + 1, len)}
             </div>
         );
     };
@@ -519,6 +560,8 @@ class CompanyOfficer extends React.Component {
         let len = SchoolNames.length * SubListOfSchools.length;
         return this.fillSelectedItemContents(0, len);
     };
+
+    ///CONTENTS SHOWING FUNCTIONS
 
     render = () => {
         /*if (localStorage.getItem('isLoggedInCompanyOfficer') === 'false') {
@@ -542,7 +585,7 @@ class CompanyOfficer extends React.Component {
                                 href="/companyofficer"> {language.drawerTitle}{"Cihan"} </a>}
                             onLeftIconButtonTouchTap={() => this.closeDrawerMenu()} />
                         <div style={{ textAlign: "center" }}>
-                            <img alt="" src="http://vvcexpl.com/wordpress/wp-content/uploads/2013/09/profile-default-male.png"
+                            <img alt="" src={UserPicture}
                                 style={{ width: 60, height: 60, marginTop: 10 }} />
                         </div>
                         <SelectableList

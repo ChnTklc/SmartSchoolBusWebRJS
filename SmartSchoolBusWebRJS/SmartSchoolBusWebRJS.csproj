@@ -68,6 +68,7 @@
   <ItemGroup>
     <Content Include="src\assets\advertising1600.png" />
     <Content Include="src\assets\CommentIcon.png" />
+    <Content Include="src\assets\defaultProfilePicture.png" />
     <Content Include="src\assets\ParkingIcon.png" />
     <Content Include="src\assets\SchoolBusIcon.png" />
     <Content Include="package-lock.json" />
@@ -82,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="src\assets\studentDefaultPicture.jpg" />
     <Content Include="src\Home\AboutUs.js" />
     <Content Include="src\Admin\Admin.js" />
     <Content Include="src\Admin\AdminHome.js" />
