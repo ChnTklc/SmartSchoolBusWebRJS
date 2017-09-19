@@ -9,41 +9,10 @@ import InfoIcon from "material-ui/svg-icons/action/info";
 import StudentPicture from "../../assets/studentDefaultPicture.jpg";
 
 let Student = require("../../Objects/Student").Student;
-let StudentObj = JSON.parse(JSON.stringify(Student)); // saved life copy object to another object without bind them.
+let StudentObj = JSON.parse(JSON.stringify(require("../../Objects/Student").Student)); // saved life copy object to another object without bind them.
 
 let Students = [StudentObj];
 Students.pop();
-
-function addStudent(photo, name, surname, classNo,
-                    studentNo, parentName, parentSurname,
-                    homeAddress, morningBusId, nightBusId) {
-
-    let stdObj = JSON.parse(JSON.stringify(Student));
-    stdObj.parent.pop();
-    stdObj.address.pop();
-    stdObj.user.photo.contents = photo;
-    stdObj.user.name = name;
-    stdObj.user.surname = surname;
-    stdObj.classNo = classNo;
-    stdObj.studentNo = studentNo;
-    stdObj.parent.push({
-        user: {
-            name: parentName,
-            surname: parentSurname
-        }
-    });
-    stdObj.address.push({
-        location: {
-            address: homeAddress
-        },
-        name: "Home"
-    });
-    stdObj.serviceRoute.getOn.id = morningBusId;
-    stdObj.serviceRoute.getOff.id = nightBusId;
-    Students.push(stdObj);
-    return Students;
-}
-
 
 export default class StudentSectionContents extends React.Component {
     constructor(props) {
@@ -67,10 +36,40 @@ export default class StudentSectionContents extends React.Component {
         }
     }
 
+    addStudent = (photo, name, surname, classNo,
+                studentNo, parentName, parentSurname,
+                homeAddress, morningBusId, nightBusId) => {
+
+        let stdObj = JSON.parse(JSON.stringify(Student));
+        stdObj.parent.pop();
+        stdObj.address.pop();
+        stdObj.user.photo.contents = photo;
+        stdObj.user.name = name;
+        stdObj.user.surname = surname;
+        stdObj.classNo = classNo;
+        stdObj.studentNo = studentNo;
+        stdObj.parent.push({
+            user: {
+                name: parentName,
+                surname: parentSurname
+            }
+        });
+        stdObj.address.push({
+            location: {
+                address: homeAddress
+            },
+            name: "Home"
+        });
+        stdObj.serviceRoute.getOn.id = morningBusId;
+        stdObj.serviceRoute.getOff.id = nightBusId;
+        Students.push(stdObj);
+        return Students;
+    };
+
     getStudents = () => { //student list get request will be send from here and fill the Students list.
         /*DUMMY DATA*/
         for (let i = 0; i < 5; i++) {
-            Students = addStudent(StudentPicture,
+            Students = this.addStudent(StudentPicture,
                 "Cihan",
                 "Toklucu",
                 "4",

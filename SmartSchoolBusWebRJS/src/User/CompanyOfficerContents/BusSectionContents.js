@@ -5,39 +5,14 @@ import TextField from "material-ui/TextField";
 import FlatButton from "material-ui/FlatButton";
 import DeleteIcon from "material-ui/svg-icons/action/delete";
 import EditIcon from "material-ui/svg-icons/editor/mode-edit";
-import InfoIcon from "material-ui/svg-icons/action/info";
 import StudentPicture from "../../assets/studentDefaultPicture.jpg";
 import UserPicture from "../../assets/defaultProfilePicture.png";
 
 let SchoolBus = require("../../Objects/SchoolBus").SchoolBus;
-let BusObj = JSON.parse(JSON.stringify(SchoolBus));
+let BusObj = JSON.parse(JSON.stringify(require("../../Objects/SchoolBus").SchoolBus));
 
 let Buses = [BusObj];
 Buses.pop();
-
-function addBus(driverID, driverPhoto, driverName,
-                driverSurname, driverPhoneNumber,
-                hostessID, hostessPhoto, hostessName,
-                hostessSurname, hostessPhoneNumber,
-                plateNumber, capacity) {
-
-    let busObj = JSON.parse(JSON.stringify(SchoolBus));
-    busObj.serviceBusDriver.id = driverID;
-    busObj.serviceBusDriver.user.photo.contents = driverPhoto;
-    busObj.serviceBusDriver.user.name = driverName;
-    busObj.serviceBusDriver.user.surname = driverSurname;
-    busObj.serviceBusDriver.user.phoneNumber = driverPhoneNumber;
-    busObj.hostess.id = hostessID;
-    busObj.hostess.user.photo.contents = hostessPhoto;
-    busObj.hostess.user.name = hostessName;
-    busObj.hostess.user.surname = hostessSurname;
-    busObj.hostess.user.phoneNumber = hostessPhoneNumber;
-    busObj.serviceBus.plateNumber = plateNumber;
-    busObj.serviceBus.capacity = capacity;
-
-    Buses.push(busObj);
-    return Buses;
-}
 
 export default class BusSectionContents extends React.Component {
     constructor(props) {
@@ -65,10 +40,34 @@ export default class BusSectionContents extends React.Component {
         }
     }
 
+    addBus = (driverID, driverPhoto, driverName,
+           driverSurname, driverPhoneNumber,
+           hostessID, hostessPhoto, hostessName,
+           hostessSurname, hostessPhoneNumber,
+           plateNumber, capacity) => {
+
+        let busObj = JSON.parse(JSON.stringify(SchoolBus));
+        busObj.serviceBusDriver.id = driverID;
+        busObj.serviceBusDriver.user.photo.contents = driverPhoto;
+        busObj.serviceBusDriver.user.name = driverName;
+        busObj.serviceBusDriver.user.surname = driverSurname;
+        busObj.serviceBusDriver.user.phoneNumber = driverPhoneNumber;
+        busObj.hostess.id = hostessID;
+        busObj.hostess.user.photo.contents = hostessPhoto;
+        busObj.hostess.user.name = hostessName;
+        busObj.hostess.user.surname = hostessSurname;
+        busObj.hostess.user.phoneNumber = hostessPhoneNumber;
+        busObj.serviceBus.plateNumber = plateNumber;
+        busObj.serviceBus.capacity = capacity;
+
+        Buses.push(busObj);
+        return Buses;
+    };
+
     getBuses = () => { //bus list get request will be send from here and fill the Buses list.
         /*DUMMY DATA*/
         for (let i = 0; i < 7; i++) {
-            Buses = addBus(1, UserPicture, "Haydar", "Hayhay", 5397910147,
+            Buses = this.addBus(1, UserPicture, "Haydar", "Hayhay", 5397910147,
                 2, StudentPicture, "Ayça", "Yirmiiki", 5335353535, "35CT33", 40);
         }
         /*DUMMY DATA*/
