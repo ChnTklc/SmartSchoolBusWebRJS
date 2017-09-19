@@ -1,8 +1,8 @@
-﻿import React from 'react';
-import HomeIcon from 'material-ui/svg-icons/action/home';
-import Info from 'material-ui/svg-icons/action/info';
-import Contact from 'material-ui/svg-icons/communication/contact-mail';
-import FlatButton from 'material-ui/FlatButton';
+﻿import React from "react";
+import HomeIcon from "material-ui/svg-icons/action/home";
+import Info from "material-ui/svg-icons/action/info";
+import Contact from "material-ui/svg-icons/communication/contact-mail";
+import FlatButton from "material-ui/FlatButton";
 
 let varsAsLanguage = {
     en: {
@@ -65,7 +65,7 @@ class NavigationBar extends React.Component {
                             minHeight: 38, width: 40,
                             height: 38, bottom: "8%"
                         }}
-                        onClick={() => this.setLanguage(language.id, 'langBtn')} />
+                        onClick={() => this.setLanguage(language.id, "langBtn")} />
                 </div>
             </section >
         );

@@ -1,4 +1,4 @@
-﻿import StudentPicture from '../assets/studentDefaultPicture.jpg';
+﻿import StudentPicture from "../assets/studentDefaultPicture.jpg";
 
 export let Student = {
     id: 0,

@@ -1,9 +1,9 @@
-﻿import React, { Component } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import NavigationBar from './NavigationBar';
-import Park from '../assets/ParkingIcon.png';
-import Comment from '../assets/CommentIcon.png';
-import SchoolBus from '../assets/SchoolBusIcon.png';
+﻿import React, { Component } from "react";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import NavigationBar from "./NavigationBar";
+import Park from "../assets/ParkingIcon.png";
+import Comment from "../assets/CommentIcon.png";
+import SchoolBus from "../assets/SchoolBusIcon.png";
 
 let varsAsLanguage = {
     en: {

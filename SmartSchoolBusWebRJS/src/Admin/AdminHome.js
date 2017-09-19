@@ -1,7 +1,7 @@
-﻿import React from 'react';
-import { Redirect } from 'react-router-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
+﻿import React from "react";
+import { Redirect } from "react-router-dom";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import RaisedButton from "material-ui/RaisedButton";
 
 class AdminHome extends React.Component {
     constructor(props) {
@@ -16,11 +16,11 @@ class AdminHome extends React.Component {
         self.setState({
             isLogin: false
         });
-        localStorage.setItem('isLoggedInAdmin', false);
+        localStorage.setItem("isLoggedInAdmin", false);
     };
 
     render() {
-        if (localStorage.getItem('isLoggedInAdmin') === 'false') {
+        if (localStorage.getItem("isLoggedInAdmin") === "false") {
             return (<Redirect to="/admin" />);
         }
         return (

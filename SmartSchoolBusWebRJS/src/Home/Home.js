@@ -1,7 +1,7 @@
-﻿import React, { Component } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import FlatButton from 'material-ui/FlatButton';
-import NavigationBar from './NavigationBar';
+﻿import React, { Component } from "react";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import FlatButton from "material-ui/FlatButton";
+import NavigationBar from "./NavigationBar";
 
 const styles = {
     width: 230,
@@ -38,7 +38,7 @@ class Home extends Component {
                 <div className="homepageoutter">
                     <NavigationBar />
                     <div>
-                        <a href='/login'><FlatButton labelPosition="center" backgroundColor="rgb(51, 105, 30)"
+                        <a href="/login"><FlatButton labelPosition="center" backgroundColor="rgb(51, 105, 30)"
                             labelStyle={{ fontSize: 30, color: "rgba(255, 255, 255, 1)" }}
                             style={styles} label={language.login} /></a>
                     </div>

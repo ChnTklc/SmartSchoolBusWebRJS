@@ -1,13 +1,13 @@
-﻿import React, { Component } from 'react';
-import { lightGreen900, lightBlue900 } from 'material-ui/styles/colors';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Email from 'material-ui/svg-icons/communication/email';
-import Phone from 'material-ui/svg-icons/communication/phone';
-import Address from 'material-ui/svg-icons/maps/place';
-import Fax from 'material-ui/svg-icons/action/print';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
-import NavigationBar from './NavigationBar';
+﻿import React, { Component } from "react";
+import { lightGreen900, lightBlue900 } from "material-ui/styles/colors";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import Email from "material-ui/svg-icons/communication/email";
+import Phone from "material-ui/svg-icons/communication/phone";
+import Address from "material-ui/svg-icons/maps/place";
+import Fax from "material-ui/svg-icons/action/print";
+import FlatButton from "material-ui/FlatButton";
+import TextField from "material-ui/TextField";
+import NavigationBar from "./NavigationBar";
 
 const styles = {
     floatingLabelStyle: {
@@ -69,10 +69,10 @@ class ContactUs extends Component {
         super(props);
         this.state = {
             sent: false,
-            name: '',
-            email: '',
-            message: '',
-            errortext: '',
+            name: "",
+            email: "",
+            message: "",
+            errortext: "",
         }
     }
 

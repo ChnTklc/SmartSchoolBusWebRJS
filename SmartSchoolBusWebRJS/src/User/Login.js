@@ -1,14 +1,14 @@
-﻿import React from 'react';
-import ActionVisibilityOff from 'material-ui/svg-icons/action/visibility-off';
-import ActionVisibility from 'material-ui/svg-icons/action/visibility';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import rpni from 'react-phone-number-input/style.css';
-import rrui from 'react-phone-number-input/rrui.css';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
-import Phone from 'react-phone-number-input';
-import { Redirect } from 'react-router-dom';
-import NavigationBar from '../Home/NavigationBar';
+﻿import React from "react";
+import ActionVisibilityOff from "material-ui/svg-icons/action/visibility-off";
+import ActionVisibility from "material-ui/svg-icons/action/visibility";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import rpni from "react-phone-number-input/style.css";
+import rrui from "react-phone-number-input/rrui.css";
+import RaisedButton from "material-ui/RaisedButton";
+import TextField from "material-ui/TextField";
+import Phone from "react-phone-number-input";
+import { Redirect } from "react-router-dom";
+import NavigationBar from "../Home/NavigationBar";
 
 let request = require("request");
 
@@ -47,33 +47,33 @@ class Login extends React.Component {
         this.state = {
             visible: false,
             isLogin: false,
-            errortext: '',
-            role: '',
-            phone: '',
-            password: ''
+            errortext: "",
+            role: "",
+            phone: "",
+            password: ""
         }
     };
 
     handleClick = (event) => {
         event.preventDefault();
         let self = this;
-        if (self.state.phone === '' || self.state.password === '') {
+        if (self.state.phone === "" || self.state.password === "") {
             return false;
         }
 
         let options = {
-            method: 'POST',
-            url: 'http://smartschoolbusdevelopmentapi.azurewebsites.net/api/token',
+            method: "POST",
+            url: "http://smartschoolbusdevelopmentapi.azurewebsites.net/api/token",
             headers:
             {
-                'content-type': 'application/x-www-form-urlencoded'
+                "content-type": "application/x-www-form-urlencoded"
             },
             form:
             {
                 username: self.state.phone,
                 password: self.state.password,
-                client_id: 'ec37e34e0b04195199383c45a595412161629a92d01d676460f2e8e553d5b83e',
-                grant_type: 'password'
+                client_id: "ec37e34e0b04195199383c45a595412161629a92d01d676460f2e8e553d5b83e",
+                grant_type: "password"
             }
         };
 
@@ -98,10 +98,10 @@ class Login extends React.Component {
 
     show = (id) => {
         let tag = document.getElementById(id);
-        if (tag.getAttribute('type') === 'password') {
-            tag.setAttribute('type', 'text');
+        if (tag.getAttribute("type") === "password") {
+            tag.setAttribute("type", "text");
         } else {
-            tag.setAttribute('type', 'password');
+            tag.setAttribute("type", "password");
         }
         this.setState({
             visible: !this.state.visible
@@ -114,19 +114,19 @@ class Login extends React.Component {
 
     render() {
         if (this.state.isLogin ||
-            localStorage.getItem('isLoggedInSchoolStaff') === 'true' ||
-            localStorage.getItem('isLoggedInCompanyOfficer') === 'true') {
+            localStorage.getItem("isLoggedInSchoolStaff") === "true" ||
+            localStorage.getItem("isLoggedInCompanyOfficer") === "true") {
 
-            if (this.state.role === 'SchoolStaff' ||
-                localStorage.getItem('isLoggedInSchoolStaff') === 'true') {
+            if (this.state.role === "SchoolStaff" ||
+                localStorage.getItem("isLoggedInSchoolStaff") === "true") {
 
-                localStorage.setItem('isLoggedInSchoolStaff', true);
+                localStorage.setItem("isLoggedInSchoolStaff", true);
                 return (<Redirect to="/schoolstaff" />);
             }
-            else if (this.state.role === 'CompanyOfficer' ||
-                localStorage.getItem('isLoggedInCompanyOfficer') === 'true') {
+            else if (this.state.role === "CompanyOfficer" ||
+                localStorage.getItem("isLoggedInCompanyOfficer") === "true") {
 
-                localStorage.setItem('isLoggedInCompanyOfficer', true);
+                localStorage.setItem("isLoggedInCompanyOfficer", true);
                 return (<Redirect to="/companyofficer" />);
             }
         }
@@ -142,8 +142,8 @@ class Login extends React.Component {
                                 onChange={(value) => this.enteredPhoneChange(value)} nativeExpanded />
                             <TextField required floatingLabelText={language.pass} type="password" id="pass"
                                 onChange={(event, value) => this.setState({ password: value })} />
-                            {this.state.visible ? <ActionVisibilityOff color="rgb(103, 118, 141)" onClick={() => this.show('pass')} /> :
-                                <ActionVisibility color="rgb(103, 118, 141)" onClick={() => this.show('pass')} />}
+                            {this.state.visible ? <ActionVisibilityOff color="rgb(103, 118, 141)" onClick={() => this.show("pass")} /> :
+                                <ActionVisibility color="rgb(103, 118, 141)" onClick={() => this.show("pass")} />}
                             <br /><br />
                             {this.state.errortext ? <div className="errorText">{this.state.errortext}!</div> : true}
                             <br />

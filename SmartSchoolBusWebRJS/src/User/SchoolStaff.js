@@ -1,7 +1,7 @@
-﻿import React from 'react';
-import { Redirect } from 'react-router-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
+﻿import React from "react";
+import { Redirect } from "react-router-dom";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import RaisedButton from "material-ui/RaisedButton";
 
 class SchoolStaff extends React.Component {
     constructor(props) {
@@ -16,11 +16,11 @@ class SchoolStaff extends React.Component {
         self.setState({
             isLogin: false
         });
-        localStorage.setItem('isLoggedInSchoolStaff', false);
+        localStorage.setItem("isLoggedInSchoolStaff", false);
     }
 
     render() {
-        if (localStorage.getItem('isLoggedInSchoolStaff') === 'false') {
+        if (localStorage.getItem("isLoggedInSchoolStaff") === "false") {
             return (<Redirect to="/login" />);
         }
         return (

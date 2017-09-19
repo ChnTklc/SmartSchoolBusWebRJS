@@ -1,25 +1,25 @@
-﻿import React from 'react';
-import { Table, TableRow, TableRowColumn, TableBody, TableHeader, TableHeaderColumn } from 'material-ui/Table';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
-import Button from 'material-ui/FlatButton';
-import Drawer from 'material-ui/Drawer';
-import { List, ListItem, makeSelectable } from 'material-ui/List';
-import DeleteIcon from 'material-ui/svg-icons/action/delete';
-import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
-import InfoIcon from 'material-ui/svg-icons/action/info';
-import Dialog from 'material-ui/Dialog';
-import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/FlatButton';
-import StudentPicture from '../assets/studentDefaultPicture.jpg';
-import UserPicture from '../assets/defaultProfilePicture.png';
-import RefreshIndicator from 'material-ui/RefreshIndicator';
+﻿import React from "react";
+import { Table, TableRow, TableRowColumn, TableBody, TableHeader, TableHeaderColumn } from "material-ui/Table";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import AppBar from "material-ui/AppBar";
+import Button from "material-ui/FlatButton";
+import Drawer from "material-ui/Drawer";
+import { List, ListItem, makeSelectable } from "material-ui/List";
+import DeleteIcon from "material-ui/svg-icons/action/delete";
+import EditIcon from "material-ui/svg-icons/editor/mode-edit";
+import InfoIcon from "material-ui/svg-icons/action/info";
+import Dialog from "material-ui/Dialog";
+import TextField from "material-ui/TextField";
+import FlatButton from "material-ui/FlatButton";
+import StudentPicture from "../assets/studentDefaultPicture.jpg";
+import UserPicture from "../assets/defaultProfilePicture.png";
+import RefreshIndicator from "material-ui/RefreshIndicator";
 
-import NavigationBar from '../Home/NavigationBar';
-let Student = require('../Objects/Student').Student;
+import NavigationBar from "../Home/NavigationBar";
+let Student = require("../Objects/Student").Student;
 let StudentObj = JSON.parse(JSON.stringify(Student)); // saved life copy object to another object without bind them.
 
-let SchoolBus = require('../Objects/SchoolBus').SchoolBus;
+let SchoolBus = require("../Objects/SchoolBus").SchoolBus;
 let BusObj = JSON.parse(JSON.stringify(SchoolBus));
 
 let SelectableList = makeSelectable(List);
@@ -142,12 +142,12 @@ function addBus(driverID, driverPhoto, driverName,
 
     let busObj = JSON.parse(JSON.stringify(SchoolBus));
     busObj.serviceBusDriver.id = driverID;
-    busObj.serviceBusDriver.user.photo = driverPhoto;
+    busObj.serviceBusDriver.user.photo.contents = driverPhoto;
     busObj.serviceBusDriver.user.name = driverName;
     busObj.serviceBusDriver.user.surname = driverSurname;
     busObj.serviceBusDriver.user.phoneNumber = driverPhoneNumber;
     busObj.hostess.id = hostessID;
-    busObj.hostess.user.photo = hostessPhoto;
+    busObj.hostess.user.photo.contents = hostessPhoto;
     busObj.hostess.user.name = hostessName;
     busObj.hostess.user.surname = hostessSurname;
     busObj.hostess.user.phoneNumber = hostessPhoneNumber;
@@ -195,16 +195,16 @@ class CompanyOfficer extends React.Component {
             isStudentInfoDialogOpen: false,
             studentEditIndex: null,
             studentInfoIndex: null,
-            sPhoto: '',
-            sName: '',
-            sSurname: '',
-            sClassNo: '',
-            sStudentNo: '',
-            sParentName: '',
-            sParentSurname: '',
-            sAddress: '',
-            sServiceRouteOn: '',
-            sServiceRouteOff: '',
+            sPhoto: "",
+            sName: "",
+            sSurname: "",
+            sClassNo: "",
+            sStudentNo: "",
+            sParentName: "",
+            sParentSurname: "",
+            sAddress: "",
+            sServiceRouteOn: "",
+            sServiceRouteOff: "",
             //states for bus section
             buses: getBuses(),
             busEditIndex: null,
@@ -214,18 +214,18 @@ class CompanyOfficer extends React.Component {
             busDriverInfoIndex: null,
             busHostessInfoIndex: null,
             bDriverID: null,
-            bDriverPhoto: '',
-            bDriverName: '',
-            bDriverSurname: '',
+            bDriverPhoto: "",
+            bDriverName: "",
+            bDriverSurname: "",
             bDriverPhoneNumber: null,
             bHostessID: null,
-            bHostessPhoto: '',
-            bHostessName: '',
-            bHostessSurname: '',
+            bHostessPhoto: "",
+            bHostessName: "",
+            bHostessSurname: "",
             bHostessPhoneNumber: null,
             bPlateNumber: null,
             bBusCapacity: null,
-        }
+        };
     }
 
     handleSelectMenuItem = (event, index) => {
@@ -244,7 +244,7 @@ class CompanyOfficer extends React.Component {
 
     logoutClick = () => {
         this.setState({ isLogin: false });
-        localStorage.setItem('isLoggedInCompanyOfficer', false);
+        localStorage.setItem("isLoggedInCompanyOfficer", false);
     };
 
     createListWithItems = (id, schoolName, itemNames) => {
@@ -883,7 +883,7 @@ class CompanyOfficer extends React.Component {
 
     showSchoolInfo = (i) => {
 
-    }
+    };
 
     itemContents = (i) => {
         switch (i) {
@@ -908,7 +908,7 @@ class CompanyOfficer extends React.Component {
                 );
             default: return ( <div /> );
         }
-    }
+    };
 
     selectContent = (i) => {
         let t = i % 6;
@@ -939,9 +939,9 @@ class CompanyOfficer extends React.Component {
     /** CONTENTS SHOWING FUNCTIONS **/
 
     render = () => {
-        /*if (localStorage.getItem('isLoggedInCompanyOfficer') === 'false') {
+        /**if (localStorage.getItem("isLoggedInCompanyOfficer") === "false") {
             return (<Redirect to="/login" />);
-        }*/
+        }**/
         return (
             <MuiThemeProvider>
                 <div>
