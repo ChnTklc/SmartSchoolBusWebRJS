@@ -104,6 +104,11 @@
     <Content Include="src\index.js" />
     <Content Include="src\Objects\CompanyOfficerObj.js" />
     <Content Include="src\Objects\Location.js" />
+    <Content Include="src\User\CompanyOfficerContents\BusSectionContents.js" />
+    <Content Include="src\User\CompanyOfficerContents\DriverSectionContents.js" />
+    <Content Include="src\User\CompanyOfficerContents\HostessSectionContents.js" />
+    <Content Include="src\User\CompanyOfficerContents\RouteSectionContents.js" />
+    <Content Include="src\User\CompanyOfficerContents\StudentSectionContents.js" />
     <Content Include="src\User\Login.js" />
     <Content Include="src\Home\NavigationBar.js" />
     <Content Include="src\Objects\Parent.js" />
