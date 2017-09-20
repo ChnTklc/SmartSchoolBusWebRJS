@@ -22,6 +22,7 @@ export default class StudentSectionContents extends React.Component {
             isStudentEditDialogOpen: false,
             isStudentInfoDialogOpen: false,
             isAddStudentDialogOpen: false,
+            isEmptyFieldErrorOpen: false,
             studentEditIndex: null,
             studentInfoIndex: null,
             sPhoto: "",
@@ -67,7 +68,7 @@ export default class StudentSectionContents extends React.Component {
         return Students;
     };
 
-    getStudents = () => { //student list get request will be send from here and fill the Students list.
+    getStudents = () => { //todo: student list get request will be send from here and fill the Students list.
         /*DUMMY DATA*/
         for (let i = 0; i < 5; i++) {
             Students = this.addStudent(StudentPicture,
@@ -168,7 +169,7 @@ export default class StudentSectionContents extends React.Component {
         );
     };
 
-    deleteStudent = (index) => { // Student delete request will be send from here.
+    deleteStudent = (index) => { //todo: Student delete request will be send from here.
         if (index !== -1) {
             Students.splice(index, 1);
             this.setState({students: Students});
@@ -178,7 +179,7 @@ export default class StudentSectionContents extends React.Component {
         }
     };
 
-    updateStudentsList = () => { // student update request will be send from here to server.
+    updateStudentsList = () => { //todo: student update request will be send from here to server.
         let index = this.state.studentEditIndex;
         let stdList = this.state.students;
 
@@ -241,7 +242,7 @@ export default class StudentSectionContents extends React.Component {
                            onChange={(event, value) => this.setState({sParentSurname: value})}/>
                 <br/>
                 <TextField required defaultValue={this.state.sAddress} floatingLabelText="Address"
-                           fullWidth={true} multiLine={true}
+                           fullWidth={true} multiLine={true} rowsMax={3}
                            onChange={(event, value) => this.setState({sAddress: value})}/>
                 <br/>
                 <TextField required defaultValue={this.state.sServiceRouteOn} floatingLabelText="Departure Service"
@@ -255,9 +256,25 @@ export default class StudentSectionContents extends React.Component {
     };
 
     callAddStudent = () => {
+        if(this.state.sName === "" ||
+            this.state.sSurname === "" ||
+            this.state.sClassNo === "" ||
+            this.state.sStudentNo === "" ||
+            this.state.sParentName === "" ||
+            this.state.sParentSurname === "" ||
+            this.state.sAddress === "" ||
+            this.state.sServiceRouteOn === "" ||
+            this.state.sServiceRouteOff === "" ){
+
+            this.setState({
+                isEmptyFieldErrorOpen: true
+            });
+            return;
+        }
+
         this.setState({
             students: this.addStudent(
-                StudentPicture, // will be edit after.
+                StudentPicture, //todo: will be edit after.
                 this.state.sName,
                 this.state.sSurname,
                 this.state.sClassNo,
@@ -286,20 +303,20 @@ export default class StudentSectionContents extends React.Component {
     addStudentDialog = () => {
         const actions = [
             <FlatButton
-                label="Save"
+                label="Cancel"
                 primary={true}
                 keyboardFocused={true}
-                onClick={() => this.callAddStudent()}
+                onClick={() => this.closeAddStudentDialog()}
             />,
             <FlatButton
                 label="Add"
                 primary={true}
-                onClick={() => this.closeAddStudentDialog()}
+                onClick={() => this.callAddStudent()}
             />
         ];
         return (
             <Dialog
-                contentStyle={{width: 550}}
+                contentStyle={{ width: 550 }}
                 title="Add Student"
                 actions={actions}
                 modal={false}
@@ -326,7 +343,7 @@ export default class StudentSectionContents extends React.Component {
                            onChange={(event, value) => this.setState({sParentSurname: value})}/>
                 <br/>
                 <TextField required floatingLabelText="Address"
-                           fullWidth={true} multiLine={true}
+                           fullWidth={true} multiLine={true} rowsMax={3}
                            onChange={(event, value) => this.setState({sAddress: value})}/>
                 <br/>
                 <TextField required floatingLabelText="Departure Service"
@@ -335,6 +352,7 @@ export default class StudentSectionContents extends React.Component {
                 <TextField required floatingLabelText="Return Service"
                            onChange={(event, value) => this.setState({sServiceRouteOff: value})}/>
                 <br/>
+                {this.state.isEmptyFieldErrorOpen ? <strong style={{ marginTop: 20, color: "red" }}>*You have to fill all empty fields!</strong> : false}
             </Dialog>
         );
     };
@@ -374,7 +392,7 @@ export default class StudentSectionContents extends React.Component {
                             <TableRow key={index + 1} hoverable={true}>
                                 <TableRowColumn style={{textAlign: "center"}}>{index + 1}</TableRowColumn>
                                 <TableRowColumn style={{textAlign: "center"}}><img alt="" src={row.user.photo.contents}
-                                                     style={{width: 25, height: 25}}/></TableRowColumn>
+                                                                                   style={{width: 25, height: 25}}/></TableRowColumn>
                                 <TableRowColumn style={{textAlign: "center"}}>{row.studentNo}</TableRowColumn>
                                 <TableRowColumn style={{textAlign: "center"}}>{row.user.name} {row.user.surname}</TableRowColumn>
                                 <TableRowColumn style={{textAlign: "center"}}>{row.parent[0].user.name} {row.parent[0].user.surname}</TableRowColumn>

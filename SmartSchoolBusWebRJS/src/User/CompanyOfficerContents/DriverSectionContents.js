@@ -24,7 +24,7 @@ export default class DriverSectionContents extends React.Component{
         }
     }
 
-    getDrivers = () => { // send get drivers request from here.
+    getDrivers = () => { //todo: send get drivers request from here.
 
         return Drivers;
     };
@@ -41,7 +41,7 @@ export default class DriverSectionContents extends React.Component{
         });
     };
 
-    updateDriverList = () => { // driver update request will be send from here to server.
+    updateDriverList = () => { //todo: driver update request will be send from here to server.
         let index = this.state.driverEditIndex;
         let driverList = this.state.drivers;
 
@@ -72,7 +72,7 @@ export default class DriverSectionContents extends React.Component{
         });
     };
 
-    deleteDriver = (index) => { // Driver delete request will be send from here.
+    deleteDriver = (index) => { //todo: Driver delete request will be send from here.
         if (index !== -1) {
             Drivers.splice(index, 1);
             this.setState({drivers: Drivers});

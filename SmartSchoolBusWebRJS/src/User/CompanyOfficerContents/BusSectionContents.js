@@ -64,7 +64,7 @@ export default class BusSectionContents extends React.Component {
         return Buses;
     };
 
-    getBuses = () => { //bus list get request will be send from here and fill the Buses list.
+    getBuses = () => { //todo: bus list get request will be send from here and fill the Buses list.
         /**DUMMY DATA**/
         for (let i = 0; i < 7; i++) {
             Buses = this.addBus(1, UserPicture, "Haydar", "Hayhay", 5397910147,
@@ -162,7 +162,7 @@ export default class BusSectionContents extends React.Component {
         );
     };
 
-    deleteBus = (index) => { // Bus delete request will be send from here.
+    deleteBus = (index) => { //todo: Bus delete request will be send from here.
         if (index !== -1) {
             Buses.splice(index, 1);
             this.setState({buses: Buses});
@@ -172,7 +172,7 @@ export default class BusSectionContents extends React.Component {
         }
     };
 
-    updateBusesList = () => { // bus update request will be send from here to server.
+    updateBusesList = () => { //todo: bus update request will be send from here to server.
         let index = this.state.busEditIndex;
         let busList = this.state.buses;
 

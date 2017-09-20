@@ -15,6 +15,7 @@ import HostessSectionContents from "./CompanyOfficerContents/HostessSectionConte
 
 let SelectableList = makeSelectable(List);
 
+/** Every constant string should be add in here to language translation. it same for every classes.**/
 let varsAsLanguage = {
     en: {
         id: "TR",
@@ -41,7 +42,7 @@ let varsAsLanguage = {
 };
 
 let language = varsAsLanguage.en;
-
+/** with this function language depends on navigation bar's language type. it same for every classes.*/
 (function languageSetting() {
     if (NavigationBar.getLanguage() === "EN") {
         language = varsAsLanguage.tr;
@@ -52,7 +53,7 @@ let language = varsAsLanguage.en;
 })();
 
 /** TODO: in here get school information and run instantly.
- *        then fill the SchoolNames list, other properties will become generic. **/
+ *        then fill the SchoolNames list, other properties will become generic. */
 
 let SchoolNames = [
     "İzmir Yüksek Teknoloji Enstitüsü",
@@ -71,7 +72,7 @@ let SubListOfSchools = [
 ];
 
 let drawerListIds = [];
-
+/** this is a generic id maker function for drawer list. */
 function fillDrawerListIds() {
     for (let i = 0; i < SchoolNames.length; i++) {
         drawerListIds.push("School" + i);
@@ -144,44 +145,26 @@ class CompanyOfficer extends React.Component {
         return listItems;
     };
 
-    /** FIXME: When contents shown on the browser in every section click same contents adding to before contents, fix it.**/
-
-    getRouteContents = () => {
-        return (<RouteSectionContents />);
-    };
-
-    getStudentContents = () => {
-        return(<StudentSectionContents />);
-    };
-
-    getBusContents = () => {
-        return(<BusSectionContents />);
-    };
-
-    getDriverContents = () => {
-        return(<DriverSectionContents/>);
-    };
-
-    getHostessContents = () => {
-        return (<HostessSectionContents />);
-    };
-
-    /** CONTENTS SHOWING FUNCTIONS **/
+    /** CONTENTS SHOWING FUNCTIONS */
 
     resizableTableView = (num) => {
         let divStyle;
 
+        /** FIXME: When contents shown on the browser in every section clicking same contents adding below of the before contents, fix it.
+         * the problem is classes are called every section selection again. they didn't reset itself. */
         let tableType;
-        if (num === 1) {
-            tableType = this.getRouteContents();
+        if(num === 0){
+            tableType = this.showSchoolInfo(num);
+        } else if (num === 1) {
+            tableType = <RouteSectionContents />;
         } else if (num === 2) {
-            tableType = this.getStudentContents();
+            tableType = <StudentSectionContents />;
         } else if (num === 3) {
-            tableType = this.getBusContents();
+            tableType = <BusSectionContents />;
         } else if (num === 4) {
-            tableType = this.getDriverContents();
+            tableType = <DriverSectionContents/>;
         } else if (num === 5) {
-            tableType = this.getHostessContents();
+            tableType = <HostessSectionContents />;
         }
 
         if (this.state.isDrawerOpen) {
@@ -206,16 +189,7 @@ class CompanyOfficer extends React.Component {
     };
 
     showSchoolInfo = (i) => {
-
-    };
-
-    selectContent = (i) => {
-        let t = i % 6;
-        return (
-            <div>
-                {t === 0 ? this.showSchoolInfo(i) : this.resizableTableView(i)}
-            </div>
-        );
+        //TODO: at the beginning you send request to get schools information. in here use them.
     };
 
     fillSelectedItemContents = (i, len) => {
@@ -224,7 +198,7 @@ class CompanyOfficer extends React.Component {
         }
         return (
             <div>
-                {this.isItem(drawerListIds[i]) ? this.selectContent(i) : this.fillSelectedItemContents(i + 1, len)}
+                {this.isItem(drawerListIds[i]) ? this.resizableTableView(i) : this.fillSelectedItemContents(i + 1, len)}
             </div>
         );
     };
@@ -234,12 +208,13 @@ class CompanyOfficer extends React.Component {
         return this.fillSelectedItemContents(0, len);
     };
 
-    /** CONTENTS SHOWING FUNCTIONS **/
+    /** CONTENTS SHOWING FUNCTIONS */
 
     render = () => {
+        //todo: if it become uncomment it will be unreachable unless you are not logged in.
         /**if (localStorage.getItem("isLoggedInCompanyOfficer") === "false") {
             return (<Redirect to="/login" />);
-        }**/
+        }*/
         return (
             <MuiThemeProvider>
                 <div>
@@ -257,7 +232,7 @@ class CompanyOfficer extends React.Component {
                         <AppBar
                             className="appbar" style={{backgroundColor: "rgba(61, 59, 59, 1)"}}
                             title={<a style={{textDecoration: "none", cursor: "pointer", color: "white", fontSize: 18}}
-                                      href="/companyofficer"> {language.drawerTitle}{"Cihan"} </a>}
+                                      href="/companyofficer"> {language.drawerTitle}{"Cihan"} </a>} // TODO: instead of Cihan it should be logged person name after send get request to server for logged company officer.
                             onLeftIconButtonTouchTap={() => this.closeDrawerMenu()}/>
                         <div style={{textAlign: "center"}}>
                             <img alt="" src={UserPicture}
