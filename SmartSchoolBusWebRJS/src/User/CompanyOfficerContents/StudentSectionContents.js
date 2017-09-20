@@ -41,7 +41,7 @@ export default class StudentSectionContents extends React.Component {
     addStudent = (photo, name, surname, classNo,
                   studentNo, parentName, parentSurname,
                   homeAddress, morningBusId, nightBusId) => {
-
+        //todo: when sending add student request to server you need to send according to it's school.
         let stdObj = JSON.parse(JSON.stringify(Student));
         stdObj.parent.pop();
         stdObj.address.pop();
@@ -290,7 +290,17 @@ export default class StudentSectionContents extends React.Component {
 
     openAddStudentDialog = () => {
         this.setState({
-            isAddStudentDialogOpen: true
+            isAddStudentDialogOpen: true,
+            sPhoto: "",
+            sName: "",
+            sSurname: "",
+            sClassNo: "",
+            sStudentNo: "",
+            sParentName: "",
+            sParentSurname: "",
+            sAddress: "",
+            sServiceRouteOn: "",
+            sServiceRouteOff: ""
         });
     };
 
@@ -351,8 +361,8 @@ export default class StudentSectionContents extends React.Component {
                 <br/>
                 <TextField required floatingLabelText="Return Service"
                            onChange={(event, value) => this.setState({sServiceRouteOff: value})}/>
-                <br/>
-                {this.state.isEmptyFieldErrorOpen ? <strong style={{ marginTop: 20, color: "red" }}>*You have to fill all empty fields!</strong> : false}
+                <br/> <br/>
+                {this.state.isEmptyFieldErrorOpen ? <strong autoFocus={true} style={{ marginTop: 20, color: "red" }}>*You have to fill all empty fields!</strong> : false}
             </Dialog>
         );
     };

@@ -7,6 +7,8 @@ import DeleteIcon from "material-ui/svg-icons/action/delete";
 import EditIcon from "material-ui/svg-icons/editor/mode-edit";
 import StudentPicture from "../../assets/studentDefaultPicture.jpg";
 import UserPicture from "../../assets/defaultProfilePicture.png";
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 let SchoolBus = require("../../Objects/SchoolBus").SchoolBus;
 let BusObj = JSON.parse(JSON.stringify(require("../../Objects/SchoolBus").SchoolBus));
@@ -23,6 +25,8 @@ export default class BusSectionContents extends React.Component {
             isBusEditDialogOpen: false,
             isBusDriverInfoDialogOpen: false,
             isBusHostessInfoDialogOpen: false,
+            isAddBusDialogOpen: false,
+            isEmptyFieldErrorOpen: false,
             busDriverInfoIndex: null,
             busHostessInfoIndex: null,
             bDriverID: null,
@@ -37,15 +41,17 @@ export default class BusSectionContents extends React.Component {
             bHostessPhoneNumber: null,
             bPlateNumber: null,
             bBusCapacity: null,
+            driverSelectValue: 0,
+            hostessSelectValue: 0,
         }
     }
 
     addBus = (driverID, driverPhoto, driverName,
-           driverSurname, driverPhoneNumber,
-           hostessID, hostessPhoto, hostessName,
-           hostessSurname, hostessPhoneNumber,
-           plateNumber, capacity) => {
-
+              driverSurname, driverPhoneNumber,
+              hostessID, hostessPhoto, hostessName,
+              hostessSurname, hostessPhoneNumber,
+              plateNumber, capacity) => {
+        //todo: when sending add bus request to server you need to add according to it's school.
         let busObj = JSON.parse(JSON.stringify(SchoolBus));
         busObj.serviceBusDriver.id = driverID;
         busObj.serviceBusDriver.user.photo.contents = driverPhoto;
@@ -312,11 +318,130 @@ export default class BusSectionContents extends React.Component {
         );
     };
 
+    callAddBus = () => {
+        if(this.state.driverSelectValue === "" ||
+            this.state.hostessSelectValue === "" ||
+            this.state.bPlateNumber === null ||
+            this.state.bBusCapacity === null){
+
+            this.setState({
+                isEmptyFieldErrorOpen: true
+            });
+            return;
+        }
+        //todo: send get request for the driver using driverSelectValue and hostess using hostessSelectValue then fill the addBus function's parameters with their information.
+        this.setState({
+            buses: this.addBus(
+                this.state.bDriverID,
+                this.state.bDriverPhoto,
+                this.state.bDriverName,
+                this.state.bDriverSurname,
+                this.state.bDriverPhoneNumber,
+                this.state.bHostessID,
+                this.state.bHostessPhoto,
+                this.state.bHostessName,
+                this.state.bHostessSurname,
+                this.state.bHostessPhoneNumber,
+                this.state.bPlateNumber,
+                this.state.bBusCapacity
+            )
+        });
+    };
+
+    openAddBusDialog = () => {
+        this.setState({
+            isAddBusDialogOpen: true,
+            bDriverID: null,
+            bDriverPhoto: "",
+            bDriverName: "",
+            bDriverSurname: "",
+            bDriverPhoneNumber: null,
+            bHostessID: null,
+            bHostessPhoto: "",
+            bHostessName: "",
+            bHostessSurname: "",
+            bHostessPhoneNumber: null,
+            bPlateNumber: null,
+            bBusCapacity: null,
+        });
+    };
+
+    closeAddBusDialog = () => {
+        this.setState({
+            isAddBusDialogOpen: false
+        });
+    };
+
+    getAllDrivers = () => { //todo: send get request for all drivers and return them as list.
+        const items = [];
+        for (let i = 0; i < 30; i++ ) {
+            items.push(<MenuItem value={i} key={i} primaryText={`Item ${i}`} />);
+        }
+        return items;
+    };
+
+    getAllHostesses = () => { //todo: send get request for all hostesses and return them as list.
+        const items = [];
+        for (let i = 0; i < 30; i++ ) {
+            items.push(<MenuItem value={i} key={i} primaryText={`Item ${i}`} />);
+        }
+        return items;
+    };
+
+    addBusDialog = () => {
+        const actions = [
+            <FlatButton
+                label="Cancel"
+                primary={true}
+                keyboardFocused={true}
+                onClick={() => this.closeAddBusDialog()}
+            />,
+            <FlatButton
+                label="Add"
+                primary={true}
+                onClick={() => this.callAddBus()}
+            />
+        ];
+        return (
+            <Dialog
+                contentStyle={{width: 550}}
+                title="Add a New Bus"
+                actions={actions}
+                modal={false}
+                open={this.state.isAddBusDialogOpen}
+                onRequestClose={() => this.closeAddBusDialog()}
+                autoScrollBodyContent={true}>
+
+                <br/>
+                <SelectField
+                    value={this.state.driverSelectValue}
+                    onChange={(event, value) => this.setState({ driverSelectValue: value })}
+                    maxHeight={200}>
+
+                    {this.getAllDrivers()}
+                </SelectField>
+                <SelectField
+                    value={this.state.hostessSelectValue}
+                    onChange={(event, value) => this.setState({ hostessSelectValue: value })}
+                    maxHeight={200}>
+
+                    {this.getAllHostesses()}
+                </SelectField>
+                <TextField required floatingLabelText="Plate Number"
+                           onChange={(event, value) => this.setState({bPlateNumber: value})}/>
+                <br/>
+                <TextField required floatingLabelText="Bus Capacity"
+                           onChange={(event, value) => this.setState({bBusCapacity: value})}/>
+                <br/> <br/>
+                {this.state.isEmptyFieldErrorOpen ? <strong autoFocus={true} style={{ marginTop: 20, color: "red" }}>*You have to fill all empty fields!</strong> : false}
+            </Dialog>
+        );
+    };
+
     render(){
         return(
             <div>
                 <Table
-                    height="540px"
                     fixedHeader={false}
                     fixedFooter={false}
                     selectable={false}>
@@ -349,20 +474,20 @@ export default class BusSectionContents extends React.Component {
                                 <TableRowColumn style={{textAlign: "center"}}>{index + 1}</TableRowColumn>
                                 <TableRowColumn style={{textAlign: "center"}}>
                                     <img alt="" src={row.serviceBusDriver.user.photo.contents}
-                                                     style={{width: 25, height: 25}}
-                                                     onClick={() => this.openBusDriverInfoDialog(index)}/>
+                                         style={{width: 25, height: 25}}
+                                         onClick={() => this.openBusDriverInfoDialog(index)}/>
                                 </TableRowColumn>
                                 <TableRowColumn style={{textAlign: "center"}}>
                                     {row.serviceBusDriver.user.name} {row.serviceBusDriver.user.surname}
-                                    </TableRowColumn>
+                                </TableRowColumn>
                                 <TableRowColumn style={{textAlign: "center"}}>
                                     <img alt="" src={row.hostess.user.photo.contents}
-                                                     style={{width: 25, height: 25}}
-                                                     onClick={() => this.openBusHostessInfoDialog(index)}/>
+                                         style={{width: 25, height: 25}}
+                                         onClick={() => this.openBusHostessInfoDialog(index)}/>
                                 </TableRowColumn>
                                 <TableRowColumn style={{textAlign: "center"}}>
                                     {row.hostess.user.name} {row.hostess.user.surname}
-                                    </TableRowColumn>
+                                </TableRowColumn>
                                 <TableRowColumn style={{textAlign: "center"}}>{row.serviceBus.plateNumber}</TableRowColumn>
                                 <TableRowColumn style={{textAlign: "center"}}>
                                     <EditIcon hoverColor="rgba(0, 0, 0, 1)" color="rgb(100, 100, 100)"
@@ -373,6 +498,10 @@ export default class BusSectionContents extends React.Component {
                         ))}
                     </TableBody>
                 </Table>
+                <div style={{ margin: 15, textAlign: "right" }}>
+                    <FlatButton backgroundColor={"rgba(51, 105, 30, 0.7)"} labelStyle={{color: "white"}} label={"Add"} onClick={() => this.openAddBusDialog()} />
+                </div>
+                {this.state.isAddBusDialogOpen ? this.addBusDialog() : false}
                 {this.state.isBusEditDialogOpen ? this.editBusInfo() : false}
                 {this.state.isBusDriverInfoDialogOpen ? this.showBusDriverInfoDetail() : false}
                 {this.state.isBusHostessInfoDialogOpen ? this.showBusHostessInfoDetail() : false}

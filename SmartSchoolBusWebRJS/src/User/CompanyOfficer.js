@@ -95,20 +95,6 @@ class CompanyOfficer extends React.Component {
         };
     }
 
-    handleSelectMenuItem = (event, index) => {
-        this.setState({
-            selectedIndex: index,
-        });
-    };
-
-    openDrawerMenu = () => {
-        this.setState({isDrawerOpen: true});
-    };
-
-    closeDrawerMenu = () => {
-        this.setState({isDrawerOpen: false});
-    };
-
     logoutClick = () => {
         this.setState({isLogin: false});
         localStorage.setItem("isLoggedInCompanyOfficer", false);
@@ -192,20 +178,23 @@ class CompanyOfficer extends React.Component {
         //TODO: at the beginning you send request to get schools information. in here use them.
     };
 
-    fillSelectedItemContents = (i, len) => {
-        if (i > len) {
-            return false;
+    fillSelectedItemContents = (len) => {
+        let contentsList = [];
+        for(let i = 0; i<len; i++){
+            contentsList.push(this.resizableTableView(i));
         }
-        return (
+        return(
             <div>
-                {this.isItem(drawerListIds[i]) ? this.resizableTableView(i) : this.fillSelectedItemContents(i + 1, len)}
+                {contentsList.map((item, i) => (
+                    this.isItem(drawerListIds[i]) ? item : false
+                ))}
             </div>
         );
     };
 
     showSelectedItemContents = () => {
         let len = SchoolNames.length * SubListOfSchools.length;
-        return this.fillSelectedItemContents(0, len);
+        return this.fillSelectedItemContents(len);
     };
 
     /** CONTENTS SHOWING FUNCTIONS */
@@ -224,23 +213,23 @@ class CompanyOfficer extends React.Component {
                                   href="/companyofficer">{language.title}</a>}
                         iconElementRight={<Button label={language.logout} style={{margin: 0}}
                                                   labelStyle={{fontSize: 18}} onClick={(e) => this.logoutClick(e)}/>}
-                        onLeftIconButtonTouchTap={() => this.openDrawerMenu()}/>
+                        onLeftIconButtonTouchTap={() => this.setState({isDrawerOpen: true})}/>
                     <Drawer
                         width={250}
                         open={this.state.isDrawerOpen}
-                        onRequestChange={(open) => this.setState({isDrawerOpen: open})}>
+                        onRequestChange={(open) => this.setState({ isDrawerOpen: open })}>
                         <AppBar
                             className="appbar" style={{backgroundColor: "rgba(61, 59, 59, 1)"}}
                             title={<a style={{textDecoration: "none", cursor: "pointer", color: "white", fontSize: 18}}
                                       href="/companyofficer"> {language.drawerTitle}{"Cihan"} </a>} // TODO: instead of Cihan it should be logged person name after send get request to server for logged company officer.
-                            onLeftIconButtonTouchTap={() => this.closeDrawerMenu()}/>
+                            onLeftIconButtonTouchTap={() => this.setState({ isDrawerOpen: false })}/>
                         <div style={{textAlign: "center"}}>
                             <img alt="" src={UserPicture}
                                  style={{width: 60, height: 60, marginTop: 10}}/>
                         </div>
                         <SelectableList
                             value={this.state.selectedIndex}
-                            onChange={(e, value) => this.handleSelectMenuItem(e, value)}>
+                            onChange={(event, value) => this.setState({ selectedIndex: value })}>
                             {this.generateSelectableList(SchoolNames.length)}
                         </SelectableList>
                     </Drawer>
