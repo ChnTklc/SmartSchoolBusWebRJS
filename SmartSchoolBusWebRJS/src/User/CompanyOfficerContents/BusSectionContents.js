@@ -65,12 +65,12 @@ export default class BusSectionContents extends React.Component {
     };
 
     getBuses = () => { //bus list get request will be send from here and fill the Buses list.
-        /*DUMMY DATA*/
+        /**DUMMY DATA**/
         for (let i = 0; i < 7; i++) {
             Buses = this.addBus(1, UserPicture, "Haydar", "Hayhay", 5397910147,
                 2, StudentPicture, "Ayça", "Yirmiiki", 5335353535, "35CT33", 40);
         }
-        /*DUMMY DATA*/
+        /**DUMMY DATA**/
         return Buses;
     };
 

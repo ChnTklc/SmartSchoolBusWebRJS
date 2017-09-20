@@ -21,6 +21,7 @@ export default class StudentSectionContents extends React.Component {
             students: this.getStudents(),
             isStudentEditDialogOpen: false,
             isStudentInfoDialogOpen: false,
+            isAddStudentDialogOpen: false,
             studentEditIndex: null,
             studentInfoIndex: null,
             sPhoto: "",
@@ -37,8 +38,8 @@ export default class StudentSectionContents extends React.Component {
     }
 
     addStudent = (photo, name, surname, classNo,
-                studentNo, parentName, parentSurname,
-                homeAddress, morningBusId, nightBusId) => {
+                  studentNo, parentName, parentSurname,
+                  homeAddress, morningBusId, nightBusId) => {
 
         let stdObj = JSON.parse(JSON.stringify(Student));
         stdObj.parent.pop();
@@ -214,7 +215,7 @@ export default class StudentSectionContents extends React.Component {
         return (
             <Dialog
                 contentStyle={{width: 550}}
-                title="Edit Student"
+                title="Edit Student Information"
                 actions={actions}
                 modal={false}
                 open={this.state.isStudentEditDialogOpen}
@@ -247,6 +248,91 @@ export default class StudentSectionContents extends React.Component {
                            onChange={(event, value) => this.setState({sServiceRouteOn: value})}/>
                 <br/>
                 <TextField required defaultValue={this.state.sServiceRouteOff} floatingLabelText="Return Service"
+                           onChange={(event, value) => this.setState({sServiceRouteOff: value})}/>
+                <br/>
+            </Dialog>
+        );
+    };
+
+    callAddStudent = () => {
+        this.setState({
+            students: this.addStudent(
+                StudentPicture, // will be edit after.
+                this.state.sName,
+                this.state.sSurname,
+                this.state.sClassNo,
+                this.state.sStudentNo,
+                this.state.sParentName,
+                this.state.sParentSurname,
+                this.state.sAddress,
+                this.state.sServiceRouteOn,
+                this.state.sServiceRouteOff
+            )
+        });
+    };
+
+    openAddStudentDialog = () => {
+        this.setState({
+            isAddStudentDialogOpen: true
+        });
+    };
+
+    closeAddStudentDialog = () => {
+        this.setState({
+            isAddStudentDialogOpen: false
+        });
+    };
+
+    addStudentDialog = () => {
+        const actions = [
+            <FlatButton
+                label="Save"
+                primary={true}
+                keyboardFocused={true}
+                onClick={() => this.callAddStudent()}
+            />,
+            <FlatButton
+                label="Add"
+                primary={true}
+                onClick={() => this.closeAddStudentDialog()}
+            />
+        ];
+        return (
+            <Dialog
+                contentStyle={{width: 550}}
+                title="Add Student"
+                actions={actions}
+                modal={false}
+                open={this.state.isAddStudentDialogOpen}
+                onRequestClose={() => this.closeAddStudentDialog()}
+                autoScrollBodyContent={true}>
+
+                <TextField required floatingLabelText="Name"
+                           onChange={(event, value) => this.setState({sName: value})}/>
+                <br/>
+                <TextField required floatingLabelText="Surname"
+                           onChange={(event, value) => this.setState({sSurname: value})}/>
+                <br/>
+                <TextField required floatingLabelText="Class Number"
+                           onChange={(event, value) => this.setState({sClassNo: value})}/>
+                <br/>
+                <TextField required floatingLabelText="Student Number"
+                           onChange={(event, value) => this.setState({sStudentNo: value})}/>
+                <br/>
+                <TextField required floatingLabelText="Parent Name"
+                           onChange={(event, value) => this.setState({sParentName: value})}/>
+                <br/>
+                <TextField required floatingLabelText="Parent Surname"
+                           onChange={(event, value) => this.setState({sParentSurname: value})}/>
+                <br/>
+                <TextField required floatingLabelText="Address"
+                           fullWidth={true} multiLine={true}
+                           onChange={(event, value) => this.setState({sAddress: value})}/>
+                <br/>
+                <TextField required floatingLabelText="Departure Service"
+                           onChange={(event, value) => this.setState({sServiceRouteOn: value})}/>
+                <br/>
+                <TextField required floatingLabelText="Return Service"
                            onChange={(event, value) => this.setState({sServiceRouteOff: value})}/>
                 <br/>
             </Dialog>
@@ -299,8 +385,10 @@ export default class StudentSectionContents extends React.Component {
                         ))}
                     </TableBody>
                 </Table>
+                <FlatButton style={{ margin: 15 }} primary={true} label={"Add"} onClick={this.openAddStudentDialog()} />
+                {this.state.isAddStudentDialogOpen ? this.addStudentDialog() : false}
                 {this.state.isStudentEditDialogOpen ? this.editStudentInfo() : false}
-                {this.state.isStudentInfoDialogOpen ? this.showStudentInfoDetail(this.state.studentInfoIndex) : false}
+                {this.state.isStudentInfoDialogOpen ? this.showStudentInfoDetail() : false}
             </div>
         );
     };

@@ -99,7 +99,7 @@ export default class DriverSectionContents extends React.Component{
         return (
             <Dialog
                 contentStyle={{width: 550}}
-                title="Edit Student"
+                title="Edit Driver Information"
                 actions={actions}
                 modal={false}
                 open={this.state.isDriverEditDialogOpen}
