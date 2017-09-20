@@ -324,13 +324,20 @@ export default class BusSectionContents extends React.Component {
                         adjustForCheckbox={false}
                         displaySelectAll={false}>
                         <TableRow>
-                            <TableHeaderColumn tooltip="Number">No</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Bus' Driver Photo">Driver's Photo</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Bus' Driver">Driver</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Bus' Hostess Photo">Hostess's Photo</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Bus' Hostess">Hostess</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Bus' Plate Number">Plate Number</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Settings">Settings</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}}
+                                               tooltip="Number">No</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}}
+                                               tooltip="Bus' Driver Photo">Driver's Photo</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}}
+                                               tooltip="Bus' Driver">Driver</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}}
+                                               tooltip="Bus' Hostess Photo">Hostess's Photo</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}}
+                                               tooltip="Bus' Hostess">Hostess</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}}
+                                               tooltip="Bus' Plate Number">Plate Number</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}}
+                                               tooltip="Settings">Settings</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody
@@ -339,17 +346,25 @@ export default class BusSectionContents extends React.Component {
                         stripedRows={true}>
                         {this.state.buses.map((row, index) => (
                             <TableRow key={index + 1} hoverable={true} style={{textAlign: "center"}}>
-                                <TableRowColumn>{index + 1}</TableRowColumn>
-                                <TableRowColumn><img alt="" src={row.serviceBusDriver.user.photo.contents}
+                                <TableRowColumn style={{textAlign: "center"}}>{index + 1}</TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}>
+                                    <img alt="" src={row.serviceBusDriver.user.photo.contents}
                                                      style={{width: 25, height: 25}}
-                                                     onClick={() => this.openBusDriverInfoDialog(index)}/></TableRowColumn>
-                                <TableRowColumn>{row.serviceBusDriver.user.name} {row.serviceBusDriver.user.surname}</TableRowColumn>
-                                <TableRowColumn><img alt="" src={row.hostess.user.photo.contents}
+                                                     onClick={() => this.openBusDriverInfoDialog(index)}/>
+                                </TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}>
+                                    {row.serviceBusDriver.user.name} {row.serviceBusDriver.user.surname}
+                                    </TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}>
+                                    <img alt="" src={row.hostess.user.photo.contents}
                                                      style={{width: 25, height: 25}}
-                                                     onClick={() => this.openBusHostessInfoDialog(index)}/></TableRowColumn>
-                                <TableRowColumn>{row.hostess.user.name} {row.hostess.user.surname}</TableRowColumn>
-                                <TableRowColumn>{row.serviceBus.plateNumber}</TableRowColumn>
-                                <TableRowColumn>
+                                                     onClick={() => this.openBusHostessInfoDialog(index)}/>
+                                </TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}>
+                                    {row.hostess.user.name} {row.hostess.user.surname}
+                                    </TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}>{row.serviceBus.plateNumber}</TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}>
                                     <EditIcon hoverColor="rgba(0, 0, 0, 1)" color="rgb(100, 100, 100)"
                                               onClick={() => this.openBusEditDialog(index)}/>
                                     <DeleteIcon hoverColor="rgb(255, 0, 0)" color="rgb(100, 100, 100)"

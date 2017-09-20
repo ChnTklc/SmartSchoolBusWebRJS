@@ -130,12 +130,12 @@ export default class DriverSectionContents extends React.Component{
                         adjustForCheckbox={false}
                         displaySelectAll={false}>
                         <TableRow>
-                            <TableHeaderColumn tooltip="Number">No</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Driver's Photo">Photo</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Driver's Name">Name</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Driver's Surname">Surname</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Driver's Phone Number">Phone</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Driver's ID">Driver ID</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}} tooltip="Number">No</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}} tooltip="Driver's Photo">Photo</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}} tooltip="Driver's Name">Name</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}} tooltip="Driver's Surname">Surname</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}} tooltip="Driver's Phone Number">Phone</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}} tooltip="Driver's ID">Driver ID</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody
@@ -144,15 +144,17 @@ export default class DriverSectionContents extends React.Component{
                         stripedRows={true}>
                         {this.state.drivers.map((row, index) => (
                             <TableRow key={index + 1} hoverable={true} style={{textAlign: "center"}}>
-                                <TableRowColumn>{index + 1}</TableRowColumn>
-                                <TableRowColumn><img alt="" src={row.user.photo.contents}
+                                <TableRowColumn style={{textAlign: "center"}}>{index + 1}</TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}>
+                                    <img alt="" src={row.user.photo.contents}
                                                      style={{width: 25, height: 25}}
-                                                     onClick={() => this.openBusDriverInfoDialog(index)}/></TableRowColumn>
-                                <TableRowColumn>{row.user.name}</TableRowColumn>
-                                <TableRowColumn>{row.user.surname}</TableRowColumn>
-                                <TableRowColumn>{row.user.phoneNumber}</TableRowColumn>
-                                <TableRowColumn>{row.id}</TableRowColumn>
-                                <TableRowColumn>
+                                                     onClick={() => this.openBusDriverInfoDialog(index)}/>
+                                </TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}>{row.user.name}</TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}>{row.user.surname}</TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}>{row.user.phoneNumber}</TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}>{row.id}</TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}>
                                     <EditIcon hoverColor="rgba(0, 0, 0, 1)" color="rgb(100, 100, 100)"
                                               onClick={() => this.openDriverEditDialog(index)}/>
                                     <DeleteIcon hoverColor="rgb(255, 0, 0)" color="rgb(100, 100, 100)"

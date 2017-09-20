@@ -341,9 +341,9 @@ export default class StudentSectionContents extends React.Component {
 
     render(){
         return(
-            <div>
+            <div className={"tbl"}>
                 <Table
-                    height="540px"
+                    style={{ maxHeight: 200 }}
                     fixedHeader={false}
                     fixedFooter={false}
                     selectable={false}>
@@ -351,13 +351,18 @@ export default class StudentSectionContents extends React.Component {
                         adjustForCheckbox={false}
                         displaySelectAll={false}>
                         <TableRow>
-                            <TableHeaderColumn tooltip="Number">No</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Student's Photo">Photo</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Student's School Number">Student No</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Student's Name">Name</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Student's Parent">Parent</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Student's Regular Service">Route
-                                Departure/Return</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}}
+                                               tooltip="Number">No</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}}
+                                               tooltip="Student's Photo">Photo</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}}
+                                               tooltip="Student's School Number">Student No</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}}
+                                               tooltip="Student's Name">Name</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}}
+                                               tooltip="Student's Parent">Parent</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: "center"}}
+                                               tooltip="Student's Regular Service">Route Departure/Return</TableHeaderColumn>
                             <TableHeaderColumn tooltip="Settings">Settings</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
@@ -366,15 +371,15 @@ export default class StudentSectionContents extends React.Component {
                         showRowHover={false}
                         stripedRows={true}>
                         {this.state.students.map((row, index) => (
-                            <TableRow key={index + 1} hoverable={true} style={{textAlign: "center"}}>
-                                <TableRowColumn>{index + 1}</TableRowColumn>
-                                <TableRowColumn><img alt="" src={row.user.photo.contents}
+                            <TableRow key={index + 1} hoverable={true}>
+                                <TableRowColumn style={{textAlign: "center"}}>{index + 1}</TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}><img alt="" src={row.user.photo.contents}
                                                      style={{width: 25, height: 25}}/></TableRowColumn>
-                                <TableRowColumn>{row.studentNo}</TableRowColumn>
-                                <TableRowColumn>{row.user.name} {row.user.surname}</TableRowColumn>
-                                <TableRowColumn>{row.parent[0].user.name} {row.parent[0].user.surname}</TableRowColumn>
-                                <TableRowColumn>{row.serviceRoute.getOn.id}/{row.serviceRoute.getOff.id}</TableRowColumn>
-                                <TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}>{row.studentNo}</TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}>{row.user.name} {row.user.surname}</TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}>{row.parent[0].user.name} {row.parent[0].user.surname}</TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}>{row.serviceRoute.getOn.id}/{row.serviceRoute.getOff.id}</TableRowColumn>
+                                <TableRowColumn style={{textAlign: "center"}}>
                                     <InfoIcon hoverColor="rgba(0, 0, 0, 1)" color="rgb(100, 100, 100)"
                                               onClick={() => this.openStudentInfoDialog(index)}/>
                                     <EditIcon hoverColor="rgba(0, 0, 0, 1)" color="rgb(100, 100, 100)"
@@ -385,7 +390,9 @@ export default class StudentSectionContents extends React.Component {
                         ))}
                     </TableBody>
                 </Table>
-                <FlatButton style={{ margin: 15 }} primary={true} label={"Add"} onClick={this.openAddStudentDialog()} />
+                <div style={{ margin: 15, textAlign: "right" }}>
+                    <FlatButton backgroundColor={"rgba(51, 105, 30, 0.7)"} labelStyle={{color: "white"}} label={"Add"} onClick={() => this.openAddStudentDialog()} />
+                </div>
                 {this.state.isAddStudentDialogOpen ? this.addStudentDialog() : false}
                 {this.state.isStudentEditDialogOpen ? this.editStudentInfo() : false}
                 {this.state.isStudentInfoDialogOpen ? this.showStudentInfoDetail() : false}

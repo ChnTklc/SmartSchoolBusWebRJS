@@ -41,7 +41,7 @@
     padding: 2em 2em 3em 2em;
     background-color: ghostwhite;
     border: 1px solid #ebebeb;
-    box-shadow: rgba(61, 59, 59, 0.35) 1px 1px 1px 1px,rgba(0,0,0,1.09804) 0px 1px 2px 0px;
+    box-shadow: rgba(61, 59, 59, 0.35) 1px 1px 1px 1px,rgba(0,0,0,1.09804) 0 1px 2px 0;
 }
 /* 
 https://s-media-cache-ak0.pinimg.com/originals/58/b9/1e/58b91ecf69cc7b00b89a98d6700b67a8.jpg
@@ -49,9 +49,9 @@ https://s-media-cache-ak0.pinimg.com/originals/58/b9/1e/58b91ecf69cc7b00b89a98d6
 https://images2.alphacoders.com/628/628814.jpg
 */
 body {
-    background: url(https://images2.alphacoders.com/628/628814.jpg) no-repeat center center fixed;
+    background: url("./assets/backgroundImage.jpg") no-repeat center center fixed;
     background-size: cover;
-    margin: 0px;
+    margin: 0;
 }
 
 .nav-bar {
@@ -131,7 +131,7 @@ body {
     line-height: 1.4;
     background-color: rgba(248, 248, 255, .7);
     border: 1px solid #ebebeb;
-    box-shadow: rgba(61, 59, 59, 0.35) 1px 1px 1px 1px,rgba(0,0,0,1.09804) 0px 1px 2px 0px;
+    box-shadow: rgba(61, 59, 59, 0.35) 1px 1px 1px 1px,rgba(0,0,0,1.09804) 0 1px 2px 0;
 }
 
     .contactform .contactfields {
