@@ -134,11 +134,11 @@ class CompanyOfficer extends React.Component {
     /** CONTENTS SHOWING FUNCTIONS */
 
     resizableTableView = (num) => {
-        let divStyle;
-
         /** FIXME: When contents shown on the browser in every section clicking same contents adding below of the before contents, fix it.
          * the problem is classes are called every section selection again. they didn't reset itself. */
         let tableType;
+        let divStyle;
+
         if(num === 0){
             tableType = this.showSchoolInfo(num);
         } else if (num === 1) {
@@ -148,7 +148,7 @@ class CompanyOfficer extends React.Component {
         } else if (num === 3) {
             tableType = <BusSectionContents />;
         } else if (num === 4) {
-            tableType = <DriverSectionContents/>;
+            tableType = <DriverSectionContents />;
         } else if (num === 5) {
             tableType = <HostessSectionContents />;
         }
